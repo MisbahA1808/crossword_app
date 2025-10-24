@@ -10,7 +10,7 @@ namespace CrosswordApp
     {
         static void Main(string[] args)
         {
-            Crossword crossword = new Crossword(10, 10);
+            Crossword crossword = new Crossword(10, 10, "one");
             CrosswordManager crosswordManager = new CrosswordManager(crossword);
 
             crosswordManager.AddWord("Hello", "across", 0, 0);

@@ -10,18 +10,20 @@ namespace CrosswordApp
 {
     internal class Crossword
     {
-        private int _rows;
-        private int _columns;
-        private char[,] _grid;
-        private string _crosswordTitle;
+        private int _rows { get; set; }
+        private int _columns { get; set; }
+        private char[,] _grid { get; set; }
+        private string _crosswordTitle { get; set; }
+
 
         //constructor for crossword class
-        public Crossword(int rows, int columns)
+        public Crossword(int rows, int columns, string title)
         {
             //initialising attributes
             _rows = rows;
             _columns = columns;
             _grid = new char[rows, columns];
+            _crosswordTitle = title;
 
             //initially setting all characters in the grid to be '*'
             for (int i = 0; i < _rows; i++)
