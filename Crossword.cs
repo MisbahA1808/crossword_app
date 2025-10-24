@@ -41,8 +41,34 @@ namespace CrosswordApp
                     Console.Write(_grid[i, j] + " ");
                 }
                 Console.WriteLine();
-            
             }
+        
+        }
+
+        public void DisplayWord(string word, string direction, int startRow, int startColumn) 
+        {
+            direction.ToLower().Trim();
+
+            if (direction == "across")
+            {
+                for (int i = 0; i < word.Length; i++)
+                {
+                    _grid[startRow + 1, startColumn] = word[i];
+
+                }
+
+            }
+            else if (direction == "down") 
+            {
+
+                for (int i = 0; i < word.Length; i++)
+                {
+                    _grid[startRow + 1, startColumn] = word[i];
+
+                }
+
+            }
+
         
         
         

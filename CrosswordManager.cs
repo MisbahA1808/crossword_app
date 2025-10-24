@@ -14,9 +14,9 @@ namespace CrosswordApp
             _currentCrossword = crossword;
         }
 
-        public void AddWord(string word, string direction) 
-        { 
-        
+        public void AddWord(string word, string direction, int startRow, int startColumn) 
+        {
+            _currentCrossword.DisplayWord(word, direction, startRow, startColumn);
         
         
         }
