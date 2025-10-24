@@ -47,13 +47,13 @@ namespace CrosswordApp
 
         public void DisplayWord(string word, string direction, int startRow, int startColumn) 
         {
-            direction.ToLower().Trim();
+            direction = direction.ToLower().Trim();
 
             if (direction == "across")
             {
                 for (int i = 0; i < word.Length; i++)
                 {
-                    _grid[startRow + 1, startColumn] = word[i];
+                    _grid[startRow, startColumn + i] = word[i];
 
                 }
 
@@ -63,7 +63,7 @@ namespace CrosswordApp
 
                 for (int i = 0; i < word.Length; i++)
                 {
-                    _grid[startRow + 1, startColumn] = word[i];
+                    _grid[startRow = + i, startColumn] = word[i];
 
                 }
 
