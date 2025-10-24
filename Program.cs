@@ -10,7 +10,9 @@ namespace CrosswordApp
     {
         static void Main(string[] args)
         {
-
+            Crossword crossword = new Crossword(10, 10);
+            crossword.DisplayCrossword();
+            Console.ReadLine();
 
 
         }
