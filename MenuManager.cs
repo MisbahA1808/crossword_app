@@ -45,6 +45,7 @@ namespace CrosswordApp
 
             do
             {
+                Console.Clear();
                 DisplayMenu();
                 keyPressed = Console.ReadKey(true).Key;
 
