@@ -23,9 +23,9 @@ namespace CrosswordApp
         }
 
         //method to add crossword to the list of crosswords
-        public void AddCrosswordToList(Crossword crossword) 
+        public void AddCrosswordToList() 
         {
-            _crosswords.Add(crossword);
+            _crosswords.Add(_currentCrossword);
         
         }
         //method for adding words to the current crossword

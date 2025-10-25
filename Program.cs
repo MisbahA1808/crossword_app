@@ -13,14 +13,19 @@ namespace CrosswordApp
     {
         static void Main(string[] args)
         {
-            Crossword crossword = new Crossword(8,8,"Crossword #1");
-            CrosswordManager crosswordManager = new CrosswordManager(crossword);
+            MenuManager menuManager = new MenuManager();
+            menuManager.DisplayMenu();
 
-            crosswordManager.AddWord("Hello", "across", 0, 0);
-            crosswordManager.AddWord("Goodbye", "down", 0, 7);
 
-            crossword.DisplayCrossword();
-            crosswordManager.StoreCurrentCrossword();
+
+            //Crossword crossword = new Crossword(8,8,"Crossword #1");
+            //CrosswordManager crosswordManager = new CrosswordManager(crossword);
+
+            //crosswordManager.AddWord("Hello", "across", 0, 0);
+            //crosswordManager.AddWord("Goodbye", "down", 0, 7);
+
+            //crossword.DisplayCrossword();
+            //crosswordManager.StoreCurrentCrossword();
 
 
 
