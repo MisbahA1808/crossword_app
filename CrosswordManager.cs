@@ -13,11 +13,21 @@ namespace CrosswordApp
     {
         //an instance of the current crossword
         private Crossword _currentCrossword;
+        //list of all crosswords
+        private List<Crossword> _crosswords = new List<Crossword>();
+
+        //constructor
         public CrosswordManager(Crossword crossword)
         {
             _currentCrossword = crossword;
         }
 
+        //method to add crossword to the list of crosswords
+        public void AddCrosswordToList(Crossword crossword) 
+        {
+            _crosswords.Add(crossword);
+        
+        }
         //method for adding words to the current crossword
         public void AddWord(string word, string direction, int startRow, int startColumn) 
         {
