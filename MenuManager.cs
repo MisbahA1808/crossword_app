@@ -39,6 +39,9 @@ namespace CrosswordApp
         public void UseMenu() 
         {
             DisplayMenu();
+            ConsoleKey keyPressed;
+            keyPressed = Console.ReadKey(true).Key;
+            
 
             do
             {
