@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace CrosswordApp
 {
@@ -17,9 +20,10 @@ namespace CrosswordApp
             crosswordManager.AddWord("Goodbye", "down", 0, 9);
 
             crossword.DisplayCrossword();
-            Console.ReadLine();
 
-
+            string jsonString = JsonConvert.SerializeObject(crossword, Formatting.Indented);
+            File.WriteAllText("crossword.json", jsonString);
+            
         }
     }
 }

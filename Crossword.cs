@@ -5,15 +5,17 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 
 namespace CrosswordApp
 {
     internal class Crossword
     {
-        private int _rows { get; set; }
-        private int _columns { get; set; }
-        private char[,] _grid { get; set; }
-        private string _crosswordTitle { get; set; }
+        [JsonProperty] private int _rows { get; set; }
+        [JsonProperty] private int _columns { get; set; }
+        [JsonProperty] private char[,] _grid { get; set; }
+        [JsonProperty] private string _crosswordTitle { get; set; }
 
 
         //constructor for crossword class
