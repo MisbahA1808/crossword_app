@@ -46,7 +46,31 @@ namespace CrosswordApp
             do
             {
                 DisplayMenu();
-            } while (true);
+                keyPressed = Console.ReadKey(true).Key;
+
+                switch (keyPressed)
+                {
+                    case ConsoleKey.D1:
+                    
+                        Console.WriteLine("You have chosen to create a crossword");
+                        break;
+
+                    case ConsoleKey.D2:
+                        Console.WriteLine("You have chosen to solve a crossword");
+                        break;
+
+
+                    case ConsoleKey.D3:
+                        Console.WriteLine("You have chosen to login");
+                        break;
+
+                    
+                    default:
+                        break;
+                }
+
+
+            } while (keyPressed != ConsoleKey.D4);
         
         
         

@@ -14,7 +14,7 @@ namespace CrosswordApp
         static void Main(string[] args)
         {
             MenuManager menuManager = new MenuManager();
-            menuManager.DisplayMenu();
+            menuManager.UseMenu();
 
 
 
