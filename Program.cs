@@ -13,16 +13,20 @@ namespace CrosswordApp
     {
         static void Main(string[] args)
         {
-            Crossword crossword = new Crossword(10, 10, "one");
+            Crossword crossword = new Crossword(8,8,"Crossword #1");
             CrosswordManager crosswordManager = new CrosswordManager(crossword);
 
             crosswordManager.AddWord("Hello", "across", 0, 0);
-            crosswordManager.AddWord("Goodbye", "down", 0, 9);
+            crosswordManager.AddWord("Goodbye", "down", 0, 7);
 
             crossword.DisplayCrossword();
+            crosswordManager.StoreCurrentCrossword();
 
-            string jsonString = JsonConvert.SerializeObject(crossword, Formatting.Indented);
-            File.WriteAllText("crossword.json", jsonString);
+
+
+
+
+            
             
         }
     }

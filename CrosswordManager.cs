@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace CrosswordApp
 {
@@ -21,6 +24,14 @@ namespace CrosswordApp
             _currentCrossword.DisplayWord(word, direction, startRow, startColumn);
         
         
+        }
+
+        public void StoreCurrentCrossword() 
+        {
+            string jsonString = JsonConvert.SerializeObject(_currentCrossword, Formatting.Indented);
+            File.WriteAllText("crossword.json", jsonString);
+
+
         }
     }
 }
