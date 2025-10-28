@@ -77,11 +77,13 @@ namespace CrosswordApp
             //if the current menu item's pointer is 0 (it is the first one in the list)
             if (_activeItemPointer == 0)
             {
-
+                //change the active item pointer to the last item in the list
                 _activeItemPointer = _items.Count() - 1;
             }
+            //else, increment the pointer to the next menu item in the list
             else { _activeItemPointer++; }
 
+            //atcivates the new current menu
             ActivateCurrentMenuItem();
         }
 
@@ -90,19 +92,26 @@ namespace CrosswordApp
             //deactivates current menu item
             DeactivateCurrentMenuItem();
 
+            //if the active item pointer points to the last item in the list
             if (_activeItemPointer == _items.Count - 1)
             {
+                //chnage the pointer to point to the first item in the list
                 _activeItemPointer = 0;
             }
-            else { _activeItemPointer++; }
+            //else decrement the pointer value
+            else { _activeItemPointer--; }
 
+            //activates the new current menu
             ActivateCurrentMenuItem();
         }
 
+        //method to deactivate all menu items
         public void DeactivateAllItems()
         {
+            //loops through the list of menu items
             foreach (MenuItem item in _items)
             {
+                //sets their 'Active' property to false
                 item.Active = false;
             }
         }
