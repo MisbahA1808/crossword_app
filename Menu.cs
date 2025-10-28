@@ -32,10 +32,10 @@ namespace CrosswordApp
         }
 
         //method to display the menu items
-        public void DisplayMenu() 
+        public void DisplayMenu()
         {
             //loops through the list of menu items 
-            foreach (MenuItem item in _items) 
+            foreach (MenuItem item in _items)
             {
                 //if the menu item is the active one (the one selected)
                 if (item.Active == true)
@@ -45,13 +45,13 @@ namespace CrosswordApp
                 }
                 //if it is not the active menu, just print it on the console
                 else { Console.WriteLine(item.Name); }
-            
+
             }
-        
+
         }
 
         //method to add a new menu item to the list of menu items
-        public void AddMenuItem(string item) 
+        public void AddMenuItem(string item)
         {
             _items.Add(new MenuItem(item));
         }
@@ -68,7 +68,7 @@ namespace CrosswordApp
             _items[_activeItemPointer].Deactivate();
         }
 
-        
+
         public void MenuItemUp()
         {
             //deactivates the current menu item
@@ -114,6 +114,12 @@ namespace CrosswordApp
                 //sets their 'Active' property to false
                 item.Active = false;
             }
+        }
+
+        public string GetActiveChoice()
+        {
+            return _items[_activeItemPointer].Name;
+        
         }
     }
 }

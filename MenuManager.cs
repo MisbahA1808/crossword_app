@@ -39,29 +39,81 @@ namespace CrosswordApp
         public string UpdateMenu(ConsoleKey keyPressed)
         {
             switch (keyPressed) {
-                case ConsoleKey.RightArrow;
-                    break;
-                case ConsoleKey.LeftArrow:
-                    break;
-                case ConsoleKey.UpArrow:
-                    break;
-                case ConsoleKey.DownArrow:
+                case ConsoleKey.RightArrow:
+                    _activeMenu.DeactivateAllItems();
+                    _activeMenu.Active = false;
+
+                    if (_activeMenuPointer == _menus.Count() - 1) 
+                    {
+                        _activeMenuPointer = 0;
+                    }
+
+                    else { _activeMenuPointer++; }
+
+                    _activeMenu = _menus[_activeMenuPointer];
+                    _activeMenu.Active = true;
+
+                    _activeMenu.ActivateCurrentMenuItem();
                     break;
 
+                case ConsoleKey.LeftArrow:
+                    _activeMenu.DeactivateAllItems();
+                    _activeMenu.Active = false;
+
+                    if (_activeMenuPointer == 0)
+                    {
+                        _activeMenuPointer = _menus.Count() -1;
+                    }
+
+                    else { _activeMenuPointer--; }
+
+                    _activeMenu = _menus[_activeMenuPointer];
+                    _activeMenu.Active = true;
+
+                    _activeMenu.ActivateCurrentMenuItem();
+                    break;
+
+                case ConsoleKey.UpArrow:
+                    _activeMenu.MenuItemUp();
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    _activeMenu.MenuItemDown();
+                    break;
+
+                default:
+                    break;
             }
-        
+            return _activeMenu.GetActiveChoice();
         
         
         }
 
         public void DisplayMenu() 
         {
-            Console.WriteLine(_header);
-            Console.WriteLine();
-            Console.Write("Create\t");
-            Console.Write("\tSolve Crossword\t");
-            Console.Write("\tLogin\t");
-            Console.Write("\tExit\t\t");
+            //Console.WriteLine(_header);
+            //Console.WriteLine();
+            //Console.Write("Create\t");
+            //Console.Write("\tSolve Crossword\t");
+            //Console.Write("\tLogin\t");
+            //Console.Write("\tExit\t\t");
+
+            foreach (var menu in _menus)
+            {
+                if (menu.Active == true) 
+                { 
+                    Console.WriteLine(menu.Name +"ACTIVE");
+                    menu.DisplayMenu();
+                    Console.WriteLine();
+                }
+                else 
+                {
+                    Console.WriteLine(menu.Name);
+                    menu.DisplayMenu();
+                    Console.WriteLine();
+                
+                }
+            }    
 
         }
 
