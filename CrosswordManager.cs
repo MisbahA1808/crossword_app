@@ -28,7 +28,7 @@ namespace CrosswordApp
             _crosswords.Add(_currentCrossword);
         
         }
-        //method for adding words to the current crossword
+        //method for adding words to the current crossword 
         public void AddWord(string word, string direction, int startRow, int startColumn) 
         {
             _currentCrossword.DisplayWord(word, direction, startRow, startColumn);

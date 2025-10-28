@@ -29,6 +29,7 @@ namespace CrosswordApp
         public void DisplayMenu() 
         {
             Console.WriteLine(_header);
+            Console.WriteLine();
             Console.Write("Create\t");
             Console.Write("\tSolve Crossword\t");
             Console.Write("\tLogin\t");
@@ -36,16 +37,23 @@ namespace CrosswordApp
 
         }
 
+        //method for menu functionality
         public void UseMenu() 
         {
-            DisplayMenu();
+            //DisplayMenu();
             ConsoleKey keyPressed;
-            keyPressed = Console.ReadKey(true).Key;
+            //keyPressed = Console.ReadKey(true).Key;
             
 
             do
             {
                 Console.Clear();
+
+               
+
+
+
+
                 DisplayMenu();
                 keyPressed = Console.ReadKey(true).Key;
 
@@ -53,16 +61,19 @@ namespace CrosswordApp
                 {
                     case ConsoleKey.D1:
                     
-                        Console.WriteLine("You have chosen to create a crossword");
+                        Console.WriteLine("You have chosen to create a crossword!");
+                        Console.ReadKey(true);
                         break;
 
                     case ConsoleKey.D2:
-                        Console.WriteLine("You have chosen to solve a crossword");
+                        Console.WriteLine("You have chosen to solve a crossword!");
+                        Console.ReadKey(true);
                         break;
 
 
                     case ConsoleKey.D3:
-                        Console.WriteLine("You have chosen to login");
+                        Console.WriteLine("You have chosen to login!");
+                        Console.ReadKey(true);
                         break;
 
                     

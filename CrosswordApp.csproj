@@ -79,6 +79,8 @@
   <ItemGroup>
     <Compile Include="Crossword.cs" />
     <Compile Include="CrosswordManager.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="MenuItem.cs" />
     <Compile Include="MenuManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
