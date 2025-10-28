@@ -59,13 +59,13 @@ namespace CrosswordApp
         //Sets the current menu item selected to 'active'
         public void ActivateCurrentMenuItem()
         {
-            _items[_activeItemPointer].Activate();
+            _items[_activeItemPointer].Active = true;
         }
 
         //Sets the current menu item to 'inactive' / not active
         public void DeactivateCurrentMenuItem()
         {
-            _items[_activeItemPointer].Deactivate();
+            _items[_activeItemPointer].Active = false;
         }
 
 

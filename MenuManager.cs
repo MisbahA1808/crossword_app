@@ -117,58 +117,52 @@ namespace CrosswordApp
 
         }
 
-        //method for menu functionality
-        public void UseMenu() 
-        {
-            //DisplayMenu();
-            ConsoleKey keyPressed;
-            //keyPressed = Console.ReadKey(true).Key;
+        ////method for menu functionality
+        //public void UseMenu() 
+        //{
+        //    //DisplayMenu();
+        //    ConsoleKey keyPressed;
+        //    //keyPressed = Console.ReadKey(true).Key;
             
+        //    do
+        //    {
+        //        Console.Clear();
 
-            do
-            {
-                Console.Clear();
+        //        DisplayMenu();
+        //        keyPressed = Console.ReadKey(true).Key;
 
-               
-
-
-
-
-                DisplayMenu();
-                keyPressed = Console.ReadKey(true).Key;
-
-                switch (keyPressed)
-                {
-                    case ConsoleKey.D1:
+        //        switch (keyPressed)
+        //        {
+        //            case ConsoleKey.D1:
                     
-                        Console.WriteLine("You have chosen to create a crossword!");
-                        Console.ReadKey(true);
-                        break;
+        //                Console.WriteLine("You have chosen to create a crossword!");
+        //                Console.ReadKey(true);
+        //                break;
 
-                    case ConsoleKey.D2:
-                        Console.WriteLine("You have chosen to solve a crossword!");
-                        Console.ReadKey(true);
-                        break;
+        //            case ConsoleKey.D2:
+        //                Console.WriteLine("You have chosen to solve a crossword!");
+        //                Console.ReadKey(true);
+        //                break;
 
 
-                    case ConsoleKey.D3:
-                        Console.WriteLine("You have chosen to login!");
-                        Console.ReadKey(true);
-                        break;
+        //            case ConsoleKey.D3:
+        //                Console.WriteLine("You have chosen to login!");
+        //                Console.ReadKey(true);
+        //                break;
 
                     
-                    default:
-                        break;
-                }
+        //            default:
+        //                break;
+        //        }
 
 
-            } while (keyPressed != ConsoleKey.D4);
+        //    } while (keyPressed != ConsoleKey.D4);
         
         
         
         
         
-        }
+        //}
 
 
     }
