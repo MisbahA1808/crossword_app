@@ -11,8 +11,11 @@ namespace CrosswordApp
         string _header;
         string _footer;
         int _windowWidth;
+        private List<Menu> _menus;
+        private int _activeMenuPointer;
+        private Menu _activeMenu;
 
-        public MenuManager()
+        public MenuManager(List<Menu> menus)
         {
             Console.SetWindowSize(100, 30);
             Console.SetBufferSize(100, 30);
@@ -20,10 +23,35 @@ namespace CrosswordApp
             _footer = "Created by Misbah Ahmad";
 
             _windowWidth = Console.WindowWidth;
-            int leftPadding = (_windowWidth - _header.Length)/ 2;
+            int leftPadding = (_windowWidth - _header.Length) / 2;
             Console.SetCursorPosition(leftPadding, Console.CursorTop);
 
-            
+            _menus = menus;
+            _activeMenuPointer = 0;
+            _activeMenu = menus[_activeMenuPointer];
+
+            _activeMenu.Active = true;
+            _activeMenu.ActivateCurrentMenuItem();
+
+
+        }
+
+        public string UpdateMenu(ConsoleKey keyPressed)
+        {
+            switch (keyPressed) {
+                case ConsoleKey.RightArrow;
+                    break;
+                case ConsoleKey.LeftArrow:
+                    break;
+                case ConsoleKey.UpArrow:
+                    break;
+                case ConsoleKey.DownArrow:
+                    break;
+
+            }
+        
+        
+        
         }
 
         public void DisplayMenu() 
