@@ -41,7 +41,9 @@ namespace CrosswordApp
                 if (item.Active == true)
                 {
                     //print it on screen with 'active' to let us know that is the one selected
-                    Console.WriteLine(item.Name + "ACTIVE");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(item.Name);
+                    Console.ResetColor();
                 }
                 //if it is not the active menu, just print it on the console
                 else { Console.WriteLine(item.Name); }

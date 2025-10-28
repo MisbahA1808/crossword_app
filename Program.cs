@@ -14,25 +14,32 @@ namespace CrosswordApp
         static void Main(string[] args)
         {
             //creating the menu objects and adding sub menus/menu items to them
-            Menu menu1 = new Menu("My Account");
+            Menu menu1 = new Menu("MY ACCOUNT");
             menu1.AddMenuItem("Login");
             menu1.AddMenuItem("Create Account");
             menu1.AddMenuItem("Logout");
 
-            Menu menu2 = new Menu("Menu 2");
+            Menu menu2 = new Menu("CREATE CROSSWORD");
             menu2.AddMenuItem("option 3");
             menu2.AddMenuItem("option 4");
 
-            Menu menu3 = new Menu("Menu 2");
+            Menu menu3 = new Menu("SOLVE CROSSWORD");
             menu3.AddMenuItem("option 5");
             menu3.AddMenuItem("option 6");
 
-            Menu menu4 = new Menu("Menu 4");
+            Menu menu4 = new Menu("MENU 4");
             menu4.AddMenuItem("option 7");
             menu4.AddMenuItem("option 8");
 
+            Menu menu5 = new Menu("MENU 5");
+            menu5.AddMenuItem("option 9");
+            menu5.AddMenuItem("option 10");
+            menu5.AddMenuItem("option 11");
+            menu5.AddMenuItem("option 12");
+
+
             //creating a menu manager object
-            MenuManager menuManager = new MenuManager(new List<Menu> {menu1, menu2, menu3, menu4});
+            MenuManager menuManager = new MenuManager(new List<Menu> {menu1, menu2, menu3, menu4, menu5});
 
             ConsoleKey keyPressed;
             menuManager.DisplayMenu();

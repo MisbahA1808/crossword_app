@@ -97,7 +97,7 @@ namespace CrosswordApp
         
         }
 
-        //method to dusplay the menu on the console
+        //method to display the menu on the console
         public void DisplayMenu() 
         {
             //loops through the list of menus
@@ -106,12 +106,13 @@ namespace CrosswordApp
                 //if the menu is active/selected
                 if (menu.Active == true) 
                 {
-                    //write the menu name
+                    //write the menu name and change the text colour of the selected menu to cyan
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine(menu.Name +"ACTIVE");
+                    Console.WriteLine(menu.Name);
+                    //resets the console colour so that all the text on the console isn't the same colour
                     Console.ResetColor();
                     menu.DisplayMenu();
-                    
+
                     Console.WriteLine();
                 }
                 else 
@@ -119,7 +120,7 @@ namespace CrosswordApp
                     Console.WriteLine(menu.Name);
                     menu.DisplayMenu();
                     Console.WriteLine();
-                
+
                 }
             }    
 
