@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace CrosswordApp
 {
+    //class to manage the display functionality of the menus
     internal class MenuManager
     {
+        //attributes
         string _header;
         string _footer;
         int _windowWidth;
@@ -36,9 +38,12 @@ namespace CrosswordApp
 
         }
 
+        //method to update the current menu based on the key pressed by the user
         public string UpdateMenu(ConsoleKey keyPressed)
         {
+            //switch case statement to chck which arrow key is pressed
             switch (keyPressed) {
+                //if the right key is pressed
                 case ConsoleKey.RightArrow:
                     _activeMenu.DeactivateAllItems();
                     _activeMenu.Active = false;
@@ -56,6 +61,7 @@ namespace CrosswordApp
                     _activeMenu.ActivateCurrentMenuItem();
                     break;
 
+                //if the left key is pressed
                 case ConsoleKey.LeftArrow:
                     _activeMenu.DeactivateAllItems();
                     _activeMenu.Active = false;
@@ -73,10 +79,12 @@ namespace CrosswordApp
                     _activeMenu.ActivateCurrentMenuItem();
                     break;
 
+                //if the up key is pressed
                 case ConsoleKey.UpArrow:
                     _activeMenu.MenuItemUp();
                     break;
 
+                //if the down key is pressed
                 case ConsoleKey.DownArrow:
                     _activeMenu.MenuItemDown();
                     break;
@@ -89,21 +97,21 @@ namespace CrosswordApp
         
         }
 
+        //method to dusplay the menu on the console
         public void DisplayMenu() 
         {
-            //Console.WriteLine(_header);
-            //Console.WriteLine();
-            //Console.Write("Create\t");
-            //Console.Write("\tSolve Crossword\t");
-            //Console.Write("\tLogin\t");
-            //Console.Write("\tExit\t\t");
-
-            foreach (var menu in _menus)
+            //loops through the list of menus
+            foreach (Menu menu in _menus)
             {
+                //if the menu is active/selected
                 if (menu.Active == true) 
-                { 
+                {
+                    //write the menu name
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine(menu.Name +"ACTIVE");
+                    Console.ResetColor();
                     menu.DisplayMenu();
+                    
                     Console.WriteLine();
                 }
                 else 

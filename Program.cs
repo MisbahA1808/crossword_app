@@ -13,7 +13,7 @@ namespace CrosswordApp
     {
         static void Main(string[] args)
         {
-        
+            //creating the menu objects and adding sub menus/menu items to them
             Menu menu1 = new Menu("My Account");
             menu1.AddMenuItem("Login");
             menu1.AddMenuItem("Create Account");
@@ -30,17 +30,24 @@ namespace CrosswordApp
             Menu menu4 = new Menu("Menu 4");
             menu4.AddMenuItem("option 7");
             menu4.AddMenuItem("option 8");
+
+            //creating a menu manager object
             MenuManager menuManager = new MenuManager(new List<Menu> {menu1, menu2, menu3, menu4});
 
             ConsoleKey keyPressed;
             menuManager.DisplayMenu();
 
+            //a loop to always display the menu
             while (true)
             {
+                //gets the key pressed as user input
                 keyPressed = Console.ReadKey(true).Key;
+                //passes the value of th ekey pressed as a parameter to menu manager's update menu method
                 string choice = menuManager.UpdateMenu(keyPressed);
+
+                //clears/refreshes the console every time a key is pressed
                 Console.Clear();
-                Console.WriteLine(choice);
+                //Console.Write(choice);
 
                 menuManager.DisplayMenu();
 
