@@ -17,14 +17,14 @@ namespace CrosswordApp
 
         public MenuManager(List<Menu> menus)
         {
-            Console.SetWindowSize(100, 30);
-            Console.SetBufferSize(100, 30);
-            _header = "Crossword Solver & Builder";
-            _footer = "Created by Misbah Ahmad";
+            //Console.SetWindowSize(100, 30);
+            //Console.SetBufferSize(100, 30);
+            //_header = "Crossword Solver & Builder";
+            //_footer = "Created by Misbah Ahmad";
 
-            _windowWidth = Console.WindowWidth;
-            int leftPadding = (_windowWidth - _header.Length) / 2;
-            Console.SetCursorPosition(leftPadding, Console.CursorTop);
+            //_windowWidth = Console.WindowWidth;
+            //int leftPadding = (_windowWidth - _header.Length) / 2;
+            //Console.SetCursorPosition(leftPadding, Console.CursorTop);
 
             _menus = menus;
             _activeMenuPointer = 0;

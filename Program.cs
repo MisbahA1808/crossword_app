@@ -13,29 +13,24 @@ namespace CrosswordApp
     {
         static void Main(string[] args)
         {
-        //    MenuManager menuManager = new MenuManager();
-        //    menuManager.UseMenu();
+        
+            Menu menu1 = new Menu("My Account");
+            menu1.AddMenuItem("Login");
+            menu1.AddMenuItem("Create Account");
+            menu1.AddMenuItem("Logout");
 
-
-
-        //Crossword crossword = new Crossword(8,8,"Crossword #1");
-        //CrosswordManager crosswordManager = new CrosswordManager(crossword);
-
-        //crosswordManager.AddWord("Hello", "across", 0, 0);
-        //crosswordManager.AddWord("Goodbye", "down", 0, 7);
-
-        //crossword.DisplayCrossword();
-        //crosswordManager.StoreCurrentCrossword();
-
-            Menu menu1 = new Menu("Menu 1");
-            menu1.AddMenuItem("option 1");
-
-            menu1.AddMenuItem("option 2");
             Menu menu2 = new Menu("Menu 2");
-            menu2.AddMenuItem("option 1");
+            menu2.AddMenuItem("option 3");
+            menu2.AddMenuItem("option 4");
 
-            menu2.AddMenuItem("option 2");
-            MenuManager menuManager = new MenuManager(new List<Menu> {menu1, menu2});
+            Menu menu3 = new Menu("Menu 2");
+            menu3.AddMenuItem("option 5");
+            menu3.AddMenuItem("option 6");
+
+            Menu menu4 = new Menu("Menu 4");
+            menu4.AddMenuItem("option 7");
+            menu4.AddMenuItem("option 8");
+            MenuManager menuManager = new MenuManager(new List<Menu> {menu1, menu2, menu3, menu4});
 
             ConsoleKey keyPressed;
             menuManager.DisplayMenu();

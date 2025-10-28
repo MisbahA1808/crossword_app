@@ -59,13 +59,13 @@ namespace CrosswordApp
         //Sets the current menu item selected to 'active'
         public void ActivateCurrentMenuItem()
         {
-            _items[_activeItemPointer].Active = true;
+            _items[_activeItemPointer].Activate();
         }
 
         //Sets the current menu item to 'inactive' / not active
         public void DeactivateCurrentMenuItem()
         {
-            _items[_activeItemPointer].Active = false;
+            _items[_activeItemPointer].Deactivate();
         }
 
 
@@ -81,7 +81,7 @@ namespace CrosswordApp
                 _activeItemPointer = _items.Count() - 1;
             }
             //else, increment the pointer to the next menu item in the list
-            else { _activeItemPointer++; }
+            else { _activeItemPointer--; }
 
             //atcivates the new current menu
             ActivateCurrentMenuItem();
@@ -99,7 +99,7 @@ namespace CrosswordApp
                 _activeItemPointer = 0;
             }
             //else decrement the pointer value
-            else { _activeItemPointer--; }
+            else { _activeItemPointer++; }
 
             //activates the new current menu
             ActivateCurrentMenuItem();
