@@ -50,5 +50,61 @@ namespace CrosswordApp
         
         }
 
+        //method to add a new menu item to the list of menu items
+        public void AddMenuItem(string item) 
+        {
+            _items.Add(new MenuItem(item));
+        }
+
+        //Sets the current menu item selected to 'active'
+        public void ActivateCurrentMenuItem()
+        {
+            _items[_activeItemPointer].Activate();
+        }
+
+        //Sets the current menu item to 'inactive' / not active
+        public void DeactivateCurrentMenuItem()
+        {
+            _items[_activeItemPointer].Deactivate();
+        }
+
+        
+        public void MenuItemUp()
+        {
+            //deactivates the current menu item
+            DeactivateCurrentMenuItem();
+
+            //if the current menu item's pointer is 0 (it is the first one in the list)
+            if (_activeItemPointer == 0)
+            {
+
+                _activeItemPointer = _items.Count() - 1;
+            }
+            else { _activeItemPointer++; }
+
+            ActivateCurrentMenuItem();
+        }
+
+        public void MenuItemDown()
+        {
+            //deactivates current menu item
+            DeactivateCurrentMenuItem();
+
+            if (_activeItemPointer == _items.Count - 1)
+            {
+                _activeItemPointer = 0;
+            }
+            else { _activeItemPointer++; }
+
+            ActivateCurrentMenuItem();
+        }
+
+        public void DeactivateAllItems()
+        {
+            foreach (MenuItem item in _items)
+            {
+                item.Active = false;
+            }
+        }
     }
 }
