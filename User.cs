@@ -10,7 +10,7 @@ namespace CrosswordApp
     internal class User
     {
         [JsonProperty] private string _name;
-        [JsonProperty] private bool _accountType;
+        [JsonProperty] private string _accountType;
         [JsonProperty] private string _username;
         [JsonProperty] private string _password;
         [JsonProperty] private string _email;
@@ -25,6 +25,26 @@ namespace CrosswordApp
             _email = email;
 
         }
+
+        public string SetAccountType(string accountType) 
+        { 
+            accountType = accountType.ToLower().Trim();
+            if (accountType == "player") 
+            {
+                _accountType = "Player";
+            
+            }
+            else if(accountType == "admin") 
+            {
+                accountType = "Admin";            
+            
+            }
+
+            return _accountType;
+        }
+
+
+
 
 
 
