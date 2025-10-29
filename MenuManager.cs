@@ -126,6 +126,15 @@ namespace CrosswordApp
 
         }
 
+        public void LoginDisplay()
+        { 
+            
+        
+        
+        
+        
+        }
+
         ////method for menu functionality
         //public void UseMenu() 
         //{
