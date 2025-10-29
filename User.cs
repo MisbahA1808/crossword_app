@@ -13,7 +13,7 @@ namespace CrosswordApp
         private string _username;
         private string _password;
         private string _email;
-        private int _userID;
+        private int _userId;
 
         public User(string name, string username, string password, string email)
         {
