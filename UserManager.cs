@@ -62,17 +62,31 @@ namespace CrosswordApp
 
         public void VerifyUser(string username, string password) 
         {
+            bool found = false;
+            string path = "users.json";
 
+            string json = File.ReadAllText(path);
 
-            User user = JsonConvert.DeserializeObject<User>(username);
- 
-            if (user.Username == username && user.Password == password) 
+            var users = JsonConvert.DeserializeObject<List<User>>(json);
+
+            foreach (User user in users) 
             {
-                Console.WriteLine("Login Successful");
+                if (user.Username == username && user.Password == password)
+                {
+                    Console.WriteLine("Login Successful");
+                    found = true;
+                    break;
+                }
+
+               
             }
-            else { Console.WriteLine("Incorrect details entered - please try again!"); }
-        
-        
+            if (!found) { Console.WriteLine("Incorrect details entered - please try again!");}
+
+            //User user = JsonConvert.DeserializeObject<User>(username);
+
+
+
+
         }
 
 

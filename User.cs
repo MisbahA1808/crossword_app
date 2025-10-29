@@ -33,21 +33,27 @@ namespace CrosswordApp
 
         //method to set the account type of the user
         public string SetAccountType(string accountType) 
-        { 
-            accountType = accountType.ToLower().Trim();
-
-            if (accountType == "player") 
+        {
+            if (String.IsNullOrEmpty(accountType)) 
             {
                 _accountType = "Player";
-            
+                return accountType;
             }
-            else if(accountType == "admin") 
-            {
-                _accountType = "Admin";            
-            
-            }
+            accountType = accountType.ToLower().Trim();
 
-            return _accountType;
+            if (accountType == "player")
+            {
+                _accountType = "Player";
+
+            }
+            else if (accountType == "admin")
+            {
+                _accountType = "Admin";
+
+            }
+            else { _accountType = "Player"; }
+
+                return _accountType;
         }
 
 
