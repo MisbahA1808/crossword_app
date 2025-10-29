@@ -24,9 +24,9 @@ namespace CrosswordApp
         }
 
         //method to add a new user 
-        public void AddUser(string name, string username, string password, string email) 
+        public void AddUser(string name, string username, string password, string email, string accountType) 
         { 
-            User user = new User(_userId, username, username, password, email);
+            User user = new User(_userId, username, username, password, email, accountType);
             _users.Add(user);
             _userId++;
         
@@ -58,6 +58,21 @@ namespace CrosswordApp
             File.WriteAllText("users.json", jsonString);
 
 
+        }
+
+        public void VerifyUser(string username, string password) 
+        {
+
+
+            User user = JsonConvert.DeserializeObject<User>(username);
+ 
+            if (user.Username == username && user.Password == password) 
+            {
+                Console.WriteLine("Login Successful");
+            }
+            else { Console.WriteLine("Incorrect details entered - please try again!"); }
+        
+        
         }
 
 

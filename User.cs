@@ -16,7 +16,7 @@ namespace CrosswordApp
         [JsonProperty] private string _email;
         [JsonProperty] private int _userId;
 
-        public User(int userId, string name, string username, string password, string email)
+        public User(int userId, string name, string username, string password, string email, string accountType)
         {
             _userId = userId;
             _name = name;
@@ -24,11 +24,18 @@ namespace CrosswordApp
             _password = password;
             _email = email;
 
+            _accountType = SetAccountType(accountType);
+
         }
 
+        public string Username { get => _username; set => _username = value; }
+        public string Password { get => _password; set => _password = value; }
+
+        //method to set the account type of the user
         public string SetAccountType(string accountType) 
         { 
             accountType = accountType.ToLower().Trim();
+
             if (accountType == "player") 
             {
                 _accountType = "Player";
@@ -36,7 +43,7 @@ namespace CrosswordApp
             }
             else if(accountType == "admin") 
             {
-                accountType = "Admin";            
+                _accountType = "Admin";            
             
             }
 
