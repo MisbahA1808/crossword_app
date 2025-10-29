@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.IO;
 
 namespace CrosswordApp
@@ -36,6 +35,7 @@ namespace CrosswordApp
         
         }
 
+        //method to store current crossword data in crossword.json
         public void StoreCurrentCrossword() 
         {
             string jsonString = JsonConvert.SerializeObject(_currentCrossword, Formatting.Indented);

@@ -13,6 +13,10 @@ namespace CrosswordApp
     {
         static void Main(string[] args)
         {
+            UserManager _userManager = new UserManager();
+            _userManager.AddUser("Misbah", "Misbah1808", "Hello123", "misbah@gmail.com");
+            _userManager.SaveUserData();
+
             //creating the menu objects and adding sub menus/menu items to them
             Menu menu1 = new Menu("MY ACCOUNT");
             menu1.AddMenuItem("Login");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,16 @@ namespace CrosswordApp
 {
     internal class User
     {
-        private string _name;
-        private bool _accountType;
-        private string _username;
-        private string _password;
-        private string _email;
-        private int _userId;
+        [JsonProperty] private string _name;
+        [JsonProperty] private bool _accountType;
+        [JsonProperty] private string _username;
+        [JsonProperty] private string _password;
+        [JsonProperty] private string _email;
+        [JsonProperty] private int _userId;
 
-        public User(string name, string username, string password, string email)
+        public User(int userId, string name, string username, string password, string email)
         {
+            _userId = userId;
             _name = name;
             _username = username;
             _password = password;

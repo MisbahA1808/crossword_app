@@ -5,6 +5,8 @@ using System.Runtime.Remoting.Channels;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace CrosswordApp
 {
@@ -24,7 +26,7 @@ namespace CrosswordApp
         //method to add a new user 
         public void AddUser(string name, string username, string password, string email) 
         { 
-            User user = new User(name, username, password, email);
+            User user = new User(_userId, username, username, password, email);
             _users.Add(user);
             _userId++;
         
@@ -41,6 +43,21 @@ namespace CrosswordApp
         public List<User> GetAllUsers() 
         { 
             return _users;
+        }
+
+        //method to save user data to users.json
+        public void SaveUserData() 
+        {
+            //var json = JsonConvert.SerializeObject(users);
+            //var path = @"";
+
+
+            //File.WriteAllText(path, json);
+
+            string jsonString = JsonConvert.SerializeObject(_users, Formatting.Indented);
+            File.WriteAllText("users.json", jsonString);
+
+
         }
 
 
