@@ -37,7 +37,7 @@ namespace CrosswordApp
             if (String.IsNullOrEmpty(accountType)) 
             {
                 _accountType = "Player";
-                return accountType;
+                return accountType; 
             }
             accountType = accountType.ToLower().Trim();
 
