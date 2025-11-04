@@ -25,7 +25,7 @@ namespace CrosswordApp
 
         }
 
-        //method to determine whether or not a word wil lfit onto a given crossword
+        //method to determine whether or not a word will fit onto a given crossword
         public bool IfValidWord(Crossword crossword) 
         {
             bool valid = false;

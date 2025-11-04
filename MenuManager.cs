@@ -126,9 +126,30 @@ namespace CrosswordApp
 
         }
 
-        public void LoginDisplay()
-        { 
+       
+
+       
+
+        public string RunMenu()
+        {
+            ConsoleKey keyPressed;
+            DisplayMenu();
+
+            while (true) 
+            {
+                keyPressed = Console.ReadKey(true).Key;
+                string choice = UpdateMenu(keyPressed);
+
+                Console.Clear();
+                DisplayMenu();
+
+                if (keyPressed == ConsoleKey.Enter)
+                {
+                    return choice;
+                }
             
+            
+            }
         
         
         

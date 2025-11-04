@@ -61,11 +61,15 @@ namespace CrosswordApp
 
         }
 
-        public void VerifyUser(string username, string password) 
+        public bool VerifyUser(string username, string password) 
         {
-            bool found = false;
             string path = "users.json";
 
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("file not found..");
+                return false;
+            }
             string json = File.ReadAllText(path);
 
             var users = JsonConvert.DeserializeObject<List<User>>(json);
@@ -75,14 +79,13 @@ namespace CrosswordApp
                 if (user.Username == username && user.Password == password)
                 {
                     Console.WriteLine("Login Successful");
-                    found = true;
-                    break;
+                    return true;
                 }
 
                
             }
-            if (!found) { Console.WriteLine("Incorrect details entered - please try again!");}
-
+             Console.WriteLine("Incorrect details entered - please try again!");
+            return false;
             //User user = JsonConvert.DeserializeObject<User>(username);
 
 
