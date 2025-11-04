@@ -12,10 +12,12 @@ namespace CrosswordApp
 {
     internal class Crossword
     {
-        [JsonProperty] private int _rows { get; set; }
-        [JsonProperty] private int _columns { get; set; }
+        [JsonProperty] private int _rows;
+        [JsonProperty] private int _columns;
         [JsonProperty] private char[,] _grid { get; set; }
         [JsonProperty] private string _crosswordTitle { get; set; }
+        public int Rows { get => _rows; set => _rows = value; }
+        public int Columns { get => _columns; set => _columns = value; }
 
 
         //constructor for crossword class
