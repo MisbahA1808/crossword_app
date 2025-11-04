@@ -17,11 +17,10 @@ namespace CrosswordApp
             UserManager _userManager;
             //MenuManager _menuManager = new MenuManager(); ;
 
-
             DisplayLogin();
         }
 
-        public static void DisplayMenu(MenuManager menuManager) 
+        public static void DisplayMenu() 
         {
             //creating the menu objects and adding sub menus/ menu items to them
             Menu menu1 = new Menu("MY ACCOUNT");
@@ -48,7 +47,7 @@ namespace CrosswordApp
             menu5.AddMenuItem("option 12");
 
             //creating a menu manager object
-            menuManager = new MenuManager(new List<Menu> { menu1, menu2, menu3, menu4, menu5 });
+            MenuManager menuManager = new MenuManager(new List<Menu> { menu1, menu2, menu3, menu4, menu5 });
 
             ConsoleKey keyPressed;
             menuManager.DisplayMenu();
@@ -70,8 +69,17 @@ namespace CrosswordApp
             }
         }
 
-        public static void CreateUser(UserManager userManager) 
+        public static void CreateUser() 
         {
+            UserManager userManager = new UserManager();
+            ConsoleKey keyPressed;
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("CREATE ACCOUNT");
+            Console.WriteLine();
+            Console.ResetColor();
+
+
             //getting the username, password, email and name of the user
             Console.WriteLine("Enter your full name:");
             string name = Console.ReadLine();
@@ -87,12 +95,24 @@ namespace CrosswordApp
 
             //creating an instance of the user and adding them to the json file
             userManager.AddUser(name,username,password,email, "player");
+
             userManager.SaveUserData();
+
+            Console.WriteLine("Account created successfully! Press Enter to return to the Login Page.");
+            keyPressed = Console.ReadKey(true).Key;
+
+            if (keyPressed == ConsoleKey.Enter)
+            {
+                Console.Clear();
+                DisplayLogin();
+            }
+
 
         }
 
-        public static void VerifyUser(UserManager userManager) 
+        public static void VerifyUser() 
         {
+            UserManager userManager = new UserManager();
             Console.WriteLine("Enter your username:");
             string username = Console.ReadLine();
             Console.WriteLine("Enter your password:");
@@ -128,7 +148,6 @@ namespace CrosswordApp
             while (true)
             {
                 
-
                 //gets the key pressed as user input
                 keyPressed = Console.ReadKey(true).Key;
                 //passes the value of th ekey pressed as a parameter to menu manager's update menu method
@@ -145,8 +164,29 @@ namespace CrosswordApp
                 Console.ResetColor();
                 menuManager.DisplayMenu();
 
+                if (keyPressed == ConsoleKey.Enter) 
+                {
+                    Console.Clear();
+                    CreateUser();
+                    break;
+                }
             }
+
             
+        }
+
+        public void SetCrosswordDimensions()
+        {
+            Console.WriteLine("CREATE CROSSWORD");
+            Console.WriteLine("Title: ");
+            string title = Console.ReadLine();
+            Console.WriteLine("Number of Rows: ");
+            int rows = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Number of Columns: ");
+            int columns = Convert.ToInt32(Console.ReadLine());
+
+            Crossword crossword = new Crossword(rows, columns, title);
+                
         
         }
 

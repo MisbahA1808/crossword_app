@@ -27,6 +27,7 @@ namespace CrosswordApp
         public void AddUser(string name, string username, string password, string email, string accountType) 
         { 
             User user = new User(_userId, username, username, password, email, accountType);
+            user.SetState(accountType);
             _users.Add(user);
             _userId++;
         

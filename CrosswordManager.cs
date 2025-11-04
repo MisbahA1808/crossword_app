@@ -43,5 +43,14 @@ namespace CrosswordApp
 
 
         }
+
+        public void AddClue() 
+        { 
+        
+        
+        
+        
+        
+        }
     }
 }
