@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrosswordApp
 {
-    internal class Clue
+    internal class Word
     {
     }
 }
