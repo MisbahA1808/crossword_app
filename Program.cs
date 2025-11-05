@@ -35,39 +35,51 @@ namespace CrosswordApp
         public static void DisplayMenu() 
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Welcome to the Crossword Solver & Builder!!");
+            Console.ResetColor();
+
             //creating the menu objects and adding sub menus/ menu items to them
             Menu menu1 = new Menu("MY ACCOUNT");
             menu1.AddMenuItem("Login");
             menu1.AddMenuItem("Create Account");
-            menu1.AddMenuItem("Logout");
+            menu1.AddMenuItem("Change Role");
 
-            Menu menu2 = new Menu("CREATE CROSSWORD");
-            menu2.AddMenuItem("option 3");
-            menu2.AddMenuItem("option 4");
+            Menu menu2 = new Menu("CROSSWORDS");
+            menu2.AddMenuItem("Create Crossword");
+            menu2.AddMenuItem("Solve Crossword");
+            
+            
+            Menu menu3 = new Menu("SETTINGS");
+            menu3.AddMenuItem("Logout");
+            
 
-            Menu menu3 = new Menu("SOLVE CROSSWORD");
-            menu3.AddMenuItem("option 5");
-            menu3.AddMenuItem("option 6");
-
-            Menu menu4 = new Menu("MENU 4");
-            menu4.AddMenuItem("option 7");
-            menu4.AddMenuItem("option 8");
-
-            Menu menu5 = new Menu("MENU 5");
-            menu5.AddMenuItem("option 9");
-            menu5.AddMenuItem("option 10");
-            menu5.AddMenuItem("option 11");
-            menu5.AddMenuItem("option 12");
 
             //creating a menu manager object
-            MenuManager menuManager = new MenuManager(new List<Menu> { menu1, menu2, menu3, menu4, menu5 });
+            MenuManager menuManager = new MenuManager(new List<Menu> { menu1, menu2, menu3});
 
+                       
             string choice = menuManager.RunMenu();
 
             switch (choice)
             {
                 case "Logout":
                     DisplayLogin();
+                    break;
+
+                case "Create Crossword":
+                    Console.Clear();
+                    Console.WriteLine("create cross");
+                    break;
+
+                case "Solve Crossword":
+                    Console.Clear();
+                    Console.WriteLine("solve cross");
+                    break;
+
+                case "Create Account":
+                    Console.Clear();
+                    DisplayAccountCreation();
                     break;
 
                 default:
@@ -152,7 +164,7 @@ namespace CrosswordApp
 
             if (isVerified)
             {
-                Console.WriteLine("Logi Successful! Press any key to continue");
+                Console.WriteLine("Press any key to continue");
                 Console.ReadKey(true);
                 DisplayMenu();
             }
@@ -160,7 +172,7 @@ namespace CrosswordApp
             {
                 Console.WriteLine("Invalid login details, press any key to retry.");
                 Console.ReadKey(true);
-                DisplayMenu();
+                VerifyUser();
             }
 
 
@@ -187,10 +199,12 @@ namespace CrosswordApp
             switch (selectedOption) 
             {
                 case "Login":
+                    Console.Clear();
                     VerifyUser();
                     break;
 
                 case "Create Account":
+                    Console.Clear();
                     CreateUser();
                     break;
 

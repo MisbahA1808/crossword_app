@@ -10,9 +10,9 @@ namespace CrosswordApp
     internal class MenuManager
     {
         //attributes
-        string _header;
-        string _footer;
-        int _windowWidth;
+        private string _header;
+        private string _footer;
+        private int _windowWidth;
         private List<Menu> _menus;
         private int _activeMenuPointer;
         private Menu _activeMenu;
@@ -88,6 +88,10 @@ namespace CrosswordApp
                 case ConsoleKey.DownArrow:
                     _activeMenu.MenuItemDown();
                     break;
+
+                case ConsoleKey.Enter:
+                    return _activeMenu.GetActiveChoice();
+                    
 
                 default:
                     break;
