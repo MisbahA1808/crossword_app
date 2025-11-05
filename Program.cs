@@ -69,17 +69,26 @@ namespace CrosswordApp
 
                 case "Create Crossword":
                     Console.Clear();
-                    Console.WriteLine("create cross");
+                    SetCrosswordDimensions();
                     break;
 
                 case "Solve Crossword":
                     Console.Clear();
-                    Console.WriteLine("solve cross");
+                    //Console.WriteLine("solve cross");
                     break;
 
                 case "Create Account":
                     Console.Clear();
                     DisplayAccountCreation();
+                    break;
+
+                case "Login":
+                    Console.WriteLine("You are already Logged In!");
+                    break;
+
+                case "Change Role":
+                    Console.Clear();
+                    Console.WriteLine("Change User Role:");
                     break;
 
                 default:
@@ -88,24 +97,6 @@ namespace CrosswordApp
                     break;
             }
 
-            //ConsoleKey keyPressed;
-            //menuManager.DisplayMenu();
-
-            ////a loop to always display the menu
-            //while (true)
-            //{
-            //    //gets the key pressed as user input
-            //    keyPressed = Console.ReadKey(true).Key;
-            //    //passes the value of th ekey pressed as a parameter to menu manager's update menu method
-            //    string choice = menuManager.UpdateMenu(keyPressed);
-
-            //    //clears/refreshes the console every time a key is pressed
-            //    Console.Clear();
-            //    //Console.Write(choice);
-
-            //    menuManager.DisplayMenu();
-
-            //}
         }
 
         public static void CreateUser() 
@@ -212,42 +203,11 @@ namespace CrosswordApp
                     break;
             }
 
-            //ConsoleKey keyPressed;
-            //menuManager.DisplayMenu();
-
-            ////a loop to always display the menu
-            //while (true)
-            //{
-                
-            //    //gets the key pressed as user input
-            //    keyPressed = Console.ReadKey(true).Key;
-            //    //passes the value of th ekey pressed as a parameter to menu manager's update menu method
-            //    string choice = menuManager.UpdateMenu(keyPressed);
-
-            //    //clears/refreshes the console every time a key is pressed
-            //    Console.Clear();
-            //    //Console.Write(choice);
-            //    Console.SetCursorPosition(38, 0);
-            //    Console.ForegroundColor = ConsoleColor.Blue;
-            //    Console.WriteLine("Welcome to the Crossword Solver & Builder!");
-            //    Console.WriteLine();
-
-            //    Console.ResetColor();
-            //    menuManager.DisplayMenu();
-
-            //    if (keyPressed == ConsoleKey.Enter) 
-            //    {
-            //        //Console.Clear();
-            //        //CreateUser();
-            //        //break;
-            //        menuManager.UpdateMenu(keyPressed);
-            //    }
-            //}
-
+           
             
         }
 
-        public void SetCrosswordDimensions()
+        public static void SetCrosswordDimensions()
         {
             Console.WriteLine("CREATE CROSSWORD");
             Console.WriteLine("Title: ");
@@ -258,6 +218,7 @@ namespace CrosswordApp
             int columns = Convert.ToInt32(Console.ReadLine());
 
             Crossword crossword = new Crossword(rows, columns, title);
+            crossword.DisplayCrossword();
                 
         
         }
