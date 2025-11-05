@@ -69,6 +69,7 @@ namespace CrosswordApp
 
                 case "Create Crossword":
                     Console.Clear();
+                    DisplayWelcomeMessage();
                     SetCrosswordDimensions();
                     break;
 
@@ -209,13 +210,18 @@ namespace CrosswordApp
 
         public static void SetCrosswordDimensions()
         {
-            Console.WriteLine("CREATE CROSSWORD");
+            Console.SetCursorPosition(50, 2);
+            Console.WriteLine("CREATE CROSSWORD:");
+            Console.WriteLine();
+
             Console.WriteLine("Title: ");
             string title = Console.ReadLine();
             Console.WriteLine("Number of Rows: ");
             int rows = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Number of Columns: ");
             int columns = Convert.ToInt32(Console.ReadLine());
+
+
 
             Crossword crossword = new Crossword(rows, columns, title);
             crossword.DisplayCrossword();
@@ -227,6 +233,22 @@ namespace CrosswordApp
         {
             Console.Clear();
         
+        
+        }
+
+        public static void DisplayWelcomeMessage() 
+        {
+            Console.SetCursorPosition(38, 0);
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Welcome to the Crossword Solver & Builder!");
+            Console.ResetColor();
+
+            Console.SetCursorPosition(20,28);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            Console.WriteLine("Created by Misbah Ahmad, a student at SHU for the module Programming Fundamentals");
+            Console.ResetColor();
         
         }
 
