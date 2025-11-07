@@ -64,26 +64,38 @@ namespace CrosswordApp
             direction = direction.ToLower().Trim();
             word = word.ToUpper().Trim();
 
+            
             //if they choose the word to be going across
             if (direction == "across")
             {
-                for (int i = 0; i < word.Length; i++)
+                if (word.Length <= (_grid.GetLength(1) - startColumn))
                 {
-                    //loops through the gris and changes the relevant indexes to the letters of the word
-                    _grid[startRow, startColumn + i] = word[i];
+                    for (int i = 0; i < word.Length; i++)
+                    {
+                        //loops through the gris and changes the relevant indexes to the letters of the word
+                        _grid[startRow, startColumn + i] = word[i];
 
+                    }
+                    Console.WriteLine("word added successfully!");
                 }
+                else { Console.WriteLine("invalid entry"); }
 
             }
             //if they choose the direction to be down
             else if (direction == "down")
             {
-                //loops through the gris and changes the relevant indexes to the letters of the word
-                for (int i = 0; i < word.Length; i++)
+                if (word.Length <= (_grid.GetLength(0) - startRow))
                 {
-                    _grid[startRow = +i, startColumn] = word[i];
+                    //loops through the gris and changes the relevant indexes to the letters of the word
+                    for (int i = 0; i < word.Length; i++)
+                    {
+                        _grid[startRow = +i, startColumn] = word[i];
+
+                    }
+                    Console.WriteLine("word added successfully!");
 
                 }
+                else { Console.WriteLine("invalid entry"); }
 
             }
             else 

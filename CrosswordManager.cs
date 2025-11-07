@@ -61,14 +61,14 @@ namespace CrosswordApp
                     {
                         //change the foreground colour to red
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write($"{position}");
+                        Console.Write($"{position} ");
                         Console.ResetColor();
 
 
                     }
                     else
                     {
-                        Console.Write($"{position}");
+                        Console.Write($"{position} ");
 
                     }
 
@@ -97,7 +97,6 @@ namespace CrosswordApp
             {
                 //displays the current word based on the input given
                 _currentCrossword.DisplayWord(word, direction, startRow, startColumn);
-                Console.WriteLine("Word added successfully!");
             }
             catch (Exception)
             {
