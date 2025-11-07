@@ -12,6 +12,7 @@ namespace CrosswordApp
 {
     internal class Crossword
     {
+        //attributes
         [JsonProperty] private int _rows;
         [JsonProperty] private int _columns;
         [JsonProperty] private char[,] _grid { get; set; }
@@ -91,6 +92,21 @@ namespace CrosswordApp
             
             }
 
+        
+        }
+
+        //gets the current grid position/cell
+        public char GetGridPosition(int row, int column) 
+        {
+            return _grid[row, column];
+        
+        }
+
+        //sets the current grids position
+        public void SetGridPosition(int row, int column, char value) 
+        {
+            _grid[row, column] = value;
+        
         
         }
 

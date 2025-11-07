@@ -70,7 +70,9 @@ namespace CrosswordApp
                 case "Create Crossword":
                     Console.Clear();
                     DisplayWelcomeMessage();
-                    SetCrosswordDimensions();
+                    CrosswordManager crosswordManager = new CrosswordManager(SetCrosswordDimensions());
+                    crosswordManager.AdminCreateCrossword();
+                    crosswordManager.StoreCurrentCrossword();
                     break;
 
                 case "Solve Crossword":
@@ -208,7 +210,7 @@ namespace CrosswordApp
             
         }
 
-        public static void SetCrosswordDimensions()
+        public static Crossword SetCrosswordDimensions()
         {
             Console.SetCursorPosition(50, 2);
             Console.WriteLine("CREATE CROSSWORD:");
@@ -225,6 +227,8 @@ namespace CrosswordApp
 
             Crossword crossword = new Crossword(rows, columns, title);
             crossword.DisplayCrossword();
+
+            return crossword;
                 
         
         }
