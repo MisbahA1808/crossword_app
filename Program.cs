@@ -154,9 +154,15 @@ namespace CrosswordApp
             DisplayWelcomeMessage();
             Console.SetCursorPosition(0, 2);
             UserManager userManager = new UserManager();
+
             Console.WriteLine("Enter your username:");
-            string username = Console.ReadLine();
+            Console.SetCursorPosition(0, 5);
             Console.WriteLine("Enter your password:");
+
+            Console.SetCursorPosition(0, 3);
+            string username = Console.ReadLine();
+
+            Console.SetCursorPosition(0, 6);
             string password = Console.ReadLine();
 
             bool isVerified = userManager.VerifyUser(username, password);
@@ -221,11 +227,22 @@ namespace CrosswordApp
             Console.WriteLine("CREATE CROSSWORD:");
             Console.WriteLine();
 
+            Console.SetCursorPosition(0, 4);
             Console.WriteLine("Title: ");
-            string title = Console.ReadLine();
+
+            Console.SetCursorPosition(0, 7);
             Console.WriteLine("Number of Rows: ");
-            int rows = Convert.ToInt32(Console.ReadLine());
+
+            Console.SetCursorPosition(0, 10);
             Console.WriteLine("Number of Columns: ");
+
+            Console.SetCursorPosition(0, 5);
+            string title = Console.ReadLine();
+
+            Console.SetCursorPosition(0, 8);
+            int rows = Convert.ToInt32(Console.ReadLine());
+
+            Console.SetCursorPosition(0, 11);
             int columns = Convert.ToInt32(Console.ReadLine());
 
 

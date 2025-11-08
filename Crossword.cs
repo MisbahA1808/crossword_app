@@ -69,7 +69,7 @@ namespace CrosswordApp
             //if they choose the word to be going across
             if (direction == "across")
             {
-                //validation
+                //validation that the word will fit into the crossword
                 if (word.Length <= (_grid.GetLength(1) - startColumn))
                 {
 
@@ -87,14 +87,14 @@ namespace CrosswordApp
             //if they choose the direction to be down
             else if (direction == "down")
             {
-                //validation
+                //validation that the word wil fit into the crossword
                 if (word.Length <= (_grid.GetLength(0) - startRow))
                 {
 
                     //loops through the gris and changes the relevant indexes to the letters of the word
                     for (int i = 0; i < word.Length; i++)
                     {
-                        _grid[startRow = +i, startColumn] = word[i];
+                        _grid[startRow + i, startColumn] = word[i];
 
                     }
                     Console.WriteLine("word added successfully!");
