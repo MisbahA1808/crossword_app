@@ -46,7 +46,9 @@ namespace CrosswordApp
         //method for admin to draw the crossword (add words to it)
         public void AdminDrawCrossword(int selectedRow, int selectedColumn) 
         {
-            Console.WriteLine("Your current crossword: ");
+            Console.WriteLine(_currentCrossword.CrosswordTitle);
+            Console.WriteLine();
+            
 
             //loops through the rows
             for (int i = 0; i < _currentCrossword.Rows; i++) 
@@ -84,12 +86,18 @@ namespace CrosswordApp
         public void AddInputWord(int startRow, int startColumn) 
         {
             //takes the word as user input
+            Console.SetCursorPosition(0, 15);
             Console.WriteLine("Enter the word you would like to add:");
+
+            //takes the direction as user input
+            Console.SetCursorPosition(0,18);
+            Console.WriteLine("Enter the direction you would like the word to go (across/down):");
+            Console.SetCursorPosition(0,16);
             string word = Console.ReadLine();
             word = word.ToUpper().Trim();
 
-            //takes the direction as user input
-            Console.WriteLine("Enter the direction you would like the word to go (across/down):");
+            Console.SetCursorPosition(0,19);
+
             string direction = Console.ReadLine();
             direction = direction.ToLower().Trim();
 
@@ -110,6 +118,7 @@ namespace CrosswordApp
 
         public void AdminCreateCrossword() 
         {
+
             //start at the top left of the crossword by setting the start row and column to zero
             int selectedRow = 0;
             int selectedColumn = 0;
@@ -120,9 +129,15 @@ namespace CrosswordApp
             {
                 //clears the console
                 Console.Clear();
+                Program.DisplayWelcomeMessage();
+                Console.SetCursorPosition(0, 2);
                 //draws the crossword
                 AdminDrawCrossword(selectedRow, selectedColumn);
-                Console.WriteLine("press the arrow keys to navigate and enter to add a word");
+                Console.SetCursorPosition(40, 27);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Use arrow keys to move, Enter to select");
+                Console.ResetColor();
+                
                 //gets the key pressed b ythe admin
                 keyPressed = Console.ReadKey(true).Key;
 

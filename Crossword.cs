@@ -16,9 +16,10 @@ namespace CrosswordApp
         [JsonProperty] private int _rows;
         [JsonProperty] private int _columns;
         [JsonProperty] private char[,] _grid { get; set; }
-        [JsonProperty] private string _crosswordTitle { get; set; }
+        [JsonProperty] private string _crosswordTitle;
         public int Rows { get => _rows; set => _rows = value; }
         public int Columns { get => _columns; set => _columns = value; }
+        public string CrosswordTitle { get => _crosswordTitle; set => _crosswordTitle = value; }
 
 
         //constructor for crossword class
@@ -68,8 +69,10 @@ namespace CrosswordApp
             //if they choose the word to be going across
             if (direction == "across")
             {
+                //validation
                 if (word.Length <= (_grid.GetLength(1) - startColumn))
                 {
+
                     for (int i = 0; i < word.Length; i++)
                     {
                         //loops through the gris and changes the relevant indexes to the letters of the word
@@ -84,8 +87,10 @@ namespace CrosswordApp
             //if they choose the direction to be down
             else if (direction == "down")
             {
+                //validation
                 if (word.Length <= (_grid.GetLength(0) - startRow))
                 {
+
                     //loops through the gris and changes the relevant indexes to the letters of the word
                     for (int i = 0; i < word.Length; i++)
                     {

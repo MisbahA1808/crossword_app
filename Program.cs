@@ -35,9 +35,8 @@ namespace CrosswordApp
         public static void DisplayMenu() 
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Welcome to the Crossword Solver & Builder!!");
-            Console.ResetColor();
+            DisplayWelcomeMessage();
+            Console.SetCursorPosition(0, 2);
 
             //creating the menu objects and adding sub menus/ menu items to them
             Menu menu1 = new Menu("MY ACCOUNT");
@@ -70,6 +69,7 @@ namespace CrosswordApp
                 case "Create Crossword":
                     Console.Clear();
                     DisplayWelcomeMessage();
+
                     CrosswordManager crosswordManager = new CrosswordManager(SetCrosswordDimensions());
                     crosswordManager.AdminCreateCrossword();
                     crosswordManager.StoreCurrentCrossword();
@@ -96,6 +96,9 @@ namespace CrosswordApp
 
                 default:
                     Console.ReadKey(true);
+                    DisplayWelcomeMessage();
+                    Console.SetCursorPosition(0, 2);
+
                     DisplayMenu();
                     break;
             }
@@ -148,6 +151,8 @@ namespace CrosswordApp
         public static void VerifyUser() 
         {
             Console.Clear();
+            DisplayWelcomeMessage();
+            Console.SetCursorPosition(0, 2);
             UserManager userManager = new UserManager();
             Console.WriteLine("Enter your username:");
             string username = Console.ReadLine();

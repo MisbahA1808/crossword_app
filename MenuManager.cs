@@ -145,7 +145,22 @@ namespace CrosswordApp
                 string choice = UpdateMenu(keyPressed);
 
                 Console.Clear();
+
+                Console.SetCursorPosition(38, 0);
+
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Welcome to the Crossword Solver & Builder!");
+                Console.ResetColor();
+
+                Console.SetCursorPosition(20, 28);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                Console.WriteLine("Created by Misbah Ahmad, a student at SHU for the module Programming Fundamentals");
+                Console.ResetColor();
+                Console.SetCursorPosition(0, 2);
+                
                 DisplayMenu();
+
 
                 if (keyPressed == ConsoleKey.Enter)
                 {
