@@ -52,11 +52,46 @@ namespace CrosswordApp
             //var json = JsonConvert.SerializeObject(users);
             //var path = @"";
 
-
             //File.WriteAllText(path, json);
+            string path = "users.json";
+            //var jsonData = File.ReadAllText(path);
+            //_users = JsonConvert.DeserializeObject<List<User>>(jsonData);
 
-            string jsonString = JsonConvert.SerializeObject(_users, Formatting.Indented);
-            File.WriteAllText("users.json", jsonString);
+            //jsonData = JsonConvert.SerializeObject(_users, Formatting.Indented);
+            //File.AppendAllText(path, jsonData);
+            List <User> existingUsers = new List<User> ();
+
+            //check if the json file exists
+            if (File.Exists(path)) 
+            {
+                //read all text in the json file
+                string json = File.ReadAllText(path);
+
+                //if the file is not empty
+                if (!string.IsNullOrEmpty(json)) 
+                {
+                    //gets the list of existing users
+                    existingUsers = JsonConvert.DeserializeObject<List<User>>(json); 
+
+                    //for each user that exists
+                    foreach (User user in _users)
+                    {
+                        //add them to a new list
+                        existingUsers.Add(user);
+
+
+                    }
+
+
+                }
+            
+            
+            }
+            else { Console.WriteLine("File not found"); }
+
+                //then writing the complete list of users to the json file
+                string jsonString = JsonConvert.SerializeObject(existingUsers, Formatting.Indented);
+            File.WriteAllText(path, jsonString);
 
 
         }

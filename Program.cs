@@ -130,6 +130,8 @@ namespace CrosswordApp
             string password = Console.ReadLine();
 
             //creating an instance of the user and adding them to the json file
+            
+
             userManager.AddUser(name,username,password,email, "player");
 
             userManager.SaveUserData();

@@ -79,9 +79,10 @@ namespace CrosswordApp
                         _grid[startRow, startColumn + i] = word[i];
 
                     }
-                    Console.WriteLine("word added successfully!");
+                    Console.WriteLine();
+                    Console.WriteLine("Word Added Successfully!");
                 }
-                else { Console.WriteLine("invalid entry"); }
+                else { Console.WriteLine("Invalid Entry!"); }
 
             }
             //if they choose the direction to be down
@@ -97,15 +98,16 @@ namespace CrosswordApp
                         _grid[startRow + i, startColumn] = word[i];
 
                     }
-                    Console.WriteLine("word added successfully!");
+                    Console.WriteLine();
+                    Console.WriteLine("Word Added Successfully!");
 
                 }
-                else { Console.WriteLine("invalid entry"); }
+                else { Console.WriteLine("Invalid Entry!"); }
 
             }
             else 
             {
-                Console.WriteLine("Invalid entry");
+                Console.WriteLine("Invalid Entry!");
             
             }
 

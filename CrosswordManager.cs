@@ -38,8 +38,36 @@ namespace CrosswordApp
         //method to store current crossword data in crossword.json
         public void StoreCurrentCrossword() 
         {
-            string jsonString = JsonConvert.SerializeObject(_currentCrossword, Formatting.Indented);
-            File.WriteAllText("crossword.json", jsonString);
+            List<Crossword> existingCrosswords = new List<Crossword>();
+            string path = "crossword.json";
+            if (File.Exists(path))
+            {
+                //read all text in the json file
+                string json = File.ReadAllText(path);
+
+                //if the file is not empty
+                if (!string.IsNullOrEmpty(json))
+                {
+                    //gets the list of existing users
+                    existingCrosswords = JsonConvert.DeserializeObject<List<Crossword>>(json);
+
+                    //for each user that exists
+                    foreach (Crossword crossword in _crosswords)
+                    {
+                        //add them to a new list
+                        existingCrosswords.Add(crossword);
+
+
+                    }
+
+
+                }
+
+
+            }
+            else { Console.WriteLine("File not found"); }
+            string jsonString = JsonConvert.SerializeObject(existingCrosswords, Formatting.Indented);
+            File.WriteAllText(path, jsonString);
 
         }
 
@@ -112,7 +140,7 @@ namespace CrosswordApp
                 Console.WriteLine("Word could not be added, please try again.");
             }
 
-            Console.WriteLine("press a key to continue");
+            Console.WriteLine("Press a key to continue");
             Console.ReadKey(true);
         }
 
@@ -195,6 +223,7 @@ namespace CrosswordApp
             //if the key pressed is the escape key, the loop breaks
             } while (keyPressed != ConsoleKey.Escape);
 
+            StoreCurrentCrossword();
             Console.WriteLine("crossword created!");
         
         }
