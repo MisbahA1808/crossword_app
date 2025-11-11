@@ -105,6 +105,7 @@ namespace CrosswordApp
         public void AdminDrawCrossword(int selectedRow, int selectedColumn)
         {
             Console.WriteLine("Your current crossword: ");
+            Console.WriteLine();
 
             //loops through the rows
             for (int i = 0; i < _currentCrossword.Rows; i++)
@@ -119,14 +120,14 @@ namespace CrosswordApp
                     {
                         //change the foreground colour to red
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write($"{position}");
+                        Console.Write($"{position}" + " ");
                         Console.ResetColor();
 
 
                     }
                     else
                     {
-                        Console.Write($"{position}");
+                        Console.Write($"{position}" + " ");
 
                     }
 
@@ -154,9 +155,9 @@ namespace CrosswordApp
                 Console.SetCursorPosition(0, 2);
                 //draws the crossword
                 AdminDrawCrossword(selectedRow, selectedColumn);
-                Console.SetCursorPosition(40, 27);
+                Console.SetCursorPosition(28, 27);
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Use arrow keys to move, Enter to select");
+                Console.WriteLine("Use arrow keys to move, Enter to select, Esc to submit crossword");
                 Console.ResetColor();
                 
                 //gets the key pressed b ythe admin
@@ -220,9 +221,10 @@ namespace CrosswordApp
             //{
             //    CrosswordManager crosswordManager = new CrosswordManager(_currentCrossword);
             //    crosswordManager.StoreCurrentCrossword();
-            
+
             //}
-            Console.WriteLine("crossword created!");
+            Console.SetCursorPosition(0, 16);
+            Console.WriteLine("Crossword Created Successfully!");
         
         }
     }
