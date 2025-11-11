@@ -216,6 +216,12 @@ namespace CrosswordApp
             //if the key pressed is the escape key, the loop breaks
             } while (keyPressed != ConsoleKey.Escape);
 
+            //if (keyPressed == ConsoleKey.Escape) 
+            //{
+            //    CrosswordManager crosswordManager = new CrosswordManager(_currentCrossword);
+            //    crosswordManager.StoreCurrentCrossword();
+            
+            //}
             Console.WriteLine("crossword created!");
         
         }

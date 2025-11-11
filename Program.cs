@@ -15,9 +15,9 @@ namespace CrosswordApp
 
         static void Main(string[] args)
         {
-            Crossword crossword = new Crossword(5, 5, "test");
-            CrosswordManager crosswordManager = new CrosswordManager(crossword);
-            crosswordManager.StoreCurrentCrossword();
+            //Crossword crossword = new Crossword(5, 5, "test");
+            //CrosswordManager crosswordManager = new CrosswordManager(crossword);
+            //crosswordManager.StoreCurrentCrossword();
 
             _isFileLoaded = false;
 
