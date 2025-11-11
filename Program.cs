@@ -15,6 +15,10 @@ namespace CrosswordApp
 
         static void Main(string[] args)
         {
+            Crossword crossword = new Crossword(5, 5, "test");
+            CrosswordManager crosswordManager = new CrosswordManager(crossword);
+            crosswordManager.StoreCurrentCrossword();
+
             _isFileLoaded = false;
 
             if (_isFileLoaded)
@@ -72,12 +76,14 @@ namespace CrosswordApp
 
                     CrosswordManager crosswordManager = new CrosswordManager(SetCrosswordDimensions());
                     crosswordManager.AdminCreateCrossword();
+                    crosswordManager.AddCrosswordToList();
                     crosswordManager.StoreCurrentCrossword();
                     break;
 
                 case "Solve Crossword":
                     Console.Clear();
                     //Console.WriteLine("solve cross");
+                    //need to implement this logic
                     break;
 
                 case "Create Account":
@@ -91,6 +97,7 @@ namespace CrosswordApp
 
                 case "Change Role":
                     Console.Clear();
+                    //need to get user role, verify it then put an appropriate message here based on that
                     Console.WriteLine("Change User Role:");
                     break;
 
@@ -223,6 +230,7 @@ namespace CrosswordApp
             
         }
 
+        //method to get user input for crossword dimensions and title
         public static Crossword SetCrosswordDimensions()
         {
             Console.SetCursorPosition(50, 2);
@@ -248,8 +256,10 @@ namespace CrosswordApp
             int columns = Convert.ToInt32(Console.ReadLine());
 
 
-
+            //creates a new crossword object with the user input as parameters
             Crossword crossword = new Crossword(rows, columns, title);
+
+            //calls the display method from crossword.cs to show the crossword on screen
             crossword.DisplayCrossword();
 
             return crossword;
@@ -264,6 +274,7 @@ namespace CrosswordApp
         
         }
 
+        //method to display the welocome message
         public static void DisplayWelcomeMessage() 
         {
             Console.SetCursorPosition(38, 0);

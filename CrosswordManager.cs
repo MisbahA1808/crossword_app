@@ -38,75 +38,32 @@ namespace CrosswordApp
         //method to store current crossword data in crossword.json
         public void StoreCurrentCrossword() 
         {
-            List<Crossword> existingCrosswords = new List<Crossword>();
+            List<Crossword> crosswords;
             string path = "crossword.json";
+
             if (File.Exists(path))
             {
-                //read all text in the json file
                 string json = File.ReadAllText(path);
 
-                //if the file is not empty
-                if (!string.IsNullOrEmpty(json))
+                if (string.IsNullOrWhiteSpace(json))
                 {
-                    //gets the list of existing users
-                    existingCrosswords = JsonConvert.DeserializeObject<List<Crossword>>(json);
-
-                    //for each user that exists
-                    foreach (Crossword crossword in _crosswords)
-                    {
-                        //add them to a new list
-                        existingCrosswords.Add(crossword);
-
-
-                    }
-
-
+                    crosswords = new List<Crossword>();
                 }
-
-
-            }
-            else { Console.WriteLine("File not found"); }
-            string jsonString = JsonConvert.SerializeObject(existingCrosswords, Formatting.Indented);
-            File.WriteAllText(path, jsonString);
-
-        }
-
-        //method for admin to draw the crossword (add words to it)
-        public void AdminDrawCrossword(int selectedRow, int selectedColumn) 
-        {
-            Console.WriteLine(_currentCrossword.CrosswordTitle);
-            Console.WriteLine();
-            
-
-            //loops through the rows
-            for (int i = 0; i < _currentCrossword.Rows; i++) 
-            {
-                //loops through the columns
-                for (int j = 0; j < _currentCrossword.Columns; j++) 
+                else
                 {
-                    //gets the current posotion on the grid
-                    char position = _currentCrossword.GetGridPosition(i,j);
-                    //if  and j are equal to te row and column sleected by the admin
-                    if (i == selectedRow && j == selectedColumn)
+                    crosswords = JsonConvert.DeserializeObject<List<Crossword>>(json);
+                    if (crosswords == null) 
                     {
-                        //change the foreground colour to red
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write($"{position} ");
-                        Console.ResetColor();
-
-
+                        crosswords = new List<Crossword>();
                     }
-                    else
-                    {
-                        Console.Write($"{position} ");
-
-                    }
-
-
                 }
-                Console.WriteLine();
             }
-        
+            else { crosswords = new List<Crossword>(); }
+
+            crosswords.Add(_currentCrossword);
+
+            string json1 = JsonConvert.SerializeObject(crosswords, Formatting.Indented);
+            File.WriteAllText(path, json1);
         
         }
 
@@ -144,6 +101,42 @@ namespace CrosswordApp
             Console.ReadKey(true);
         }
 
+        //method for admin to draw the crossword (add words to it)
+        public void AdminDrawCrossword(int selectedRow, int selectedColumn)
+        {
+            Console.WriteLine("Your current crossword: ");
+
+            //loops through the rows
+            for (int i = 0; i < _currentCrossword.Rows; i++)
+            {
+                //loops through the columns
+                for (int j = 0; j < _currentCrossword.Columns; j++)
+                {
+                    //gets the current posotion on the grid
+                    char position = _currentCrossword.GetGridPosition(i, j);
+                    //if  and j are equal to te row and column sleected by the admin
+                    if (i == selectedRow && j == selectedColumn)
+                    {
+                        //change the foreground colour to red
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write($"{position}");
+                        Console.ResetColor();
+
+
+                    }
+                    else
+                    {
+                        Console.Write($"{position}");
+
+                    }
+
+
+                }
+                Console.WriteLine();
+            }
+
+
+        }
         public void AdminCreateCrossword() 
         {
 
@@ -223,7 +216,6 @@ namespace CrosswordApp
             //if the key pressed is the escape key, the loop breaks
             } while (keyPressed != ConsoleKey.Escape);
 
-            StoreCurrentCrossword();
             Console.WriteLine("crossword created!");
         
         }
