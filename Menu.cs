@@ -32,11 +32,16 @@ namespace CrosswordApp
         }
 
         //method to display the menu items
-        public void DisplayMenu()
+        public void DisplayMenu(int x, int y)
         {
+            Console.SetCursorPosition(x, y);
+
+            int buffer = 1;
+
             //loops through the list of menu items 
             foreach (MenuItem item in _items)
             {
+                Console.SetCursorPosition(x, y + buffer);
                 //if the menu item is the active one (the one selected)
                 if (item.Active == true)
                 {
@@ -47,7 +52,7 @@ namespace CrosswordApp
                 }
                 //if it is not the active menu, just print it on the console
                 else { Console.WriteLine(item.Name); }
-
+                buffer++;
             }
 
         }

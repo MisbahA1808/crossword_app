@@ -225,6 +225,7 @@ namespace CrosswordApp
             //}
             Console.SetCursorPosition(0, 16);
             Console.WriteLine("Crossword Created Successfully!");
+            Program.DisplayMenu();
         
         }
     }

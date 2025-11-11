@@ -104,28 +104,35 @@ namespace CrosswordApp
         //method to display the menu on the console
         public void DisplayMenu() 
         {
+            int startCol = 0;
+            int startRow = 3;
+            int spacing = 25;
+
             //loops through the list of menus
             foreach (Menu menu in _menus)
             {
+                Console.SetCursorPosition(startCol, startRow - 1);
                 //if the menu is active/selected
                 if (menu.Active == true) 
                 {
                     //write the menu name and change the text colour of the selected menu to cyan
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine(menu.Name);
+                    Console.Write(menu.Name);
                     //resets the console colour so that all the text on the console isn't the same colour
                     Console.ResetColor();
-                    menu.DisplayMenu();
-
-                    Console.WriteLine();
+                    
+                    //Console.WriteLine();
                 }
                 else 
                 {
-                    Console.WriteLine(menu.Name);
-                    menu.DisplayMenu();
-                    Console.WriteLine();
+                    Console.Write(menu.Name);
+                   
+                    //Console.WriteLine();
 
                 }
+
+                menu.DisplayMenu(startCol, startRow);
+                startCol += spacing;
             }    
 
         }

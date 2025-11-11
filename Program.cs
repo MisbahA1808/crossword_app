@@ -56,8 +56,6 @@ namespace CrosswordApp
             Menu menu3 = new Menu("SETTINGS");
             menu3.AddMenuItem("Logout");
             
-
-
             //creating a menu manager object
             MenuManager menuManager = new MenuManager(new List<Menu> { menu1, menu2, menu3});
 
