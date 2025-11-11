@@ -17,9 +17,11 @@ namespace CrosswordApp
         [JsonProperty] private int _columns;
         [JsonProperty] private char[,] _grid { get; set; }
         [JsonProperty] private string _crosswordTitle;
+        [JsonProperty] private string _clue;
         public int Rows { get => _rows; set => _rows = value; }
         public int Columns { get => _columns; set => _columns = value; }
         public string CrosswordTitle { get => _crosswordTitle; set => _crosswordTitle = value; }
+        public string Clue { get => _clue; set => _clue = value; }
 
 
         //constructor for crossword class

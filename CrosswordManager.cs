@@ -77,6 +77,9 @@ namespace CrosswordApp
             //takes the direction as user input
             Console.SetCursorPosition(0,18);
             Console.WriteLine("Enter the direction you would like the word to go (across/down):");
+
+            Console.SetCursorPosition(0, 21);
+            Console.WriteLine("Enter the clue for the word:");
             Console.SetCursorPosition(0,16);
             string word = Console.ReadLine();
             word = word.ToUpper().Trim();
@@ -85,6 +88,9 @@ namespace CrosswordApp
 
             string direction = Console.ReadLine();
             direction = direction.ToLower().Trim();
+
+            Console.SetCursorPosition(0,22);
+            string clue = Console.ReadLine();
 
             try
             {
