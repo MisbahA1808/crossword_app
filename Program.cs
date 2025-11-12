@@ -80,8 +80,7 @@ namespace CrosswordApp
 
                 case "(S) Solve Crossword":
                     Console.Clear();
-                    //Console.WriteLine("solve cross");
-                    //need to implement this logic
+                    DisplayCrosswordSolver();
                     break;
 
                 case "(A) Create Account":
@@ -297,9 +296,25 @@ namespace CrosswordApp
         {
             DisplayWelcomeMessage();
             Console.SetCursorPosition(0, 3);
-            Console.WriteLine("Select a crossword to solve!");
             //need to get the list of saved crosswords, and add them all to a menu
             //then take the keypressed and use that to open the corresponding crossword from memory
+            List<Crossword> savedCrosswords = new List<Crossword>();
+            CrosswordManager crosswordManager = new CrosswordManager();
+
+            savedCrosswords = crosswordManager.GetStoredCrosswords();
+            Menu crosswordMenu = new Menu("Select a crossword to solve!");
+
+            
+
+
+            foreach (Crossword crossword in savedCrosswords)
+            {
+                crosswordMenu.AddMenuItem(crossword.CrosswordTitle);
+            
+            }
+            MenuManager menuManager = new MenuManager(new List<Menu> { crosswordMenu });
+            string selectedOption = menuManager.RunMenu();
+
 
         }
 

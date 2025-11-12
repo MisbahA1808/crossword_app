@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace CrosswordApp
 {
@@ -19,6 +19,11 @@ namespace CrosswordApp
         public CrosswordManager(Crossword crossword)
         {
             _currentCrossword = crossword;
+        }
+
+        public CrosswordManager()
+        {
+            
         }
 
         //method to add crossword to the list of crosswords
@@ -234,6 +239,46 @@ namespace CrosswordApp
             //Program.DisplayMenu();
             return;
         
+        }
+
+        public List<Crossword> GetStoredCrosswords()
+        {
+            List<Crossword> crosswords = new List<Crossword>();
+            string path = "crossword.json";
+
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    crosswords = new List<Crossword>();
+                }
+                else
+                {
+                    crosswords = JsonConvert.DeserializeObject<List<Crossword>>(json, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }
+);
+                    if (crosswords == null)
+                    {
+                        crosswords = new List<Crossword>();
+                    }
+                }
+            }
+
+            
+            List<Crossword> filledCrosswords = new List<Crossword>();
+            foreach (Crossword c in crosswords) 
+            {
+                if (c != null) 
+                { filledCrosswords.Add(c); }
+            }
+            crosswords = filledCrosswords;
+
+            
+
+            return crosswords;
+
+
         }
     }
 }

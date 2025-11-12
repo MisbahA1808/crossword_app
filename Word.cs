@@ -27,7 +27,7 @@ namespace CrosswordApp
             _clue = clue;
             _startRow = startRow;
             _startColumn = startColumn;
-            _length = _text.Length;
+            //_length = _text.Length;
 
         }
 
