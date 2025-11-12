@@ -44,17 +44,17 @@ namespace CrosswordApp
 
             //creating the menu objects and adding sub menus/ menu items to them
             Menu menu1 = new Menu("MY ACCOUNT");
-            menu1.AddMenuItem("Login");
-            menu1.AddMenuItem("Create Account");
-            menu1.AddMenuItem("Change Role");
+            menu1.AddMenuItem("(L) Login");
+            menu1.AddMenuItem("(A) Create Account");
+            menu1.AddMenuItem("(R) Change Role");
 
             Menu menu2 = new Menu("CROSSWORDS");
-            menu2.AddMenuItem("Create Crossword");
-            menu2.AddMenuItem("Solve Crossword");
+            menu2.AddMenuItem("(C) Create Crossword");
+            menu2.AddMenuItem("(S) Solve Crossword");
             
             
             Menu menu3 = new Menu("SETTINGS");
-            menu3.AddMenuItem("Logout");
+            menu3.AddMenuItem("(Q) Logout");
             
             //creating a menu manager object
             MenuManager menuManager = new MenuManager(new List<Menu> { menu1, menu2, menu3});
@@ -108,13 +108,7 @@ namespace CrosswordApp
                     break;
             }
 
-            ConsoleKey keyPressed =  Console.ReadKey(true).Key;
-            switch (keyPressed)
-            {
-                case ConsoleKey.L:
-
-                default:
-            }
+            
 
         }
 
@@ -210,8 +204,8 @@ namespace CrosswordApp
             //Console.WriteLine("Would you like to: \n(L) Login  \n(C) Create an account (C) ?");
 
             Menu menu1 = new Menu("Please select an option below to continue:");
-            menu1.AddMenuItem("Login");
-            menu1.AddMenuItem("Create Account");
+            menu1.AddMenuItem("(L) Login");
+            menu1.AddMenuItem("(A) Create Account");
 
             MenuManager menuManager = new MenuManager(new List<Menu> { menu1});
             string selectedOption = menuManager.RunMenu();

@@ -94,6 +94,23 @@ namespace CrosswordApp
                     
 
                 default:
+                    switch (keyPressed)
+                    {
+                        case ConsoleKey.L:
+                            return "Login";
+                        case ConsoleKey.C:
+                            return "Create Crossword";
+                        case ConsoleKey.S:
+                            return "Solve Crossword";
+                        case ConsoleKey.A:
+                            return "Create Account";
+                        case ConsoleKey.Q:
+                            return "Logout";
+                        case ConsoleKey.R:
+                            return "Change Role";
+                        default:
+                            break;
+                    }
                     break;
             }
             return _activeMenu.GetActiveChoice();
@@ -169,7 +186,12 @@ namespace CrosswordApp
                 DisplayMenu();
 
 
-                if (keyPressed == ConsoleKey.Enter)
+                if (keyPressed == ConsoleKey.Enter ||
+                    keyPressed == ConsoleKey.L ||
+                    keyPressed == ConsoleKey.C ||
+                    keyPressed == ConsoleKey.S||
+                    keyPressed == ConsoleKey.A ||
+                    keyPressed == ConsoleKey.Q)
                 {
                     return choice;
                 }
