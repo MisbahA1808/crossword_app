@@ -64,7 +64,7 @@ namespace CrosswordApp
         }
 
         //method to display a word on the crossword grid
-        public void DisplayWord(string wordInput, string direction, int startRow, int startColumn, string clue = "") 
+        public void DisplayWord(string wordInput, string direction, int startRow, int startColumn, string clue) 
         {
             //formats the direction and the word given by the user for extra validation
             direction = direction.ToLower().Trim();

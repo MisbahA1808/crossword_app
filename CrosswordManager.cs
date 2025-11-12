@@ -28,9 +28,9 @@ namespace CrosswordApp
         
         }
         //method for adding words to the current crossword 
-        public void AddWord(string word, string direction, int startRow, int startColumn) 
+        public void AddWord(string word, string direction, int startRow, int startColumn, string clue) 
         {
-            _currentCrossword.DisplayWord(word, direction, startRow, startColumn);
+            _currentCrossword.DisplayWord(word, direction, startRow, startColumn, clue);
         
         
         }
@@ -95,7 +95,7 @@ namespace CrosswordApp
             try
             {
                 //displays the current word based on the input given
-                _currentCrossword.DisplayWord(word, direction, startRow, startColumn);
+                _currentCrossword.DisplayWord(word, direction, startRow, startColumn,clue);
             }
             catch (Exception)
             {
@@ -231,7 +231,8 @@ namespace CrosswordApp
             //}
             Console.SetCursorPosition(0, 16);
             Console.WriteLine("Crossword Created Successfully!");
-            Program.DisplayMenu();
+            //Program.DisplayMenu();
+            return;
         
         }
     }
