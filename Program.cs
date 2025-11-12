@@ -293,6 +293,16 @@ namespace CrosswordApp
         
         }
 
+        public static void DisplayCrosswordSolver() 
+        {
+            DisplayWelcomeMessage();
+            Console.SetCursorPosition(0, 3);
+            Console.WriteLine("Select a crossword to solve!");
+            //need to get the list of saved crosswords, and add them all to a menu
+            //then take the keypressed and use that to open the corresponding crossword from memory
+
+        }
+
 
     }
 
