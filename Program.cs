@@ -58,7 +58,7 @@ namespace CrosswordApp
             
             //creating a menu manager object
             MenuManager menuManager = new MenuManager(new List<Menu> { menu1, menu2, menu3});
-
+                        
                        
             string choice = menuManager.RunMenu();
 
@@ -106,6 +106,14 @@ namespace CrosswordApp
 
                     DisplayMenu();
                     break;
+            }
+
+            ConsoleKey keyPressed =  Console.ReadKey(true).Key;
+            switch (keyPressed)
+            {
+                case ConsoleKey.L:
+
+                default:
             }
 
         }
