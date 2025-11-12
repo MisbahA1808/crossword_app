@@ -18,10 +18,12 @@ namespace CrosswordApp
         [JsonProperty] private char[,] _grid { get; set; }
         [JsonProperty] private string _crosswordTitle;
         [JsonProperty] private string _clue;
+        [JsonProperty] private List<Word> _words;
         public int Rows { get => _rows; set => _rows = value; }
         public int Columns { get => _columns; set => _columns = value; }
         public string CrosswordTitle { get => _crosswordTitle; set => _crosswordTitle = value; }
         public string Clue { get => _clue; set => _clue = value; }
+        internal List<Word> Words { get => _words; set => _words = value; }
 
 
         //constructor for crossword class
@@ -32,6 +34,7 @@ namespace CrosswordApp
             _columns = columns;
             _grid = new char[rows, columns];
             _crosswordTitle = title;
+            _words = new List<Word>();
 
             //initially setting all characters in the grid to be '*'
             for (int i = 0; i < _rows; i++)
@@ -61,24 +64,24 @@ namespace CrosswordApp
         }
 
         //method to display a word on the crossword grid
-        public void DisplayWord(string word, string direction, int startRow, int startColumn) 
+        public void DisplayWord(string wordInput, string direction, int startRow, int startColumn, string clue = "") 
         {
             //formats the direction and the word given by the user for extra validation
             direction = direction.ToLower().Trim();
-            word = word.ToUpper().Trim();
-
+            wordInput = wordInput.ToUpper().Trim();
+            Word word = new Word(wordInput, direction, clue, startRow, startColumn);
             
             //if they choose the word to be going across
             if (direction == "across")
             {
                 //validation that the word will fit into the crossword
-                if (word.Length <= (_grid.GetLength(1) - startColumn))
+                if (wordInput.Length <= (_grid.GetLength(1) - startColumn))
                 {
 
-                    for (int i = 0; i < word.Length; i++)
+                    for (int i = 0; i < wordInput.Length; i++)
                     {
                         //loops through the gris and changes the relevant indexes to the letters of the word
-                        _grid[startRow, startColumn + i] = word[i];
+                        _grid[startRow, startColumn + i] = wordInput[i];
 
                     }
                     Console.WriteLine();
@@ -91,13 +94,13 @@ namespace CrosswordApp
             else if (direction == "down")
             {
                 //validation that the word wil fit into the crossword
-                if (word.Length <= (_grid.GetLength(0) - startRow))
+                if (wordInput.Length <= (_grid.GetLength(0) - startRow))
                 {
 
                     //loops through the gris and changes the relevant indexes to the letters of the word
-                    for (int i = 0; i < word.Length; i++)
+                    for (int i = 0; i < wordInput.Length; i++)
                     {
-                        _grid[startRow + i, startColumn] = word[i];
+                        _grid[startRow + i, startColumn] = wordInput[i];
 
                     }
                     Console.WriteLine();
@@ -112,6 +115,7 @@ namespace CrosswordApp
                 Console.WriteLine("Invalid Entry!");
             
             }
+            _words.Add(word);
 
         
         }

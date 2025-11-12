@@ -97,17 +97,17 @@ namespace CrosswordApp
                     switch (keyPressed)
                     {
                         case ConsoleKey.L:
-                            return "Login";
+                            return "(L) Login";
                         case ConsoleKey.C:
-                            return "Create Crossword";
+                            return "(C) Create Crossword";
                         case ConsoleKey.S:
-                            return "Solve Crossword";
+                            return "(S) Solve Crossword";
                         case ConsoleKey.A:
-                            return "Create Account";
+                            return "(A) Create Account";
                         case ConsoleKey.Q:
-                            return "Logout";
+                            return "(Q) Logout";
                         case ConsoleKey.R:
-                            return "Change Role";
+                            return "(R) Change Role";
                         default:
                             break;
                     }

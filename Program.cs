@@ -64,11 +64,11 @@ namespace CrosswordApp
 
             switch (choice)
             {
-                case "Logout":
+                case "(Q) Logout":
                     DisplayLogin();
                     break;
 
-                case "Create Crossword":
+                case "(C) Create Crossword":
                     Console.Clear();
                     DisplayWelcomeMessage();
 
@@ -78,22 +78,22 @@ namespace CrosswordApp
                     crosswordManager.StoreCurrentCrossword();
                     break;
 
-                case "Solve Crossword":
+                case "(S) Solve Crossword":
                     Console.Clear();
                     //Console.WriteLine("solve cross");
                     //need to implement this logic
                     break;
 
-                case "Create Account":
+                case "(A) Create Account":
                     Console.Clear();
                     DisplayAccountCreation();
                     break;
 
-                case "Login":
+                case "(L) Login":
                     Console.WriteLine("You are already Logged In!");
                     break;
 
-                case "Change Role":
+                case "(R) Change Role":
                     Console.Clear();
                     //need to get user role, verify it then put an appropriate message here based on that
                     Console.WriteLine("Change User Role:");
@@ -194,38 +194,40 @@ namespace CrosswordApp
 
         public static void DisplayLogin() 
         {
-            Console.Clear();
-            Console.SetCursorPosition(38, 0);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Welcome to the Crossword Solver & Builder!");
-            Console.WriteLine();
-            Console.ResetColor();
-
-            //Console.WriteLine("Would you like to: \n(L) Login  \n(C) Create an account (C) ?");
-
-            Menu menu1 = new Menu("Please select an option below to continue:");
-            menu1.AddMenuItem("(L) Login");
-            menu1.AddMenuItem("(A) Create Account");
-
-            MenuManager menuManager = new MenuManager(new List<Menu> { menu1});
-            string selectedOption = menuManager.RunMenu();
-
-            switch (selectedOption) 
+            while (true)
             {
-                case "Login":
-                    Console.Clear();
-                    VerifyUser();
-                    break;
+                Console.Clear();
+                Console.SetCursorPosition(38, 0);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Welcome to the Crossword Solver & Builder!");
+                Console.WriteLine();
+                Console.ResetColor();
 
-                case "Create Account":
-                    Console.Clear();
-                    CreateUser();
-                    break;
+                //Console.WriteLine("Would you like to: \n(L) Login  \n(C) Create an account (C) ?");
 
-                default:
-                    break;
+                Menu menu1 = new Menu("Please select an option below to continue:");
+                menu1.AddMenuItem("(L) Login");
+                menu1.AddMenuItem("(A) Create Account");
+
+                MenuManager menuManager = new MenuManager(new List<Menu> { menu1 });
+                string selectedOption = menuManager.RunMenu();
+
+                switch (selectedOption)
+                {
+                    case "(L) Login":
+                        Console.Clear();
+                        VerifyUser();
+                        break;
+
+                    case "(A) Create Account":
+                        Console.Clear();
+                        CreateUser();
+                        break;
+
+                    default:
+                        break;
+                }
             }
-
            
             
         }
