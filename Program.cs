@@ -11,6 +11,7 @@ namespace CrosswordApp
 {
     internal class Program
     {
+        //bool to check if the file is loaded
         private static bool _isFileLoaded;
 
         static void Main(string[] args)
@@ -19,15 +20,19 @@ namespace CrosswordApp
             //CrosswordManager crosswordManager = new CrosswordManager(crossword);
             //crosswordManager.StoreCurrentCrossword();
 
+            //needs further updating
             _isFileLoaded = false;
 
+            //if the file is loaded
             if (_isFileLoaded)
             {
+                //display the login page
                 DisplayLogin();
 
             }
             else 
             {
+                //else inform the user and prompt them to press enter to continue
                 Console.WriteLine("File NOT loaded, use 'admin' and 'password to login. Press ENTER to continue.");
                 Console.ReadKey(true);
                 DisplayLogin();
@@ -36,9 +41,12 @@ namespace CrosswordApp
             
         }
 
+        //method to display the main menus
         public static void DisplayMenu() 
         {
+            //clear the console
             Console.Clear();
+            //dipplay the welcome message
             DisplayWelcomeMessage();
             Console.SetCursorPosition(0, 2);
 
@@ -59,45 +67,62 @@ namespace CrosswordApp
             //creating a menu manager object
             MenuManager menuManager = new MenuManager(new List<Menu> { menu1, menu2, menu3});
                         
-                       
+            //gets the name of the menu item that has been selected
             string choice = menuManager.RunMenu();
 
             switch (choice)
             {
+                //if the choice is Q/Logout
                 case "(Q) Logout":
+                    //go back to the login menu
                     DisplayLogin();
                     break;
 
+                //if the choice is C/Create Crossword
                 case "(C) Create Crossword":
                     Console.Clear();
                     DisplayWelcomeMessage();
 
+                    //create a crossword manager object
+                    //set crossword dimensions returns type crossword
                     CrosswordManager crosswordManager = new CrosswordManager(SetCrosswordDimensions());
+
+                    //calls the methos to allow the creation of the crossword
                     crosswordManager.AdminCreateCrossword();
+                    //method adds the created crossword to the list of crosswords
                     crosswordManager.AddCrosswordToList();
+                    //then stores it in the json file
                     crosswordManager.StoreCurrentCrossword();
                     break;
 
+                //if the choice is S/Solve Crossword
                 case "(S) Solve Crossword":
                     Console.Clear();
+                    //display the crossword solver page
                     DisplayCrosswordSolver();
                     break;
 
+                //if the choice is A/Create account
                 case "(A) Create Account":
                     Console.Clear();
+                    //display the account creation page
                     DisplayAccountCreation();
                     break;
 
+                //if the choice is L/Login
                 case "(L) Login":
+                    //(for now) informs the user that they are already logged in
                     Console.WriteLine("You are already Logged In!");
                     break;
 
+                //if the choice is R/Change Role
                 case "(R) Change Role":
                     Console.Clear();
                     //need to get user role, verify it then put an appropriate message here based on that
                     Console.WriteLine("Change User Role:");
                     break;
 
+                //default displays the menu
                 default:
                     Console.ReadKey(true);
                     DisplayWelcomeMessage();
@@ -111,8 +136,10 @@ namespace CrosswordApp
 
         }
 
+        //method to create a new user
         public static void CreateUser() 
         {
+            //create a usermanager object
             UserManager userManager = new UserManager();
             ConsoleKey keyPressed;
 
@@ -136,25 +163,20 @@ namespace CrosswordApp
             string password = Console.ReadLine();
 
             //creating an instance of the user and adding them to the json file
-            
-
             userManager.AddUser(name,username,password,email, "player");
-
             userManager.SaveUserData();
 
+            //prompts the user to return to the login page
             Console.WriteLine("Account created successfully! Press Enter to return to the Login Page.");
             keyPressed = Console.ReadKey(true).Key;
 
             Console.ReadKey(true);
             DisplayLogin();
-            //if (keyPressed == ConsoleKey.Enter)
-            //{
-            //    Console.Clear();
-            //    DisplayLogin();
-            //}
-
+           
 
         }
+
+        //method to verify a user that has already created an account
 
         public static void VerifyUser() 
         {
@@ -163,6 +185,7 @@ namespace CrosswordApp
             Console.SetCursorPosition(0, 2);
             UserManager userManager = new UserManager();
 
+            //gets input of their username and password
             Console.WriteLine("Enter your username:");
             Console.SetCursorPosition(0, 5);
             Console.WriteLine("Enter your password:");
@@ -173,28 +196,38 @@ namespace CrosswordApp
             Console.SetCursorPosition(0, 6);
             string password = Console.ReadLine();
 
+            //stores true/false in isverified variable based on if their username and password match the ones in the json file
             bool isVerified = userManager.VerifyUser(username, password);
 
+            //if true
             if (isVerified)
             {
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey(true);
+                //displays the menu
                 DisplayMenu();
             }
+            //if false
             else 
             {
+                //prompts them to enter login details again
                 Console.WriteLine("Invalid login details, press any key to retry.");
                 Console.ReadKey(true);
+
+                //recursion to call the same method
                 VerifyUser();
             }
 
 
         }
 
+        //method to display the login menu
         public static void DisplayLogin() 
         {
+            //indefinite loop
             while (true)
             {
+                //displays welcome message
                 Console.Clear();
                 Console.SetCursorPosition(38, 0);
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -204,22 +237,30 @@ namespace CrosswordApp
 
                 //Console.WriteLine("Would you like to: \n(L) Login  \n(C) Create an account (C) ?");
 
+                //creates a new menu and adds menu items to it
                 Menu menu1 = new Menu("Please select an option below to continue:");
                 menu1.AddMenuItem("(L) Login");
                 menu1.AddMenuItem("(A) Create Account");
 
+                //creates a menu manager object and passes the list of menus into it
                 MenuManager menuManager = new MenuManager(new List<Menu> { menu1 });
+
+                //gets the name of the selected menu option
                 string selectedOption = menuManager.RunMenu();
 
                 switch (selectedOption)
                 {
+                    //if the option is L/Login
                     case "(L) Login":
                         Console.Clear();
+                        //call the method to allow the user to login
                         VerifyUser();
                         break;
 
+                    //if the option is A/Create account
                     case "(A) Create Account":
                         Console.Clear();
+                        //call the create user method
                         CreateUser();
                         break;
 
@@ -238,6 +279,7 @@ namespace CrosswordApp
             Console.WriteLine("CREATE CROSSWORD:");
             Console.WriteLine();
 
+            //gets user input for title, number of rows, columns
             Console.SetCursorPosition(0, 4);
             Console.WriteLine("Title: ");
 
@@ -268,6 +310,7 @@ namespace CrosswordApp
         
         }
 
+
         public static void DisplayAccountCreation() 
         {
             Console.Clear();
@@ -292,27 +335,35 @@ namespace CrosswordApp
         
         }
 
+        //method to display the crossword solving page
         public static void DisplayCrosswordSolver() 
         {
+            //displays the welcome message
             DisplayWelcomeMessage();
             Console.SetCursorPosition(0, 3);
-            //need to get the list of saved crosswords, and add them all to a menu
-            //then take the keypressed and use that to open the corresponding crossword from memory
+
+            //create a new list to store all the crosswords that are in the json file
             List<Crossword> savedCrosswords = new List<Crossword>();
+            //create a crossword manager object
             CrosswordManager crosswordManager = new CrosswordManager();
 
+            //fill the list with the crosswords stored in the json
             savedCrosswords = crosswordManager.GetStoredCrosswords();
+
+            //create a menu
             Menu crosswordMenu = new Menu("Select a crossword to solve!");
 
-            
-
-
+            //loops through al lcrosswords in the list
             foreach (Crossword crossword in savedCrosswords)
             {
+                //for each crossword, add its title to the menu as a menu item
                 crosswordMenu.AddMenuItem(crossword.CrosswordTitle);
             
             }
+            //create a menu manager object and pass in the crosswordmenu 
             MenuManager menuManager = new MenuManager(new List<Menu> { crosswordMenu });
+
+            //gets the name of the selected crossword
             string selectedOption = menuManager.RunMenu();
 
 

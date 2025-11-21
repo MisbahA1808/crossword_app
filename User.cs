@@ -9,6 +9,8 @@ namespace CrosswordApp
 {
     internal class User
     {
+        //attributes
+        //all as json properties so that they cna be serialised to the json file users.josn for storage
         [JsonProperty] private string _name;
         [JsonProperty] private string _accountType;
         [JsonProperty] private string _username;
@@ -17,6 +19,7 @@ namespace CrosswordApp
         [JsonProperty] private int _userId;
         [JsonProperty] private int _state;
 
+        //constructor
         public User(int userId, string name, string username, string password, string email, string accountType)
         {
             _userId = userId;
@@ -24,11 +27,13 @@ namespace CrosswordApp
             _username = username;
             _password = password;
             _email = email;
+            //by default, the state is -1 (not logged in)
             _state = -1;
             _accountType = SetAccountType(accountType);
 
         }
 
+        //getters and setters
         public string Username { get => _username; set => _username = value; }
         public string Password { get => _password; set => _password = value; }
         public int State { get => _state; set => _state = value; }
@@ -36,6 +41,7 @@ namespace CrosswordApp
         //method to set the account type of the user
         public string SetAccountType(string accountType) 
         {
+            //if no acocunt type is selected, they areby default a player
             if (String.IsNullOrEmpty(accountType)) 
             {
                 _accountType = "Player";
@@ -43,19 +49,23 @@ namespace CrosswordApp
             }
             accountType = accountType.ToLower().Trim();
 
+            //if the usre input is player
             if (accountType == "player")
             {
                 _accountType = "Player";
 
             }
+            //if the user input is admin
             else if (accountType == "admin")
             {
                 _accountType = "Admin";
 
             }
+            //if input is invalid, by default set to player
             else { _accountType = "Player"; }
 
-                return _accountType;
+            //returns the account type
+            return _accountType;
         }
 
         //method to set/change account state (between player, admin and not logged in)
@@ -75,7 +85,7 @@ namespace CrosswordApp
             //otherwise the state = -1 (not logged in)
             else { _state = -1; }
             
-
+            //returns state
             return _state;
 
         }

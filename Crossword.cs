@@ -13,12 +13,14 @@ namespace CrosswordApp
     internal class Crossword
     {
         //attributes
+        //these are json properties so that they can be serialised to then be stored in the json file
         [JsonProperty] private int _rows;
         [JsonProperty] private int _columns;
         [JsonProperty] private char[,] _grid { get; set; }
         [JsonProperty] private string _crosswordTitle;
         [JsonProperty] private string _clue;
         [JsonProperty] private List<Word> _words;
+        //getters and setters for the attirbutes above
         public int Rows { get => _rows; set => _rows = value; }
         public int Columns { get => _columns; set => _columns = value; }
         public string CrosswordTitle { get => _crosswordTitle; set => _crosswordTitle = value; }
@@ -56,8 +58,10 @@ namespace CrosswordApp
             {
                 for (int j = 0; j < _columns; j++) 
                 {
+                    //for each grid position, it displays it on screen, adds space so that it is formatted nicely
                     Console.Write(_grid[i, j] + " ");
                 }
+                //moves to the next row in the crossword
                 Console.WriteLine();
             }
         
@@ -69,12 +73,15 @@ namespace CrosswordApp
             //formats the direction and the word given by the user for extra validation
             direction = direction.ToLower().Trim();
             wordInput = wordInput.ToUpper().Trim();
+
+            //creates a word object and stores the relevant word related data in it
             Word word = new Word(wordInput, direction, clue, startRow, startColumn);
             
             //if they choose the word to be going across
             if (direction == "across")
             {
                 //validation that the word will fit into the crossword
+                //grid.GetLength(1) gets the number of the columns
                 if (wordInput.Length <= (_grid.GetLength(1) - startColumn))
                 {
 
@@ -87,6 +94,7 @@ namespace CrosswordApp
                     Console.WriteLine();
                     Console.WriteLine("Word Added Successfully!");
                 }
+                //invalid entry as the word can not fit onto the crossword
                 else { Console.WriteLine("Invalid Entry!"); }
 
             }
@@ -94,6 +102,7 @@ namespace CrosswordApp
             else if (direction == "down")
             {
                 //validation that the word wil fit into the crossword
+                //grid.GetLength(1) gets the number of the rows
                 if (wordInput.Length <= (_grid.GetLength(0) - startRow))
                 {
 
@@ -107,6 +116,7 @@ namespace CrosswordApp
                     Console.WriteLine("Word Added Successfully!");
 
                 }
+                //invalid entry as the word can not fit onto the crossword
                 else { Console.WriteLine("Invalid Entry!"); }
 
             }
@@ -115,6 +125,7 @@ namespace CrosswordApp
                 Console.WriteLine("Invalid Entry!");
             
             }
+            //adds the input word to the list of words
             _words.Add(word);
 
         

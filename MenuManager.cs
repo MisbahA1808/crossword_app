@@ -10,9 +10,6 @@ namespace CrosswordApp
     internal class MenuManager
     {
         //attributes
-        private string _header;
-        private string _footer;
-        private int _windowWidth;
         private List<Menu> _menus;
         private int _activeMenuPointer;
         private Menu _activeMenu;
@@ -29,73 +26,92 @@ namespace CrosswordApp
             //Console.SetCursorPosition(leftPadding, Console.CursorTop);
 
             _menus = menus;
+            //initially set activemenupointer to zero
             _activeMenuPointer = 0;
+            //set the active menu to the first menu in the list
             _activeMenu = menus[_activeMenuPointer];
-
             _activeMenu.Active = true;
+
+            //activate the first item in the active menu
             _activeMenu.ActivateCurrentMenuItem();
 
 
         }
 
         //method to update the current menu based on the key pressed by the user
+        // determines the menu item which is active
         public string UpdateMenu(ConsoleKey keyPressed)
         {
-            //switch case statement to chck which arrow key is pressed
+            //switch case statement to chck which  key is pressed
             switch (keyPressed) {
-                //if the right key is pressed
+                //if the right key is pressed (moves to the next menu on the right)
                 case ConsoleKey.RightArrow:
+                    //deactivate all items in the currently active menu
                     _activeMenu.DeactivateAllItems();
                     _activeMenu.Active = false;
 
+                    //if the current menu is the last menu (furthest right)
                     if (_activeMenuPointer == _menus.Count() - 1) 
                     {
+                        //wrap back to the first menu
                         _activeMenuPointer = 0;
                     }
-
+                    //otherwise the active menu is the next on the right
                     else { _activeMenuPointer++; }
 
+                    //update the active menu based on the new pointer value
                     _activeMenu = _menus[_activeMenuPointer];
                     _activeMenu.Active = true;
 
+                    //activate the first item in the new active menu
                     _activeMenu.ActivateCurrentMenuItem();
                     break;
 
-                //if the left key is pressed
+                //if the left key is pressed (moves to the next menu on the left)
                 case ConsoleKey.LeftArrow:
+                    //deactivate all items in the currently active menu
                     _activeMenu.DeactivateAllItems();
                     _activeMenu.Active = false;
 
+                    //if the current menu is the first menu (furthest left)
                     if (_activeMenuPointer == 0)
                     {
+                        //wrap around to the last menu
                         _activeMenuPointer = _menus.Count() -1;
                     }
-
+                    //otherwise the active menu is the next one on the left
                     else { _activeMenuPointer--; }
 
+                    //update the active menu based on the new pointer value
                     _activeMenu = _menus[_activeMenuPointer];
                     _activeMenu.Active = true;
 
+                    //activate the first item in the new active menu
                     _activeMenu.ActivateCurrentMenuItem();
                     break;
 
                 //if the up key is pressed
                 case ConsoleKey.UpArrow:
+                    //calls menu item up method within the menu class
                     _activeMenu.MenuItemUp();
                     break;
 
                 //if the down key is pressed
                 case ConsoleKey.DownArrow:
+                    //calls menu item down method within the menu class
                     _activeMenu.MenuItemDown();
                     break;
 
+                //if the enter key is pressed (indicating they want tro select the menu)
                 case ConsoleKey.Enter:
+                    //get the menu's name and return it
                     return _activeMenu.GetActiveChoice();
                     
-
+                //default takes into account letters not just arrow keys as above
                 default:
                     switch (keyPressed)
                     {
+                        //for each vlid letter pressed, returns the name of that menu item
                         case ConsoleKey.L:
                             return "(L) Login";
                         case ConsoleKey.C:
@@ -113,6 +129,7 @@ namespace CrosswordApp
                     }
                     break;
             }
+            //return the selected menu item
             return _activeMenu.GetActiveChoice();
         
         
@@ -147,8 +164,9 @@ namespace CrosswordApp
                     //Console.WriteLine();
 
                 }
-
+                //calls the display menumethod from the menu class
                 menu.DisplayMenu(startCol, startRow);
+                //adds 25 to the startcolumn so that menus don't print on top of each other
                 startCol += spacing;
             }    
 
@@ -157,17 +175,21 @@ namespace CrosswordApp
        
 
        
-
+        //runs the main menu loop and also returns the menu choice chosen by the user
         public string RunMenu()
         {
             ConsoleKey keyPressed;
+            //initially display the menu
             DisplayMenu();
 
             while (true) 
             {
+                //read the key ressed by the user
                 keyPressed = Console.ReadKey(true).Key;
+                //updates the selected menu option based on what key the user presses
                 string choice = UpdateMenu(keyPressed);
 
+                //clear the console
                 Console.Clear();
 
                 Console.SetCursorPosition(38, 0);
@@ -183,9 +205,10 @@ namespace CrosswordApp
                 Console.ResetColor();
                 Console.SetCursorPosition(0, 2);
                 
+                //redisplay the menu after updating it
                 DisplayMenu();
 
-
+                //if the user selects enter or one of the valid key choices
                 if (keyPressed == ConsoleKey.Enter ||
                     keyPressed == ConsoleKey.L ||
                     keyPressed == ConsoleKey.C ||
@@ -193,6 +216,7 @@ namespace CrosswordApp
                     keyPressed == ConsoleKey.A ||
                     keyPressed == ConsoleKey.Q)
                 {
+                    //returns the user's selection
                     return choice;
                 }
             
@@ -204,52 +228,7 @@ namespace CrosswordApp
         
         }
 
-        ////method for menu functionality
-        //public void UseMenu() 
-        //{
-        //    //DisplayMenu();
-        //    ConsoleKey keyPressed;
-        //    //keyPressed = Console.ReadKey(true).Key;
-            
-        //    do
-        //    {
-        //        Console.Clear();
-
-        //        DisplayMenu();
-        //        keyPressed = Console.ReadKey(true).Key;
-
-        //        switch (keyPressed)
-        //        {
-        //            case ConsoleKey.D1:
-                    
-        //                Console.WriteLine("You have chosen to create a crossword!");
-        //                Console.ReadKey(true);
-        //                break;
-
-        //            case ConsoleKey.D2:
-        //                Console.WriteLine("You have chosen to solve a crossword!");
-        //                Console.ReadKey(true);
-        //                break;
-
-
-        //            case ConsoleKey.D3:
-        //                Console.WriteLine("You have chosen to login!");
-        //                Console.ReadKey(true);
-        //                break;
-
-                    
-        //            default:
-        //                break;
-        //        }
-
-
-        //    } while (keyPressed != ConsoleKey.D4);
         
-        
-        
-        
-        
-        //}
 
 
     }

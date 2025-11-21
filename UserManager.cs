@@ -20,7 +20,7 @@ namespace CrosswordApp
         public UserManager()
         {
             _users = new List<User>();
-            _userId = 1;
+         
         }
 
         //method to add a new user 
@@ -87,41 +87,54 @@ namespace CrosswordApp
             
             
             }
+            //inform the user if the file is not found
             else { Console.WriteLine("File not found"); }
 
-                //then writing the complete list of users to the json file
-                string jsonString = JsonConvert.SerializeObject(existingUsers, Formatting.Indented);
+               
+            //then writing the complete list of users to the json file
+            string jsonString = JsonConvert.SerializeObject(existingUsers, Formatting.Indented);
             File.WriteAllText(path, jsonString);
 
 
         }
 
+        //method to verify a user who has already created an account
         public bool VerifyUser(string username, string password) 
         {
+            //file path
             string path = "users.json";
 
+            //if the json file doesn't exist
             if (!File.Exists(path))
             {
+                //inform the user
                 Console.WriteLine("file not found..");
+                //return false as user could not be verified
                 return false;
             }
+            //if file is found, read the json file
             string json = File.ReadAllText(path);
 
+            //store all the user objects from the json file in a list of type user
             var users = JsonConvert.DeserializeObject<List<User>>(json);
 
+            //for each user in the list
             foreach (User user in users) 
             {
+                //if their username and password matches the user input
                 if (user.Username == username && user.Password == password)
                 {
+                    //inform them of a successful login
                     Console.WriteLine("Login Successful");
+                    //return true as they have been verified successfully
                     return true;
                 }
 
                
             }
+            //otherwise return false and inform them of incorrect login details
              Console.WriteLine("Incorrect details entered - please try again!");
             return false;
-            //User user = JsonConvert.DeserializeObject<User>(username);
 
 
 

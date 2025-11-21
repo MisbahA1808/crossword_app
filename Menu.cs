@@ -19,6 +19,7 @@ namespace CrosswordApp
         //a pointer to the active/current menu
         private int _activeItemPointer;
 
+        //getters and setters
         public string Name { get => _name; set => _name = value; }
         public bool Active { get => _active; set => _active = value; }
 
@@ -26,32 +27,38 @@ namespace CrosswordApp
         public Menu(string name)
         {
             _name = name;
+            //by default, the menu's status is set to not active (i.e not selected)
             _active = false;
             _items = new List<MenuItem>();
             _activeItemPointer = 0;
         }
 
-        //method to display the menu items
+        //method to display the menu on the console
+        //takes parameters x and y for the start position
         public void DisplayMenu(int x, int y)
         {
+            //moves the cursor to the starting point to draw the menu from
             Console.SetCursorPosition(x, y);
 
+            //buffer variable to help evenly space out the menu on the console
             int buffer = 1;
 
             //loops through the list of menu items 
             foreach (MenuItem item in _items)
             {
+                //moves the cursor down by one row for the next menu item
                 Console.SetCursorPosition(x, y + buffer);
                 //if the menu item is the active one (the one selected)
                 if (item.Active == true)
                 {
-                    //print it on screen with 'active' to let us know that is the one selected
+                    //change the colour of the writing the men name is written in
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine(item.Name);
                     Console.ResetColor();
                 }
                 //if it is not the active menu, just print it on the console
                 else { Console.WriteLine(item.Name); }
+                //increment the buffer so that it moves to the next line for the next menu item
                 buffer++;
             }
 
@@ -75,7 +82,8 @@ namespace CrosswordApp
             _items[_activeItemPointer].Deactivate();
         }
 
-
+        //moves the menu selection up by one menu item
+        //if the selection i salready at the top, it then moves to the menu item at the bottom of thel ist
         public void MenuItemUp()
         {
             //deactivates the current menu item
@@ -94,6 +102,8 @@ namespace CrosswordApp
             ActivateCurrentMenuItem();
         }
 
+        //moves the menu selection down by one menu item
+        //if the selection is already at the bottom, it then moves to the menu item at the top of the list
         public void MenuItemDown()
         {
             //deactivates current menu item
@@ -123,8 +133,11 @@ namespace CrosswordApp
             }
         }
 
+        //returns the name of the currently selected menu item
         public string GetActiveChoice()
         {
+            //active item is th eone pointe dto by the active item pointer
+            //returns the name attribute of the menu item
             return _items[_activeItemPointer].Name;
         
         }

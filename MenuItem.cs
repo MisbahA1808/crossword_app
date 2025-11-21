@@ -21,6 +21,7 @@ namespace CrosswordApp
             _active = false;
         }
 
+        //getters and setters
         public string Name { get => _name; set => _name = value; }
         public bool Active { get => _active; set => _active = value; }
 
