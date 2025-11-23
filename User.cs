@@ -35,6 +35,8 @@ namespace CrosswordApp
         //getters and setters
         public string Username { get => _username; set => _username = value; }
         public string Password { get => _password; set => _password = value; }
+        public string AccountType { get => _accountType; set => _accountType = value; }
+
         //public int State { get => _state; set => _state = value; }
 
         //method to set the account type of the user

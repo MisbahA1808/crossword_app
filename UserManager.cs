@@ -131,8 +131,18 @@ namespace CrosswordApp
                 {
                     //inform them of a successful login
                     Console.WriteLine("Login Successful");
-                    //return true as they have been verified successfully
-                    return true;
+
+                    _loggedInUser = user;
+
+                    if (user.AccountType == "Admin")
+                    {
+                        LoginState = 0;
+                    }
+                    else { LoginState = 1; }
+
+
+                        //return true as they have been verified successfully
+                        return true;
                 }
 
                
@@ -146,6 +156,13 @@ namespace CrosswordApp
 
         }
 
+        public void Logout() 
+        {
+            _loggedInUser = null;
+            _loginState = -1;
+                                
+        
+        }
 
     }
 }
