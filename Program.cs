@@ -11,9 +11,7 @@ namespace CrosswordApp
 {
     internal class Program
     {
-        //bool to check if the file is loaded
-        private static bool _isFileLoaded;
-
+        public static UserManager UserManager = new UserManager();
         static void Main(string[] args)
         {
             //Crossword crossword = new Crossword(5, 5, "test");
@@ -50,6 +48,8 @@ namespace CrosswordApp
             DisplayWelcomeMessage();
             Console.SetCursorPosition(0, 2);
 
+            int state = Program.UserManager.LoginState;
+
             //creating the menu objects and adding sub menus/ menu items to them
             Menu menu1 = new Menu("MY ACCOUNT");
             menu1.AddMenuItem("(L) Login");
@@ -74,12 +74,32 @@ namespace CrosswordApp
             {
                 //if the choice is Q/Logout
                 case "(Q) Logout":
+                    if (Program.UserManager.LoginState == -1)
+                    {
+                        Console.WriteLine("No user is logged in!");
+                        Console.ReadKey(true);
+                        DisplayMenu();
+                        return;
+
+                    }
+
+                    Program.UserManager.Logout();
+                    Console.WriteLine("You have successfully been logged out, press any key to return to the login page");
+                    Console.ReadKey(true);
                     //go back to the login menu
                     DisplayLogin();
                     break;
 
                 //if the choice is C/Create Crossword
                 case "(C) Create Crossword":
+                    if (Program.UserManager.LoginState != 0) 
+                    {
+                        Console.WriteLine("Only admins can access this feature!");
+                        Console.ReadKey(true);
+                        DisplayMenu();
+                        return;
+                    
+                    }
                     Console.Clear();
                     DisplayWelcomeMessage();
 
@@ -97,6 +117,14 @@ namespace CrosswordApp
 
                 //if the choice is S/Solve Crossword
                 case "(S) Solve Crossword":
+                    if (Program.UserManager.LoginState == -1)
+                    {
+                        Console.WriteLine("Please login beofre trying to access this feature!");
+                        Console.ReadKey(true);
+                        DisplayMenu();
+                        return;
+
+                    }
                     Console.Clear();
                     //display the crossword solver page
                     DisplayCrosswordSolver();
@@ -111,12 +139,27 @@ namespace CrosswordApp
 
                 //if the choice is L/Login
                 case "(L) Login":
-                    //(for now) informs the user that they are already logged in
-                    Console.WriteLine("You are already Logged In!");
+                    if (Program.UserManager.LoginState != -1)
+                    {
+                        Console.WriteLine("You are already logged in!");
+                        Console.ReadKey(true);
+                        DisplayMenu();
+                        return;
+
+                    }
+                    VerifyUser();
                     break;
 
                 //if the choice is R/Change Role
                 case "(R) Change Role":
+                    if (Program.UserManager.LoginState != 0)
+                    {
+                        Console.WriteLine("Only admins can access this feature!");
+                        Console.ReadKey(true);
+                        DisplayMenu();
+                        return;
+
+                    }
                     Console.Clear();
                     //need to get user role, verify it then put an appropriate message here based on that
                     Console.WriteLine("Change User Role:");
@@ -140,7 +183,7 @@ namespace CrosswordApp
         public static void CreateUser() 
         {
             //create a usermanager object
-            UserManager userManager = new UserManager();
+            UserManager userManager = Program.UserManager;
             ConsoleKey keyPressed;
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -183,7 +226,6 @@ namespace CrosswordApp
             Console.Clear();
             DisplayWelcomeMessage();
             Console.SetCursorPosition(0, 2);
-            UserManager userManager = new UserManager();
 
             //gets input of their username and password
             Console.WriteLine("Enter your username:");
@@ -197,7 +239,7 @@ namespace CrosswordApp
             string password = Console.ReadLine();
 
             //stores true/false in isverified variable based on if their username and password match the ones in the json file
-            bool isVerified = userManager.VerifyUser(username, password);
+            bool isVerified =Program.UserManager.VerifyUser(username, password);
 
             //if true
             if (isVerified)
