@@ -368,6 +368,7 @@ namespace CrosswordApp
             Console.WriteLine(savedCrosswords[choice].CrosswordTitle + ": ");
             Console.WriteLine();
 
+
             crosswordManager.DisplaySolvableCrossword(savedCrosswords[choice]);
             //savedCrosswords[choice].DisplayCrossword();
             Console.ReadKey(true);
