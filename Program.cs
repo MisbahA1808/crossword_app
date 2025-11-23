@@ -21,10 +21,10 @@ namespace CrosswordApp
             //crosswordManager.StoreCurrentCrossword();
 
             //needs further updating
-            _isFileLoaded = false;
+            
 
-            //if the file is loaded
-            if (_isFileLoaded)
+            //if the file of user data exists (i.e if the program can access it and therefore load it)
+            if (File.Exists("users.json"))
             {
                 //display the login page
                 DisplayLogin();

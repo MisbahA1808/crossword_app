@@ -17,7 +17,7 @@ namespace CrosswordApp
         [JsonProperty] private string _password;
         [JsonProperty] private string _email;
         [JsonProperty] private int _userId;
-        [JsonProperty] private int _state;
+        //[JsonProperty] private int _state;
 
         //constructor
         public User(int userId, string name, string username, string password, string email, string accountType)
@@ -28,7 +28,6 @@ namespace CrosswordApp
             _password = password;
             _email = email;
             //by default, the state is -1 (not logged in)
-            _state = -1;
             _accountType = SetAccountType(accountType);
 
         }
@@ -36,7 +35,7 @@ namespace CrosswordApp
         //getters and setters
         public string Username { get => _username; set => _username = value; }
         public string Password { get => _password; set => _password = value; }
-        public int State { get => _state; set => _state = value; }
+        //public int State { get => _state; set => _state = value; }
 
         //method to set the account type of the user
         public string SetAccountType(string accountType) 
@@ -69,48 +68,48 @@ namespace CrosswordApp
         }
 
         //method to set/change account state (between player, admin and not logged in)
-        public int SetState(string accountType) 
-        {
-            //if the account type is admin
-            if (_accountType == "admin")
-            {
-                //the state = 0
-                _state = 0;
-            }
-            //if the account type is player, the state = 1
-            else if (_accountType == "player")
-            {
-                _state = 1;
-            }
-            //otherwise the state = -1 (not logged in)
-            else { _state = -1; }
+        //public int SetState(string accountType) 
+        //{
+        //    //if the account type is admin
+        //    if (_accountType == "admin")
+        //    {
+        //        //the state = 0
+        //        _state = 0;
+        //    }
+        //    //if the account type is player, the state = 1
+        //    else if (_accountType == "player")
+        //    {
+        //        _state = 1;
+        //    }
+        //    //otherwise the state = -1 (not logged in)
+        //    else { _state = -1; }
             
-            //returns state
-            return _state;
+        //    //returns state
+        //    return _state;
 
-        }
+        //}
         //when log out, state returns to -1, -1's can only log in, to create anoter username u have to be an admin
         //a player can only change their password and solve crosswords, admins have free reign
-        public bool ChangeUserRole(User user) 
-        {
-            bool validChange = false;
+        //public bool ChangeUserRole(User user) 
+        //{
+        //    bool validChange = false;
 
 
-            //needs updating further!!!
-            if (user._state == 1)
-            {
-                validChange = true;
-                return validChange;
+        //    //needs updating further!!!
+        //    if (user._state == 1)
+        //    {
+        //        validChange = true;
+        //        return validChange;
 
-            }
-            else
-            {
-                return validChange;
+        //    }
+        //    else
+        //    {
+        //        return validChange;
 
-             };
+        //     };
                         
         
-        }
+        //}
 
 
 

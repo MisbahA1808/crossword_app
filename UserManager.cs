@@ -15,6 +15,11 @@ namespace CrosswordApp
         //list of all users
         private List<User> _users;
         private int _userId;
+        private int _loginState = -1;
+        private User _loggedInUser;
+
+        public int LoginState { get => _loginState; set => _loginState = value; }
+        internal User LoggedInUser { get => _loggedInUser; set => _loggedInUser = value; }
 
         //constructor
         public UserManager()
