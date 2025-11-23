@@ -344,5 +344,56 @@ namespace CrosswordApp
 
 
         }
+
+        public char[,] CreateSolvableCrossword(Crossword crossword) 
+        {
+            int rows = crossword.Rows;
+            int columns = crossword.Columns;
+
+            char[,] solvableCrossword = new char[rows, columns];
+
+            for (int i = 0; i < rows; i++) 
+            {
+                for (int j = 0; j < columns; j++) 
+                {
+                    if (crossword.Grid[i, j] == '*')
+                    {
+                        solvableCrossword[i, j] = '#';
+
+                    }
+                    else
+                    {
+                        solvableCrossword[i, j] = '?';
+                    }
+                }
+            
+            }
+
+            return solvableCrossword;
+        
+        
+        }
+
+        public void DisplaySolvableCrossword(Crossword crossword)
+        {
+            CrosswordManager crosswordManager = new CrosswordManager();
+            char[,] solvableCrossword = crosswordManager.CreateSolvableCrossword(crossword);
+
+
+            //loops through the rows and columns of the crossword grid
+            for (int i = 0; i < crossword.Rows; i++)
+            {
+                for (int j = 0; j < crossword.Columns; j++)
+                {
+                    //for each grid position, it displays it on screen, adds space so that it is formatted nicely
+                    Console.Write(solvableCrossword[i, j] + " ");
+                }
+                //moves to the next row in the crossword
+                Console.WriteLine();
+            }
+
+
+
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace CrosswordApp
         //these are json properties so that they can be serialised to then be stored in the json file
         [JsonProperty] private int _rows;
         [JsonProperty] private int _columns;
-        [JsonProperty] private char[,] _grid { get; set; }
+        [JsonProperty] private char[,] _grid;
         [JsonProperty] private string _crosswordTitle;
         [JsonProperty] private string _clue;
         [JsonProperty] private List<Word> _words;
@@ -26,6 +26,7 @@ namespace CrosswordApp
         public string CrosswordTitle { get => _crosswordTitle; set => _crosswordTitle = value; }
         public string Clue { get => _clue; set => _clue = value; }
         internal List<Word> Words { get => _words; set => _words = value; }
+        public char[,] Grid { get => _grid; set => _grid = value; }
 
 
         //constructor for crossword class
@@ -145,6 +146,8 @@ namespace CrosswordApp
         
         
         }
+
+        
 
     }
 }

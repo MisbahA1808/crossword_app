@@ -350,22 +350,36 @@ namespace CrosswordApp
             //fill the list with the crosswords stored in the json
             savedCrosswords = crosswordManager.GetStoredCrosswords();
 
-            //create a menu
-            Menu crosswordMenu = new Menu("Select a crossword to solve!");
-
-            //loops through al lcrosswords in the list
-            foreach (Crossword crossword in savedCrosswords)
-            {
-                //for each crossword, add its title to the menu as a menu item
-                crosswordMenu.AddMenuItem(crossword.CrosswordTitle);
             
+
+            Console.WriteLine("Write the number of the crossword you want to solve");
+            Console.WriteLine();
+
+            for (int i = 0; i < savedCrosswords.Count; i++) 
+            {
+                Console.WriteLine(i+ ". " + savedCrosswords[i].CrosswordTitle);
             }
-            //create a menu manager object and pass in the crosswordmenu 
-            MenuManager menuManager = new MenuManager(new List<Menu> { crosswordMenu });
 
-            //gets the name of the selected crossword
-            string selectedOption = menuManager.RunMenu();
+            Console.WriteLine("Enter a number:");
+            int choice = Convert.ToInt32(Console.ReadLine());
 
+            Console.Clear();
+
+            Console.WriteLine(savedCrosswords[choice].CrosswordTitle + ": ");
+            Console.WriteLine();
+
+            crosswordManager.DisplaySolvableCrossword(savedCrosswords[choice]);
+            //savedCrosswords[choice].DisplayCrossword();
+            Console.ReadKey(true);
+
+            ConsoleKey keyPressed;
+            keyPressed = Console.ReadKey(true).Key;
+
+            if (keyPressed == ConsoleKey.Enter)
+            {
+                DisplayMenu();
+            }
+            
 
         }
 

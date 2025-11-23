@@ -179,6 +179,12 @@ namespace CrosswordApp
         public string RunMenu()
         {
             ConsoleKey keyPressed;
+
+            //_activeMenu.DeactivateAllItems();
+            //_activeMenuPointer = 0;
+            //_activeMenu = _menus[0];
+            //_activeMenu.ActivateCurrentMenuItem();
+
             //initially display the menu
             DisplayMenu();
 
@@ -208,17 +214,25 @@ namespace CrosswordApp
                 //redisplay the menu after updating it
                 DisplayMenu();
 
-                //if the user selects enter or one of the valid key choices
-                if (keyPressed == ConsoleKey.Enter ||
-                    keyPressed == ConsoleKey.L ||
-                    keyPressed == ConsoleKey.C ||
-                    keyPressed == ConsoleKey.S||
-                    keyPressed == ConsoleKey.A ||
-                    keyPressed == ConsoleKey.Q)
-                {
-                    //returns the user's selection
-                    return choice;
-                }
+                //if (_menus.Count == 1)
+                //{
+                //    if (keyPressed == ConsoleKey.Enter) { return choice; }
+
+                //}
+                //else
+                //{
+                    //if the user selects enter or one of the valid key choices
+                    if (keyPressed == ConsoleKey.Enter ||
+                        keyPressed == ConsoleKey.L ||
+                        keyPressed == ConsoleKey.C ||
+                        keyPressed == ConsoleKey.S ||
+                        keyPressed == ConsoleKey.A ||
+                        keyPressed == ConsoleKey.Q)
+                    {
+                        //returns the user's selection
+                        return choice;
+                    }
+                //}
             
             
             }
