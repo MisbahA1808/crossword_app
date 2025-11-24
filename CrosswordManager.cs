@@ -285,6 +285,8 @@ namespace CrosswordApp
             Console.WriteLine("Crossword Created Successfully!");
             //Program.DisplayMenu();
             //exits the method
+            Console.ReadKey(true);
+            Program.DisplayMenu();
             return;
         
         }

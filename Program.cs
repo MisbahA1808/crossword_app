@@ -19,13 +19,15 @@ namespace CrosswordApp
             //crosswordManager.StoreCurrentCrossword();
 
             //needs further updating
-            
+
+            Program.UserManager.CreateDefaultAdminAccount();
 
             //if the file of user data exists (i.e if the program can access it and therefore load it)
-            if (File.Exists("users.json"))
+            if (!File.Exists("users.json"))
             {
                 //display the login page
                 DisplayLogin();
+                
 
             }
             else 
@@ -76,6 +78,8 @@ namespace CrosswordApp
                 case "(Q) Logout":
                     if (Program.UserManager.LoginState == -1)
                     {
+                        Console.SetCursorPosition(0, 10);
+
                         Console.WriteLine("No user is logged in!");
                         Console.ReadKey(true);
                         DisplayMenu();
@@ -84,6 +88,8 @@ namespace CrosswordApp
                     }
 
                     Program.UserManager.Logout();
+                    Console.SetCursorPosition(0, 10);
+
                     Console.WriteLine("You have successfully been logged out, press any key to return to the login page");
                     Console.ReadKey(true);
                     //go back to the login menu
@@ -94,6 +100,7 @@ namespace CrosswordApp
                 case "(C) Create Crossword":
                     if (Program.UserManager.LoginState != 0) 
                     {
+                        Console.SetCursorPosition(0, 10);
                         Console.WriteLine("Only admins can access this feature!");
                         Console.ReadKey(true);
                         DisplayMenu();
@@ -119,6 +126,8 @@ namespace CrosswordApp
                 case "(S) Solve Crossword":
                     if (Program.UserManager.LoginState == -1)
                     {
+                        Console.SetCursorPosition(0, 10);
+
                         Console.WriteLine("Please login beofre trying to access this feature!");
                         Console.ReadKey(true);
                         DisplayMenu();
@@ -141,6 +150,8 @@ namespace CrosswordApp
                 case "(L) Login":
                     if (Program.UserManager.LoginState != -1)
                     {
+                        Console.SetCursorPosition(0, 10);
+
                         Console.WriteLine("You are already logged in!");
                         Console.ReadKey(true);
                         DisplayMenu();
@@ -154,10 +165,11 @@ namespace CrosswordApp
                 case "(R) Change Role":
                     if (Program.UserManager.LoginState != 0)
                     {
+                        Console.SetCursorPosition(0, 10);
+
                         Console.WriteLine("Only admins can access this feature!");
                         Console.ReadKey(true);
                         DisplayMenu();
-                        return;
 
                     }
                     Console.Clear();
