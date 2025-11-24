@@ -163,5 +163,46 @@ namespace CrosswordApp
         
         }
 
+        public void CreateDefaultAdminAccount()
+        {
+            string path = "users.json";
+
+            List<User> users = new List<User>();
+
+            if (File.Exists(path)) 
+            {
+                string json = File.ReadAllText(path);
+
+                if (!string.IsNullOrWhiteSpace(json))
+                    {
+                    users = JsonConvert.DeserializeObject<List<User>>(json);
+                }
+            
+            
+            }
+
+            bool exists = false;
+
+            foreach (User user in users) 
+            {
+                if (user.Username == "admin" && user.Password == "password") 
+                {
+                    exists = true;
+                    break;
+                }
+            
+            }
+
+            if (!exists) 
+            {
+                User admin = new User(0, "Default Admin", "admin", "password", "admin@crosswordbuilder", "Admin");
+                users.Add(admin);
+            }
+
+            string jsonString = JsonConvert.SerializeObject(users, Formatting.Indented);
+            File.WriteAllText(path,jsonString);
+
+        }
+
     }
 }
