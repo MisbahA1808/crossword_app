@@ -93,13 +93,26 @@ namespace CrosswordApp
                 //if the up key is pressed
                 case ConsoleKey.UpArrow:
                     //calls menu item up method within the menu class
+                    if (_activeMenu.IsExpanded && _activeMenu.GetActiveChoice() == _activeMenu.GetFirstMenuItem())
+                    {
+                        _activeMenu.IsExpanded = false;
+                        _activeMenu.DeactivateAllItems();
+                    }
                     _activeMenu.MenuItemUp();
                     break;
 
                 //if the down key is pressed
                 case ConsoleKey.DownArrow:
                     //calls menu item down method within the menu class
-                    _activeMenu.MenuItemDown();
+                    if (!_activeMenu.IsExpanded)
+                    {
+                        _activeMenu.IsExpanded = true;
+                        _activeMenu.ActivateCurrentMenuItem();
+                    }
+                    else
+                    {
+                        _activeMenu.MenuItemDown();
+                    }
                     break;
 
                 //if the enter key is pressed (indicating they want tro select the menu)
@@ -113,16 +126,22 @@ namespace CrosswordApp
                     {
                         //for each vlid letter pressed, returns the name of that menu item
                         case ConsoleKey.L:
+                            _activeMenu.IsExpanded = true;
                             return "(L) Login";
                         case ConsoleKey.C:
+                            _activeMenu.IsExpanded = true;
                             return "(C) Create Crossword";
                         case ConsoleKey.S:
+                            _activeMenu.IsExpanded = true;
                             return "(S) Solve Crossword";
                         case ConsoleKey.A:
+                            _activeMenu.IsExpanded = true;
                             return "(A) Create Account";
                         case ConsoleKey.Q:
+                            _activeMenu.IsExpanded = true;
                             return "(Q) Logout";
                         case ConsoleKey.R:
+                            _activeMenu.IsExpanded = true;
                             return "(R) Change Role";
                         default:
                             break;

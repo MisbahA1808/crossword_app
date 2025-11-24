@@ -19,9 +19,12 @@ namespace CrosswordApp
         //a pointer to the active/current menu
         private int _activeItemPointer;
 
+        private bool _isExpanded = false;
+
         //getters and setters
         public string Name { get => _name; set => _name = value; }
         public bool Active { get => _active; set => _active = value; }
+        public bool IsExpanded { get => _isExpanded; set => _isExpanded = value; }
 
         //constructor
         public Menu(string name)
@@ -42,24 +45,26 @@ namespace CrosswordApp
 
             //buffer variable to help evenly space out the menu on the console
             int buffer = 1;
-
-            //loops through the list of menu items 
-            foreach (MenuItem item in _items)
+            if (_isExpanded)
             {
-                //moves the cursor down by one row for the next menu item
-                Console.SetCursorPosition(x, y + buffer);
-                //if the menu item is the active one (the one selected)
-                if (item.Active == true)
+                //loops through the list of menu items 
+                foreach (MenuItem item in _items)
                 {
-                    //change the colour of the writing the men name is written in
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(item.Name);
-                    Console.ResetColor();
+                    //moves the cursor down by one row for the next menu item
+                    Console.SetCursorPosition(x, y + buffer);
+                    //if the menu item is the active one (the one selected)
+                    if (item.Active == true)
+                    {
+                        //change the colour of the writing the men name is written in
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine(item.Name);
+                        Console.ResetColor();
+                    }
+                    //if it is not the active menu, just print it on the console
+                    else { Console.WriteLine(item.Name); }
+                    //increment the buffer so that it moves to the next line for the next menu item
+                    buffer++;
                 }
-                //if it is not the active menu, just print it on the console
-                else { Console.WriteLine(item.Name); }
-                //increment the buffer so that it moves to the next line for the next menu item
-                buffer++;
             }
 
         }
@@ -139,6 +144,12 @@ namespace CrosswordApp
             //active item is th eone pointe dto by the active item pointer
             //returns the name attribute of the menu item
             return _items[_activeItemPointer].Name;
+        
+        }
+
+        public string GetFirstMenuItem()
+        {
+            return _items[0].Name;
         
         }
     }
