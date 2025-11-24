@@ -174,7 +174,9 @@ namespace CrosswordApp
                     }
                     Console.Clear();
                     //need to get user role, verify it then put an appropriate message here based on that
-                    Console.WriteLine("Change User Role:");
+                    Console.WriteLine("This feature is still under development, press any key to return to the dashboard.");
+                    Console.ReadKey(true);
+                    DisplayMenu();
                     break;
 
                 //default displays the menu
@@ -368,8 +370,7 @@ namespace CrosswordApp
         public static void DisplayAccountCreation() 
         {
             Console.Clear();
-        
-        
+            CreateUser();
         }
 
         //method to display the welocome message
