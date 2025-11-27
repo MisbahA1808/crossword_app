@@ -430,25 +430,7 @@ namespace CrosswordApp
             //stores their choice
             int choice = Convert.ToInt32(Console.ReadLine());
 
-            Console.Clear();
-
-            //write the title of their choice on screen
-            Console.WriteLine(savedCrosswords[choice].CrosswordTitle + ": ");
-            Console.WriteLine();
-
-            //display the crossword they chose on the console (this is the masked version)
-            crosswordManager.DisplaySolvableCrossword(savedCrosswords[choice]);
-            //savedCrosswords[choice].DisplayCrossword();
-            Console.ReadKey(true);
-
-            ConsoleKey keyPressed;
-            keyPressed = Console.ReadKey(true).Key;
-
-            //if they press enter, goes back to the main menu
-            if (keyPressed == ConsoleKey.Enter)
-            {
-                DisplayMenu();
-            }
+            
             return savedCrosswords[choice];
 
         }

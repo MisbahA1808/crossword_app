@@ -313,7 +313,7 @@ namespace CrosswordApp
 
                 for (int i = 0; i < crossword.Rows; i++)
                 {
-                    for (int j = 0; j > crossword.Columns; j++) 
+                    for (int j = 0; j < crossword.Columns; j++) 
                     {
                         if (i == selectedRow && j == selectedColumn)
                         {
@@ -382,7 +382,7 @@ namespace CrosswordApp
                 //if the key pressed is the escape key, the loop breaks
             } while (keyPressed != ConsoleKey.Escape);
 
-
+            Program.DisplayMenu();
 
         }
 
