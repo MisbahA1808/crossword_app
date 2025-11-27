@@ -375,14 +375,9 @@ namespace CrosswordApp
                         }
                         break;
 
-                    //if the key pressed is the enter key (i.e. the admin wants to enter a word at this grid position)
-                    case ConsoleKey.Enter:
-                        //calls AddInputWord()
-                        AddInputWord(selectedRow, selectedColumn);
+                    default:
+                        CheckUserLetter(crossword, maskedCrossword, selectedRow, selectedColumn, keyPressed)
                         break;
-
-
-
                 }
                 //if the key pressed is the escape key, the loop breaks
             } while (keyPressed != ConsoleKey.Escape);
@@ -391,12 +386,27 @@ namespace CrosswordApp
 
         }
 
-        public string CheckUserLetter(Crossword crossword, char[,] maskedCrossword, int row, int column, ConsoleKey keyPressed) 
+        public void CheckUserLetter(Crossword crossword, char[,] maskedCrossword, int row, int column, ConsoleKey keyPressed) 
         {
             //checks if input is a single vcharacter and that the character is  aletter
-            if (!char.IsLetter((char)keyPressed)) 
-            { return; }
+            if (!char.IsLetter((char)keyPressed))
+            {
+                return;
+            }
+                
         
+            char guess = char.ToUpper((char)keyPressed);
+
+            if (crossword.Grid[row, column] == guess)
+            {
+                maskedCrossword[row, column] = guess;
+
+            }
+            else
+            {
+                maskedCrossword[row, column] = 'X';
+            
+            }
         
         }
 
