@@ -69,56 +69,5 @@ namespace CrosswordApp
             return _accountType;
         }
 
-        //method to set/change account state (between player, admin and not logged in)
-        //public int SetState(string accountType) 
-        //{
-        //    //if the account type is admin
-        //    if (_accountType == "admin")
-        //    {
-        //        //the state = 0
-        //        _state = 0;
-        //    }
-        //    //if the account type is player, the state = 1
-        //    else if (_accountType == "player")
-        //    {
-        //        _state = 1;
-        //    }
-        //    //otherwise the state = -1 (not logged in)
-        //    else { _state = -1; }
-            
-        //    //returns state
-        //    return _state;
-
-        //}
-        //when log out, state returns to -1, -1's can only log in, to create anoter username u have to be an admin
-        //a player can only change their password and solve crosswords, admins have free reign
-        //public bool ChangeUserRole(User user) 
-        //{
-        //    bool validChange = false;
-
-
-        //    //needs updating further!!!
-        //    if (user._state == 1)
-        //    {
-        //        validChange = true;
-        //        return validChange;
-
-        //    }
-        //    else
-        //    {
-        //        return validChange;
-
-        //     };
-                        
-        
-        //}
-
-
-
-
-
-
-
-
     }
 }

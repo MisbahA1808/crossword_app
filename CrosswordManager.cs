@@ -24,14 +24,12 @@ namespace CrosswordApp
         }
 
         //secondary constructor with no parameters
+        //constructor overloading?
         public CrosswordManager()
         {
             
         }
-        //public CrosswordManager()
-        //{
-
-        //}
+        
 
         //method to add crossword to the list of crosswords
         public void AddCrosswordToList() 
@@ -283,11 +281,122 @@ namespace CrosswordApp
             Console.SetCursorPosition(0, 16);
             //the crossword is created as the admin has pressed escape
             Console.WriteLine("Crossword Created Successfully!");
-            //Program.DisplayMenu();
-            //exits the method
+
+            //exits the method when a key is pressed and returns to the displaymenu functionality
             Console.ReadKey(true);
+            //method adds the created crossword to the list of crosswords
+            AddCrosswordToList();
+            //then stores it in the json file
+            StoreCurrentCrossword();
             Program.DisplayMenu();
             return;
+        
+        }
+
+        public void PlayerSolveCrossword() 
+        {
+            //start at the top left of the crossword by setting the start row and column to zero
+            int selectedRow = 0;
+            int selectedColumn = 0;
+            //variable to store which key is pressed
+            ConsoleKey keyPressed;
+
+            //loop to display the crossword and its updated changes each time until the admin pressed the escape key
+            do
+            {
+                //clears the console
+                Console.Clear();
+                //display the welcome message
+                Program.DisplayWelcomeMessage();
+                Console.SetCursorPosition(0, 2);
+
+                //draws the crossword, starting with (0,0) highlighted/selected
+                AdminDrawCrossword(selectedRow, selectedColumn);
+                Console.SetCursorPosition(28, 27);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                //extra info for admin to navigate crossword creation
+                Console.WriteLine("Use arrow keys to move, Enter to select, Esc to submit crossword");
+                Console.ResetColor();
+
+                //gets the key pressed b ythe admin
+                keyPressed = Console.ReadKey(true).Key;
+
+                //switch case block based on the key pressed
+                switch (keyPressed)
+                {
+                    //if the key pressed is the up arrow
+                    case ConsoleKey.UpArrow:
+                        //if the row they have selected is > 0
+                        if (selectedRow > 0)
+                        {
+                            //decrement selectedRow
+                            selectedRow--;
+                        }
+                        break;
+
+                    //if the key pressed is the down arroow
+                    case ConsoleKey.DownArrow:
+                        //if the row selected is less than the amount of rowws in the crossword
+                        if (selectedRow < _currentCrossword.Rows - 1)
+                        {
+                            //increment selectedRow
+                            selectedRow++;
+                        }
+                        break;
+
+                    //if the key pressed is the left arrow
+                    case ConsoleKey.LeftArrow:
+                        //if the selected column > 0
+                        if (selectedColumn > 0)
+                        {
+                            //decrement selected column
+                            selectedColumn--;
+                        }
+                        break;
+
+                    //if the key pressed is the right arrow
+                    case ConsoleKey.RightArrow:
+                        //if the selected column is less than the amount of columns in the crossword
+                        if (selectedColumn < _currentCrossword.Columns)
+                        {
+                            //increment selected column
+                            selectedColumn++;
+                        }
+                        break;
+
+                    //if the key pressed is the enter key (i.e. the admin wants to enter a word at this grid position)
+                    case ConsoleKey.Enter:
+                        //calls AddInputWord()
+                        AddInputWord(selectedRow, selectedColumn);
+                        break;
+
+
+
+                }
+                //if the key pressed is the escape key, the loop breaks
+            } while (keyPressed != ConsoleKey.Escape);
+
+
+
+        }
+
+        public string CheckUserAnswer(string word, Crossword crossword, int x, int y, string direction) 
+        {
+            if (direction == "across") { }
+            else { }
+
+
+                for (int i = 0; i < word.Length; i++)
+                {
+                    if (crossword.Grid[x, y])
+
+
+
+            }
+        
+        
+        
+        
         
         }
 
@@ -347,38 +456,53 @@ namespace CrosswordApp
 
         }
 
+        //method to create a solvable crossword
+        //hides the words in any given crossword so that they cannot be seen
+        //this method does not create another crossword object, rather temporarily creates a char[,] to mask the words
         public char[,] CreateSolvableCrossword(Crossword crossword) 
         {
+            //setting the rows and columns based on the crossword selected
             int rows = crossword.Rows;
             int columns = crossword.Columns;
 
+            //create a new crossword grid
             char[,] solvableCrossword = new char[rows, columns];
 
+            //looping through the rows and the columns
             for (int i = 0; i < rows; i++) 
             {
                 for (int j = 0; j < columns; j++) 
                 {
+                    //if the grid posiition in the crossword has a '*'
                     if (crossword.Grid[i, j] == '*')
                     {
+                        //replace it with a #
                         solvableCrossword[i, j] = '#';
 
                     }
                     else
                     {
+                        //otherwise if it is any letter
+                        //replace it with a ?
                         solvableCrossword[i, j] = '?';
                     }
                 }
             
             }
 
+            //returns the char[,]
             return solvableCrossword;
         
         
         }
 
+        //method to display the crossword for the user to solve
         public void DisplaySolvableCrossword(Crossword crossword)
         {
+            //create a crossword manager object
             CrosswordManager crosswordManager = new CrosswordManager();
+
+            //create a solvable crossword from the user selection
             char[,] solvableCrossword = crosswordManager.CreateSolvableCrossword(crossword);
 
 
@@ -396,6 +520,12 @@ namespace CrosswordApp
 
 
 
+        }
+
+        public Crossword GetCrosswordBeingSolved() 
+        {
+            Crossword crosswordBeingSolved = Program.DisplayCrosswordSolver();
+            return crosswordBeingSolved;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace CrosswordApp
         //a pointer to the active/current menu
         private int _activeItemPointer;
 
+        //a bool to indicate if the current menu is expanded into drop down or not
         private bool _isExpanded = false;
 
         //getters and setters
@@ -147,6 +148,8 @@ namespace CrosswordApp
         
         }
 
+        //method to get and return the first menu item
+        //used to check if the highlighted menu item is the top one (the drop down menu then recollapses upwards)
         public string GetFirstMenuItem()
         {
             return _items[0].Name;

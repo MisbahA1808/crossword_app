@@ -155,50 +155,68 @@ namespace CrosswordApp
 
         }
 
+        //method to logout
         public void Logout() 
         {
+            //sets login state to -1 (not logges in) and logged in user to null
             _loggedInUser = null;
             _loginState = -1;
                                 
         
         }
 
+        //method to create a default admin account
         public void CreateDefaultAdminAccount()
         {
+            //define file path of json
             string path = "users.json";
 
+            //create a new list of users
             List<User> users = new List<User>();
 
+            //if the json file exists
             if (File.Exists(path)) 
             {
+                //read the entire file
                 string json = File.ReadAllText(path);
 
+                //if the file is not empty 
                 if (!string.IsNullOrWhiteSpace(json))
-                    {
+                {
+                    //deserialise the file and store all the user objects in users
                     users = JsonConvert.DeserializeObject<List<User>>(json);
                 }
             
             
             }
 
+            //variable to check if an admin account alreayd exists
             bool exists = false;
 
+            //lopo through all the users in the user list
             foreach (User user in users) 
             {
+                //if the usrname and password match the default admin username and password
                 if (user.Username == "admin" && user.Password == "password") 
                 {
+                    //set exists to true
                     exists = true;
+                    //breka out of the loop
                     break;
                 }
             
             }
 
+            //if the defualt accoutn does not exust
             if (!exists) 
             {
+                //create an admin acocunt b ycreating and admin object
                 User admin = new User(0, "Default Admin", "admin", "password", "admin@crosswordbuilder", "Admin");
+                //add admin to the user list
                 users.Add(admin);
             }
 
+            //serialise the file and write all of the users from the users list on to users.json
             string jsonString = JsonConvert.SerializeObject(users, Formatting.Indented);
             File.WriteAllText(path,jsonString);
 

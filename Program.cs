@@ -11,24 +11,19 @@ namespace CrosswordApp
 {
     internal class Program
     {
+        //creating a global user manager object
+        //global because if i keep creating instances, the account state of the user logged in would not be consistsent across the program
         public static UserManager UserManager = new UserManager();
         static void Main(string[] args)
         {
-            //Crossword crossword = new Crossword(5, 5, "test");
-            //CrosswordManager crosswordManager = new CrosswordManager(crossword);
-            //crosswordManager.StoreCurrentCrossword();
-
-            //needs further updating
-
+            //creates a default admin account suing username 'admin' and password 'password' so that a default admin can always login
             Program.UserManager.CreateDefaultAdminAccount();
 
             //if the file of user data exists (i.e if the program can access it and therefore load it)
-            if (!File.Exists("users.json"))
+            if (File.Exists("users.json"))
             {
                 //display the login page
                 DisplayLogin();
-                
-
             }
             else 
             {
@@ -37,8 +32,6 @@ namespace CrosswordApp
                 Console.ReadKey(true);
                 DisplayLogin();
             }
-
-            
         }
 
         //method to display the main menus
@@ -62,7 +55,6 @@ namespace CrosswordApp
             menu2.AddMenuItem("(C) Create Crossword");
             menu2.AddMenuItem("(S) Solve Crossword");
             
-            
             Menu menu3 = new Menu("SETTINGS");
             menu3.AddMenuItem("(Q) Logout");
             
@@ -76,37 +68,48 @@ namespace CrosswordApp
             {
                 //if the choice is Q/Logout
                 case "(Q) Logout":
+                    //if the users login state is -1 (not logged in)
                     if (Program.UserManager.LoginState == -1)
                     {
                         Console.SetCursorPosition(0, 10);
 
                         Console.WriteLine("No user is logged in!");
                         Console.ReadKey(true);
+                        //display the menu
                         DisplayMenu();
                         return;
 
                     }
 
+                    //if they are logged in
+                    //logs them out of their account
                     Program.UserManager.Logout();
                     Console.SetCursorPosition(0, 10);
 
+                    //display success message
                     Console.WriteLine("You have successfully been logged out, press any key to return to the login page");
                     Console.ReadKey(true);
-                    //go back to the login menu
+                    //go back to the login menu upon any key pressed
                     DisplayLogin();
                     break;
 
                 //if the choice is C/Create Crossword
                 case "(C) Create Crossword":
+                    //if the login state is not 0, n(ot admin)
                     if (Program.UserManager.LoginState != 0) 
                     {
                         Console.SetCursorPosition(0, 10);
+                        //inform them that only admins can create crosswords
                         Console.WriteLine("Only admins can access this feature!");
+
+                        //go back to the menu upon any key pressed
                         Console.ReadKey(true);
                         DisplayMenu();
                         return;
                     
                     }
+
+                    //if they are an admin logged in
                     Console.Clear();
                     DisplayWelcomeMessage();
 
@@ -116,19 +119,18 @@ namespace CrosswordApp
 
                     //calls the methos to allow the creation of the crossword
                     crosswordManager.AdminCreateCrossword();
-                    //method adds the created crossword to the list of crosswords
-                    crosswordManager.AddCrosswordToList();
-                    //then stores it in the json file
-                    crosswordManager.StoreCurrentCrossword();
+                    
                     break;
 
                 //if the choice is S/Solve Crossword
                 case "(S) Solve Crossword":
+                    //if the use ris not logged in
                     if (Program.UserManager.LoginState == -1)
                     {
                         Console.SetCursorPosition(0, 10);
-
+                        //prompt them to login
                         Console.WriteLine("Please login beofre trying to access this feature!");
+                        //return to the menu upon any key pressed
                         Console.ReadKey(true);
                         DisplayMenu();
                         return;
@@ -148,30 +150,35 @@ namespace CrosswordApp
 
                 //if the choice is L/Login
                 case "(L) Login":
+                    //if the user is already logged in (their loginstate is not -1)
                     if (Program.UserManager.LoginState != -1)
                     {
                         Console.SetCursorPosition(0, 10);
-
+                        //inform them that they are already logged in
                         Console.WriteLine("You are already logged in!");
+                        //return to the menu upon any key pressed
                         Console.ReadKey(true);
                         DisplayMenu();
                         return;
 
                     }
+                    //if they aren't logged in, go to the login page
                     VerifyUser();
                     break;
 
                 //if the choice is R/Change Role
                 case "(R) Change Role":
+                    //if the user is not an admin
                     if (Program.UserManager.LoginState != 0)
                     {
                         Console.SetCursorPosition(0, 10);
-
+                        //inform them that only admins can change roles
                         Console.WriteLine("Only admins can access this feature!");
                         Console.ReadKey(true);
                         DisplayMenu();
 
                     }
+                    //however if they are an admin
                     Console.Clear();
                     //need to get user role, verify it then put an appropriate message here based on that
                     Console.WriteLine("This feature is still under development, press any key to return to the dashboard.");
@@ -234,7 +241,6 @@ namespace CrosswordApp
         }
 
         //method to verify a user that has already created an account
-
         public static void VerifyUser() 
         {
             Console.Clear();
@@ -366,7 +372,7 @@ namespace CrosswordApp
         
         }
 
-
+        //method to display the account creation page
         public static void DisplayAccountCreation() 
         {
             Console.Clear();
@@ -374,6 +380,7 @@ namespace CrosswordApp
         }
 
         //method to display the welocome message
+        //avoids repeated code
         public static void DisplayWelcomeMessage() 
         {
             Console.SetCursorPosition(38, 0);
@@ -391,7 +398,7 @@ namespace CrosswordApp
         }
 
         //method to display the crossword solving page
-        public static void DisplayCrosswordSolver() 
+        public static Crossword DisplayCrosswordSolver() 
         {
             //displays the welcome message
             DisplayWelcomeMessage();
@@ -406,24 +413,28 @@ namespace CrosswordApp
             savedCrosswords = crosswordManager.GetStoredCrosswords();
 
             
-
+            //get user input
             Console.WriteLine("Write the number of the crossword you want to solve");
             Console.WriteLine();
 
+            //loops through the list of saved crosswords and prints their titles on screen
             for (int i = 0; i < savedCrosswords.Count; i++) 
             {
                 Console.WriteLine(i+ ". " + savedCrosswords[i].CrosswordTitle);
             }
 
+            //gets user input
             Console.WriteLine("Enter a number:");
+            //stores their choice
             int choice = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear();
 
+            //write the title of their choice on screen
             Console.WriteLine(savedCrosswords[choice].CrosswordTitle + ": ");
             Console.WriteLine();
 
-
+            //display the crossword they chose on the console (this is the masked version)
             crosswordManager.DisplaySolvableCrossword(savedCrosswords[choice]);
             //savedCrosswords[choice].DisplayCrossword();
             Console.ReadKey(true);
@@ -431,11 +442,12 @@ namespace CrosswordApp
             ConsoleKey keyPressed;
             keyPressed = Console.ReadKey(true).Key;
 
+            //if they press enter, goes back to the main menu
             if (keyPressed == ConsoleKey.Enter)
             {
                 DisplayMenu();
             }
-            
+            return savedCrosswords[choice];
 
         }
 

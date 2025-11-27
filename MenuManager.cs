@@ -16,15 +16,6 @@ namespace CrosswordApp
 
         public MenuManager(List<Menu> menus)
         {
-            //Console.SetWindowSize(100, 30);
-            //Console.SetBufferSize(100, 30);
-            //_header = "Crossword Solver & Builder";
-            //_footer = "Created by Misbah Ahmad";
-
-            //_windowWidth = Console.WindowWidth;
-            //int leftPadding = (_windowWidth - _header.Length) / 2;
-            //Console.SetCursorPosition(leftPadding, Console.CursorTop);
-
             _menus = menus;
             //initially set activemenupointer to zero
             _activeMenuPointer = 0;
@@ -34,7 +25,6 @@ namespace CrosswordApp
 
             //activate the first item in the active menu
             _activeMenu.ActivateCurrentMenuItem();
-
 
         }
 
@@ -92,30 +82,47 @@ namespace CrosswordApp
 
                 //if the up key is pressed
                 case ConsoleKey.UpArrow:
-                    if (_menus.Count == 1) { _activeMenu.MenuItemUp(); break; }
-                    //calls menu item up method within the menu class
+                    //if there is only one menu on the console
+                    if (_menus.Count == 1) 
+                    {
+                        //calls menu item up method within the menu class
+                        _activeMenu.MenuItemUp();
+                        break; 
+                    }
+                    //if the drop down menu is expanded and the active menu item is the first item in the list (i.e. you are at the top of the menu)
                     if (_activeMenu.IsExpanded && _activeMenu.GetActiveChoice() == _activeMenu.GetFirstMenuItem())
                     {
+                        //set isexpanded to false
                         _activeMenu.IsExpanded = false;
+                        //deactivate all menu items
                         _activeMenu.DeactivateAllItems();
                     }
                     else
                     {
+                        //calls menu item up method within the menu class
                         _activeMenu.MenuItemUp();
                     }
                     break;
 
                 //if the down key is pressed
                 case ConsoleKey.DownArrow:
-                    if (_menus.Count == 1) { _activeMenu.MenuItemDown();break; }
-                    //calls menu item down method within the menu class
+                    if (_menus.Count == 1)
+                    {
+                        //calls menu item down method within the menu class
+                        _activeMenu.MenuItemDown();
+                        break; 
+                    }
+                    //if the menu is not expanded
                     if (!_activeMenu.IsExpanded)
                     {
+                        //set isexpanded to true
                         _activeMenu.IsExpanded = true;
+                        //activate the current menu item
                         _activeMenu.ActivateCurrentMenuItem();
                     }
                     else
                     {
+                        //calls menu item down method within the menu class
                         _activeMenu.MenuItemDown();
                     }
                     break;
@@ -131,6 +138,9 @@ namespace CrosswordApp
                     {
                         //for each vlid letter pressed, returns the name of that menu item
                         case ConsoleKey.L:
+                            //checks if there is more than one menu on the console
+                            //if there isn't it will just show the whole menu and no drop down system will be in place
+                            //same logic for all of the cases except the default
                             if (_menus.Count > 1)
                             {
                                 _activeMenu.IsExpanded = true;
@@ -180,14 +190,18 @@ namespace CrosswordApp
         //method to display the menu on the console
         public void DisplayMenu() 
         {
+            //some set values to set the cursor position correctly before printing the menus on screen
             int startCol = 0;
             int startRow = 3;
             int spacing = 25;
 
+            //if there is only one menu on the console
             if (_menus.Count == 1) 
             {
+                //make sure that the men uis expanded 
                 _menus[0].IsExpanded = true;
             }
+
             //loops through the list of menus
             foreach (Menu menu in _menus)
             {
@@ -246,6 +260,7 @@ namespace CrosswordApp
 
                 Console.SetCursorPosition(38, 0);
 
+                //welcome message printing and formatting
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Welcome to the Crossword Solver & Builder!");
                 Console.ResetColor();
@@ -260,25 +275,19 @@ namespace CrosswordApp
                 //redisplay the menu after updating it
                 DisplayMenu();
 
-                //if (_menus.Count == 1)
-                //{
-                //    if (keyPressed == ConsoleKey.Enter) { return choice; }
-
-                //}
-                //else
-                //{
-                    //if the user selects enter or one of the valid key choices
-                    if (keyPressed == ConsoleKey.Enter ||
-                        keyPressed == ConsoleKey.L ||
-                        keyPressed == ConsoleKey.C ||
-                        keyPressed == ConsoleKey.S ||
-                        keyPressed == ConsoleKey.A ||
-                        keyPressed == ConsoleKey.Q)
-                    {
-                        //returns the user's selection
-                        return choice;
-                    }
-                //}
+                
+                //if the user selects enter or one of the valid key choices
+                if (keyPressed == ConsoleKey.Enter ||
+                    keyPressed == ConsoleKey.L ||
+                    keyPressed == ConsoleKey.C ||
+                    keyPressed == ConsoleKey.S ||
+                    keyPressed == ConsoleKey.A ||
+                    keyPressed == ConsoleKey.Q)
+                {
+                    //returns the user's selection
+                    return choice;
+                }
+                
             
             
             }
