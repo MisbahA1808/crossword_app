@@ -138,7 +138,9 @@ namespace CrosswordApp
                     }
                     Console.Clear();
                     //display the crossword solver page
-                    DisplayCrosswordSolver();
+                    Crossword selectedCrossword = DisplayCrosswordSolver();
+                    CrosswordManager crosswordSolveManager = new CrosswordManager();
+                    crosswordSolveManager.PlayerSolveCrossword(selectedCrossword);
                     break;
 
                 //if the choice is A/Create account

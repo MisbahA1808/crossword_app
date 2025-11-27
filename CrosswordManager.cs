@@ -376,7 +376,7 @@ namespace CrosswordApp
                         break;
 
                     default:
-                        CheckUserLetter(crossword, maskedCrossword, selectedRow, selectedColumn, keyPressed)
+                        CheckUserLetter(crossword, maskedCrossword, selectedRow, selectedColumn, keyPressed);
                         break;
                 }
                 //if the key pressed is the escape key, the loop breaks
