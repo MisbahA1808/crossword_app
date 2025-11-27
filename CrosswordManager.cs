@@ -293,7 +293,7 @@ namespace CrosswordApp
         
         }
 
-        public void PlayerSolveCrossword() 
+        public void PlayerSolveCrossword(Crossword crossword) 
         {
             //start at the top left of the crossword by setting the start row and column to zero
             int selectedRow = 0;
@@ -301,6 +301,7 @@ namespace CrosswordApp
             //variable to store which key is pressed
             ConsoleKey keyPressed;
 
+            char[,] maskedCrossword = CreateSolvableCrossword(crossword);
             //loop to display the crossword and its updated changes each time until the admin pressed the escape key
             do
             {
@@ -310,15 +311,25 @@ namespace CrosswordApp
                 Program.DisplayWelcomeMessage();
                 Console.SetCursorPosition(0, 2);
 
-                //draws the crossword, starting with (0,0) highlighted/selected
-                AdminDrawCrossword(selectedRow, selectedColumn);
-                Console.SetCursorPosition(28, 27);
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                //extra info for admin to navigate crossword creation
-                Console.WriteLine("Use arrow keys to move, Enter to select, Esc to submit crossword");
-                Console.ResetColor();
+                for (int i = 0; i < crossword.Rows; i++)
+                {
+                    for (int j = 0; j > crossword.Columns; j++) 
+                    {
+                        if (i == selectedRow && j == selectedColumn)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(maskedCrossword[i, j] + " ");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.Write(maskedCrossword[i,j] + " ");
+                        
+                        }
+                    }
+                    Console.WriteLine();
+                }
 
-                //gets the key pressed b ythe admin
                 keyPressed = Console.ReadKey(true).Key;
 
                 //switch case block based on the key pressed
@@ -337,7 +348,7 @@ namespace CrosswordApp
                     //if the key pressed is the down arroow
                     case ConsoleKey.DownArrow:
                         //if the row selected is less than the amount of rowws in the crossword
-                        if (selectedRow < _currentCrossword.Rows - 1)
+                        if (selectedRow < crossword.Rows - 1)
                         {
                             //increment selectedRow
                             selectedRow++;
@@ -357,7 +368,7 @@ namespace CrosswordApp
                     //if the key pressed is the right arrow
                     case ConsoleKey.RightArrow:
                         //if the selected column is less than the amount of columns in the crossword
-                        if (selectedColumn < _currentCrossword.Columns)
+                        if (selectedColumn < crossword.Columns)
                         {
                             //increment selected column
                             selectedColumn++;
@@ -380,22 +391,11 @@ namespace CrosswordApp
 
         }
 
-        public string CheckUserAnswer(string word, Crossword crossword, int x, int y, string direction) 
+        public string CheckUserLetter(Crossword crossword, char[,] maskedCrossword, int row, int column, ConsoleKey keyPressed) 
         {
-            if (direction == "across") { }
-            else { }
-
-
-                for (int i = 0; i < word.Length; i++)
-                {
-                    if (crossword.Grid[x, y])
-
-
-
-            }
-        
-        
-        
+            //checks if input is a single vcharacter and that the character is  aletter
+            if (!char.IsLetter((char)keyPressed)) 
+            { return; }
         
         
         }
