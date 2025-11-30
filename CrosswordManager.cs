@@ -660,5 +660,19 @@ namespace CrosswordApp
             Crossword crosswordBeingSolved = Program.DisplayCrosswordSolver();
             return crosswordBeingSolved;
         }
+
+        //method to get the word at the users selected start position
+        public Word GetWord(Crossword crossword, int row, int column) 
+        {
+            foreach (Word w in crossword.Words) 
+            {
+                if (w.StartRow == row && w.StartColumn == column) 
+                {
+                    return w;
+                }
+            
+            }
+            return null;
+        }
     }
 }
