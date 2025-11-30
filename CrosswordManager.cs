@@ -410,6 +410,19 @@ namespace CrosswordApp
         
         }
 
+        public void CheckUserWord(string word) 
+        {
+        
+        
+        
+        }
+
+        public void PlayerEnterWord(Crossword crossword, char[,] maskedCrossword, int startRow, int startColumn) 
+        { 
+        
+        
+        }
+
         //method that gets the crosswords stored in the json
         public List<Crossword> GetStoredCrosswords()
         {

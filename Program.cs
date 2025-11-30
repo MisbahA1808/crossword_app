@@ -16,7 +16,7 @@ namespace CrosswordApp
         public static UserManager UserManager = new UserManager();
         static void Main(string[] args)
         {
-            //creates a default admin account suing username 'admin' and password 'password' so that a default admin can always login
+            //creates a default admin account using username 'admin' and password 'password' so that a default admin can always login
             Program.UserManager.CreateDefaultAdminAccount();
 
             //if the file of user data exists (i.e if the program can access it and therefore load it)
