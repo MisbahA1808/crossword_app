@@ -541,6 +541,16 @@ namespace CrosswordApp
             if (correct)
             {
                 Console.WriteLine("Correct!!!");
+
+                //checks if the crossword is fully solved or not
+                if (IsCrosswordFullySolved(maskedCrossword))
+                {
+                    Console.WriteLine("Congratulations! You have solved the entire crossword! Well done :)");
+                    Console.WriteLine("Press any key to return to the main menu.");
+                    Console.ReadKey(true);
+                    Program.DisplayMenu();
+                    return;
+                }
             }
             else 
             { 
