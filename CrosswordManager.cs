@@ -501,25 +501,40 @@ namespace CrosswordApp
 
         public void PlayerEnterWord(Crossword crossword, char[,] maskedCrossword, int startRow, int startColumn) 
         {
-            Console.SetCursorPosition(0,15);
-            //gets user input
-            Console.WriteLine("Enter the word you guess:");
-            string word = Console.ReadLine();
+            //gets word at the users slected position
+            Word w = GetWord(crossword, startRow, startColumn);
 
-            //get word in correct formato to then validate
-            word = word.ToUpper().Trim();
-
-            Console.WriteLine("Enter the direction you guess:");
-            string direction = Console.ReadLine();
-
-            if (direction != "across" && direction != "down") 
+            if (w == null) 
             {
-                Console.WriteLine("invalid direction, press any key");
+                Console.WriteLine("No word starts here! Press any key to continue.");
                 Console.ReadKey(true);
                 return;
             }
 
-            bool correct = CheckUserWord(crossword, maskedCrossword, word, direction, startRow, startColumn);
+            Console.WriteLine("Clue:" + w.Clue);
+            Console.WriteLine("Direction" + w.Direction);
+            Console.WriteLine();
+
+
+            Console.SetCursorPosition(0, 15);
+            //gets user input
+            Console.WriteLine("Enter the word you guess:");
+            string guess = Console.ReadLine();
+
+            //get word in correct formato to then validate
+            guess = guess.ToUpper().Trim();
+
+            //Console.WriteLine("Enter the direction you guess:");
+            //string direction = Console.ReadLine();
+
+            //if (direction != "across" && direction != "down") 
+            //{
+            //    Console.WriteLine("invalid direction, press any key");
+            //    Console.ReadKey(true);
+            //    return;
+            //}
+
+            bool correct = CheckUserWord(crossword, maskedCrossword, guess, w.Direction, startRow, startColumn);
 
 
             if (correct)
