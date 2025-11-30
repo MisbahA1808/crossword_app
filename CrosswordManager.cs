@@ -296,6 +296,8 @@ namespace CrosswordApp
 
         public void PlayerSolveCrossword(Crossword crossword) 
         {
+            
+
             //start at the top left of the crossword by setting the start row and column to zero
             int selectedRow = 0;
             int selectedColumn = 0;
@@ -310,6 +312,12 @@ namespace CrosswordApp
                 Console.Clear();
                 //display the welcome message
                 Program.DisplayWelcomeMessage();
+
+                Console.SetCursorPosition(25, 27);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Use arrows keys to move, enter to select a position to guess from.");
+                Console.ResetColor();
+
                 Console.SetCursorPosition(0, 2);
 
                 for (int i = 0; i < crossword.Rows; i++)

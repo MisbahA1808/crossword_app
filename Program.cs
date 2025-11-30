@@ -41,6 +41,10 @@ namespace CrosswordApp
             Console.Clear();
             //dipplay the welcome message
             DisplayWelcomeMessage();
+            Console.SetCursorPosition(35, 27);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Use arrow keys to navigate OR keyboard shortcuts!");
+            Console.ResetColor();
             Console.SetCursorPosition(0, 2);
 
             int state = Program.UserManager.LoginState;
@@ -192,6 +196,10 @@ namespace CrosswordApp
                 default:
                     Console.ReadKey(true);
                     DisplayWelcomeMessage();
+                    Console.SetCursorPosition(20, 27);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Use arrow keys to navigate OR keyboard shortcuts!");
+                    Console.ResetColor();
                     Console.SetCursorPosition(0, 2);
 
                     DisplayMenu();
@@ -266,6 +274,7 @@ namespace CrosswordApp
             //if true
             if (isVerified)
             {
+                Console.WriteLine();
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey(true);
                 //displays the menu
@@ -414,9 +423,11 @@ namespace CrosswordApp
             //fill the list with the crosswords stored in the json
             savedCrosswords = crosswordManager.GetStoredCrosswords();
 
-            
+
             //get user input
-            Console.WriteLine("Write the number of the crossword you want to solve");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Available Crosswords:");
+            Console.ResetColor();
             Console.WriteLine();
 
             //loops through the list of saved crosswords and prints their titles on screen
@@ -426,9 +437,14 @@ namespace CrosswordApp
             }
 
             //gets user input
-            Console.WriteLine("Enter a number:");
+            Console.WriteLine();
+            Console.WriteLine("Enter the number of the crossword you choose:");
             //stores their choice
+
+
             int choice = Convert.ToInt32(Console.ReadLine());
+
+            
 
             
             return savedCrosswords[choice];

@@ -129,7 +129,10 @@ namespace CrosswordApp
                 if (user.Username == username && user.Password == password)
                 {
                     //inform them of a successful login
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Login Successful");
+                    Console.ResetColor();
 
                     _loggedInUser = user;
 
@@ -140,8 +143,8 @@ namespace CrosswordApp
                     else { LoginState = 1; }
 
 
-                        //return true as they have been verified successfully
-                        return true;
+                    //return true as they have been verified successfully
+                    return true;
                 }
 
                
