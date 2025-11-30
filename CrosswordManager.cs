@@ -475,7 +475,8 @@ namespace CrosswordApp
                 {
                     currentColumn = startColumn + i;
                 }
-                else { currentRow = startRow + i}
+                else { currentRow = startRow + i; }
+                
 
                 if (maskedCrossword[currentRow, currentColumn] == '?') 
                 {
@@ -498,7 +499,7 @@ namespace CrosswordApp
             string word = Console.ReadLine();
 
             //get word in correct formato to then validate
-            word.ToUpper().Trim();
+            word = word.ToUpper().Trim();
 
             Console.WriteLine("Enter the direction you guess:");
             string direction = Console.ReadLine();
@@ -510,7 +511,7 @@ namespace CrosswordApp
                 return;
             }
 
-            bool correct = CheckUserWord(crossword, maskedCrossword, word, direction, startRow, startColumn)
+            bool correct = CheckUserWord(crossword, maskedCrossword, word, direction, startRow, startColumn);
 
 
             if (correct)
