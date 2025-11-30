@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -410,17 +411,74 @@ namespace CrosswordApp
         
         }
 
-        public void CheckUserWord(string word) 
+        public bool CheckUserWord(Crossword crossword, char[,] maskedCrossword,  string word, string direction, int startRow, int startColumn) 
         {
-        
-        
+            if (direction == "across")
+            {
+                if (startColumn + word.Length > crossword.Columns)
+                {
+                    return false;
+                }
+
+
+            }
+            else if (direction == "down")
+            {
+                if (startRow + word.Length > crossword.Rows)
+                {
+                    return false;
+                }
+
+
+            }
+            else { return false; }
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                int currentRow = startRow;
+                int currentColumn = startColumn;
+
+                if (direction == "across")
+                {
+                    currentColumn = startColumn + i;
+                }
+                else { currentRow = startRow + i}
+            }
         
         }
 
         public void PlayerEnterWord(Crossword crossword, char[,] maskedCrossword, int startRow, int startColumn) 
-        { 
-        
-        
+        {
+            Console.SetCursorPosition(0,15);
+            //gets user input
+            Console.WriteLine("Enter the word you guess:");
+            string word = Console.ReadLine();
+
+            //get word in correct formato to then validate
+            word.ToUpper().Trim();
+
+            Console.WriteLine("Enter the direction you guess:");
+            string direction = Console.ReadLine();
+
+            if (direction != "across" && direction != "down") 
+            {
+                Console.WriteLine("invalid direction, press any key");
+                Console.ReadKey(true);
+                return;
+            }
+
+            bool correct = CheckUserWord(crossword, maskedCrossword, word, direction, startRow, startColumn)
+
+
+            if (correct)
+            {
+                Console.WriteLine("Correct!!!");
+            }
+            else 
+            { 
+                Console.WriteLine("Incorrect :("); 
+            }
+            Console.ReadKey(true);
         }
 
         //method that gets the crosswords stored in the json
