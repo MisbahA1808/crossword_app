@@ -376,8 +376,12 @@ namespace CrosswordApp
                         }
                         break;
 
+                    case ConsoleKey.Enter:
+                        PlayerEnterWord(crossword, maskedCrossword, selectedRow, selectedColumn);
+                        break;
+                        
                     default:
-                        CheckUserLetter(crossword, maskedCrossword, selectedRow, selectedColumn, keyPressed);
+                        //CheckUserLetter(crossword, maskedCrossword, selectedRow, selectedColumn, keyPressed);
                         break;
                 }
                 //if the key pressed is the escape key, the loop breaks
@@ -435,6 +439,35 @@ namespace CrosswordApp
 
             for (int i = 0; i < word.Length; i++)
             {
+                //define the current start rwo and column
+                int currentRow = startRow;
+                int currentColumn = startColumn;
+
+                //if the direction they chose is across
+                if (direction == "across")
+                {
+                    currentColumn = startColumn + i;
+                }
+                //else if the direction is down
+                else { currentRow = startRow + i; }
+
+                //get the values of the correct letter from the crossword and the masked letter too
+                char correctLetter = crossword.Grid[currentRow, currentColumn];
+                char maskedLetter = maskedCrossword[currentRow, currentColumn];
+
+                if (maskedLetter == '?')
+                {
+                    if (word[i] != correctLetter)
+                    {
+                        return false;
+                    }
+                
+                }
+            }
+
+            //for revealing the correct letter on screen if they entered it correct;y
+            for (int i = 0; i < word.Length; i++) 
+            {
                 int currentRow = startRow;
                 int currentColumn = startColumn;
 
@@ -443,7 +476,17 @@ namespace CrosswordApp
                     currentColumn = startColumn + i;
                 }
                 else { currentRow = startRow + i}
+
+                if (maskedCrossword[currentRow, currentColumn] == '?') 
+                {
+                    maskedCrossword[currentRow, currentColumn] = word[i];
+                
+                }
+            
+            
             }
+
+            return true;
         
         }
 
