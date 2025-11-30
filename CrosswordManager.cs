@@ -511,8 +511,9 @@ namespace CrosswordApp
                 return;
             }
 
-            Console.WriteLine("Clue:" + w.Clue);
-            Console.WriteLine("Direction" + w.Direction);
+            Console.WriteLine();
+            Console.WriteLine("Clue: " + w.Clue);
+            Console.WriteLine("Direction: " + w.Direction);
             Console.WriteLine();
 
 
@@ -688,6 +689,26 @@ namespace CrosswordApp
             
             }
             return null;
+        }
+
+        public bool IsCrosswordFullySolved(char[,] maskedCrossword)
+        {
+            for (int i = 0; i < maskedCrossword.GetLength(0); i++) 
+            {
+                for (int j = 0; j < maskedCrossword.GetLength(1); j++) 
+                {
+                    if (maskedCrossword[i, j] == '?') 
+                    {
+                        return false;
+                    }
+                
+                }
+            
+            
+            
+            }
+            return true;
+        
         }
     }
 }
