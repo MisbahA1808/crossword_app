@@ -50,16 +50,16 @@ namespace CrosswordApp
             int state = Program.UserManager.LoginState;
 
             //creating the menu objects and adding sub menus/ menu items to them
-            Menu menu1 = new Menu("MY ACCOUNT");
+            Menu menu1 = new Menu("(1) MY ACCOUNT");
             menu1.AddMenuItem("(L) Login");
             menu1.AddMenuItem("(A) Create Account");
             menu1.AddMenuItem("(R) Change Role");
 
-            Menu menu2 = new Menu("CROSSWORDS");
+            Menu menu2 = new Menu(" (2) CROSSWORDS");
             menu2.AddMenuItem("(C) Create Crossword");
             menu2.AddMenuItem("(S) Solve Crossword");
             
-            Menu menu3 = new Menu("SETTINGS");
+            Menu menu3 = new Menu("(3) SETTINGS");
             menu3.AddMenuItem("(Q) Logout");
             
             //creating a menu manager object

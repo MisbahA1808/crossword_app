@@ -134,51 +134,87 @@ namespace CrosswordApp
                     
                 //default takes into account letters not just arrow keys as above
                 default:
-                    switch (keyPressed)
+                    //makes the first menu headers drop down based on the associated numbrs pressed
+                    if (char.IsDigit((char)keyPressed)) 
                     {
-                        //for each vlid letter pressed, returns the name of that menu item
-                        case ConsoleKey.L:
-                            //checks if there is more than one menu on the console
-                            //if there isn't it will just show the whole menu and no drop down system will be in place
-                            //same logic for all of the cases except the default
-                            if (_menus.Count > 1)
-                            {
-                                _activeMenu.IsExpanded = true;
-                            }
-                            return "(L) Login";
-                        case ConsoleKey.C:
-                            if (_menus.Count > 1)
-                            {
-                                _activeMenu.IsExpanded = true;
-                            }
-                            return "(C) Create Crossword";
-                        case ConsoleKey.S:
-                            if (_menus.Count > 1)
-                            {
-                                _activeMenu.IsExpanded = true;
-                            }
-                            return "(S) Solve Crossword";
-                        case ConsoleKey.A:
-                            if (_menus.Count > 1)
-                            {
-                                _activeMenu.IsExpanded = true;
-                            }
-                            return "(A) Create Account";
-                        case ConsoleKey.Q:
-                            if (_menus.Count > 1)
-                            {
-                                _activeMenu.IsExpanded = true;
-                            }
-                            return "(Q) Logout";
-                        case ConsoleKey.R:
-                            if (_menus.Count > 1)
-                            {
-                                _activeMenu.IsExpanded = true;
-                            }
-                            return "(R) Change Role";
-                        default:
-                            break;
+                        int menuNumber = (int)keyPressed - (int)ConsoleKey.D1;
+
+                        //maps the number pressed to the menu
+                        if (menuNumber >= 0 && menuNumber < _menus.Count) 
+                        {
+                            _activeMenu.DeactivateAllItems();
+                            _activeMenu.Active = false;
+                            _activeMenuPointer = menuNumber;
+                            _activeMenu = _menus[_activeMenuPointer];
+                            _activeMenu.Active = true;
+                            _activeMenu.IsExpanded = true;
+                            _activeMenu.ActivateCurrentMenuItem();
+                        }
+                        break;
                     }
+
+                    //if the menu is expanded, the other keys can then be used to get to other pages
+                    if (_activeMenu.IsExpanded)
+                    {
+                        if (keyPressed == ConsoleKey.L) 
+                        { return "(L) Login"; }
+                        if (keyPressed == ConsoleKey.C)
+                        { return "(C) Create Crossword"; }
+                        if (keyPressed == ConsoleKey.S)
+                        { return "(S) Solve Crossword"; }
+                        if (keyPressed == ConsoleKey.A)
+                        { return "(A) Create Account"; }
+                        if (keyPressed == ConsoleKey.Q)
+                        { return "(Q) Logout"; }
+                        if (keyPressed == ConsoleKey.R)
+                        { return "(R) Change Role"; }
+                    }
+                    break;
+                    //switch (keyPressed)
+                    //{
+                    //    //for each vlid letter pressed, returns the name of that menu item
+                    //    case ConsoleKey.L:
+                    //        //checks if there is more than one menu on the console
+                    //        //if there isn't it will just show the whole menu and no drop down system will be in place
+                    //        //same logic for all of the cases except the default
+                    //        if (_menus.Count > 1)
+                    //        {
+                    //            _activeMenu.IsExpanded = true;
+                    //        }
+                    //        return "(L) Login";
+                    //    case ConsoleKey.C:
+                    //        if (_menus.Count > 1)
+                    //        {
+                    //            _activeMenu.IsExpanded = true;
+                    //        }
+                    //        return "(C) Create Crossword";
+                    //    case ConsoleKey.S:
+                    //        if (_menus.Count > 1)
+                    //        {
+                    //            _activeMenu.IsExpanded = true;
+                    //        }
+                    //        return "(S) Solve Crossword";
+                    //    case ConsoleKey.A:
+                    //        if (_menus.Count > 1)
+                    //        {
+                    //            _activeMenu.IsExpanded = true;
+                    //        }
+                    //        return "(A) Create Account";
+                    //    case ConsoleKey.Q:
+                    //        if (_menus.Count > 1)
+                    //        {
+                    //            _activeMenu.IsExpanded = true;
+                    //        }
+                    //        return "(Q) Logout";
+                    //    case ConsoleKey.R:
+                    //        if (_menus.Count > 1)
+                    //        {
+                    //            _activeMenu.IsExpanded = true;
+                    //        }
+                    //        return "(R) Change Role";
+                    //    default:
+                    //        break;
+                    //}
                     break;
             }
             //return the selected menu item

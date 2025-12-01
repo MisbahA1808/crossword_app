@@ -517,7 +517,7 @@ namespace CrosswordApp
             Console.WriteLine();
 
 
-            Console.SetCursorPosition(0, 15);
+            Console.SetCursorPosition(0, 16);
             //gets user input
             Console.WriteLine("Enter the word you guess:");
             string guess = Console.ReadLine();
@@ -545,7 +545,10 @@ namespace CrosswordApp
                 //checks if the crossword is fully solved or not
                 if (IsCrosswordFullySolved(maskedCrossword))
                 {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Congratulations! You have solved the entire crossword! Well done :)");
+                    Console.ResetColor();
                     Console.WriteLine("Press any key to return to the main menu.");
                     Console.ReadKey(true);
                     Program.DisplayMenu();
@@ -701,6 +704,7 @@ namespace CrosswordApp
             return null;
         }
 
+        //method to check if the user has completed the whole crossword or not
         public bool IsCrosswordFullySolved(char[,] maskedCrossword)
         {
             for (int i = 0; i < maskedCrossword.GetLength(0); i++) 
