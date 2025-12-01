@@ -25,13 +25,11 @@ namespace CrosswordApp
         }
 
         //secondary constructor with no parameters
-        //constructor overloading?
         public CrosswordManager()
         {
             
         }
         
-
         //method to add crossword to the list of crosswords
         public void AddCrosswordToList() 
         {
@@ -169,29 +167,21 @@ namespace CrosswordApp
                         Console.Write($"{position}" + " ");
                         //reset the console colour so that only that character has a different colour
                         Console.ResetColor();
-
-
                     }
                     else
                     {
                         //prints all other grid positions normally in white
                         Console.Write($"{position}" + " ");
-
                     }
-
-
                 }
                 //moves to the next row of the crossword
                 Console.WriteLine();
             }
-
-
         }
 
         //method that allows admin to create crossword by moving around on the crossword grid using arrow keys
         public void AdminCreateCrossword() 
         {
-
             //start at the top left of the crossword by setting the start row and column to zero
             int selectedRow = 0;
             int selectedColumn = 0;
@@ -273,12 +263,6 @@ namespace CrosswordApp
             //if the key pressed is the escape key, the loop breaks
             } while (keyPressed != ConsoleKey.Escape);
 
-            //if (keyPressed == ConsoleKey.Escape) 
-            //{
-            //    CrosswordManager crosswordManager = new CrosswordManager(_currentCrossword);
-            //    crosswordManager.StoreCurrentCrossword();
-
-            //}
             Console.SetCursorPosition(0, 16);
             //the crossword is created as the admin has pressed escape
             Console.WriteLine("Crossword Created Successfully!");
@@ -291,20 +275,21 @@ namespace CrosswordApp
             StoreCurrentCrossword();
             Program.DisplayMenu();
             return;
-        
         }
 
+        //method that deals with the player solving their chosen crossword
         public void PlayerSolveCrossword(Crossword crossword) 
         {
-            
-
             //start at the top left of the crossword by setting the start row and column to zero
             int selectedRow = 0;
             int selectedColumn = 0;
             //variable to store which key is pressed
             ConsoleKey keyPressed;
 
+            //gets and stores the masked crossword forrhe chosen crossword
+            //masked crossword is a 2d array version of the crossword, only used for displaying purposes so that the original crossword object is not altered when solving
             char[,] maskedCrossword = CreateSolvableCrossword(crossword);
+
             //loop to display the crossword and its updated changes each time until the admin pressed the escape key
             do
             {
@@ -313,6 +298,7 @@ namespace CrosswordApp
                 //display the welcome message
                 Program.DisplayWelcomeMessage();
 
+                //information for the user
                 Console.SetCursorPosition(25, 27);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Use arrows keys to move, enter to select a position to guess from.");
@@ -320,25 +306,28 @@ namespace CrosswordApp
 
                 Console.SetCursorPosition(0, 2);
 
+                //printig the masked crossword on the console
                 for (int i = 0; i < crossword.Rows; i++)
                 {
                     for (int j = 0; j < crossword.Columns; j++) 
                     {
+                        //if it is the grid position that the user has selected with the arrow keys, starts at 0,0
                         if (i == selectedRow && j == selectedColumn)
                         {
+                            //change its colour to red
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write(maskedCrossword[i, j] + " ");
                             Console.ResetColor();
                         }
                         else
                         {
+                            //otherwise print in normally
                             Console.Write(maskedCrossword[i,j] + " ");
-                        
                         }
                     }
                     Console.WriteLine();
                 }
-
+                //stores key pressed by user
                 keyPressed = Console.ReadKey(true).Key;
 
                 //switch case block based on the key pressed
@@ -394,60 +383,36 @@ namespace CrosswordApp
                 }
                 //if the key pressed is the escape key, the loop breaks
             } while (keyPressed != ConsoleKey.Escape);
-
+            //returns back to the menu
             Program.DisplayMenu();
 
         }
 
-        public void CheckUserLetter(Crossword crossword, char[,] maskedCrossword, int row, int column, ConsoleKey keyPressed) 
-        {
-            //checks if input is a single vcharacter and that the character is  aletter
-            if (!char.IsLetter((char)keyPressed))
-            {
-                return;
-            }
-                
-        
-            char guess = char.ToUpper((char)keyPressed);
-
-            if (crossword.Grid[row, column] == guess)
-            {
-                maskedCrossword[row, column] = guess;
-
-            }
-            else
-            {
-                maskedCrossword[row, column] = 'X';
-            
-            }
-        
-        }
-
+        //method to check the word that the user guesses whilst solving the crossword
         public bool CheckUserWord(Crossword crossword, char[,] maskedCrossword,  string word, string direction, int startRow, int startColumn) 
         {
             if (direction == "across")
             {
+                //checking that their guess will fit into the crossword
                 if (startColumn + word.Length > crossword.Columns)
                 {
                     return false;
                 }
-
-
             }
             else if (direction == "down")
             {
+                //checking that their guess will fit into the crossword
                 if (startRow + word.Length > crossword.Rows)
                 {
                     return false;
                 }
-
-
             }
             else { return false; }
 
+            //for each letter int their guess word
             for (int i = 0; i < word.Length; i++)
             {
-                //define the current start rwo and column
+                //define the current start row and column
                 int currentRow = startRow;
                 int currentColumn = startColumn;
 
@@ -463,8 +428,10 @@ namespace CrosswordApp
                 char correctLetter = crossword.Grid[currentRow, currentColumn];
                 char maskedLetter = maskedCrossword[currentRow, currentColumn];
 
+                //if there is a letter in that position
                 if (maskedLetter == '?')
                 {
+                    //if the letter the user guessed for the position is wrong
                     if (word[i] != correctLetter)
                     {
                         return false;
@@ -479,45 +446,46 @@ namespace CrosswordApp
                 int currentRow = startRow;
                 int currentColumn = startColumn;
 
+                //if the direction is across
                 if (direction == "across")
                 {
                     currentColumn = startColumn + i;
                 }
+                //else if the direction is down
                 else { currentRow = startRow + i; }
                 
-
+                //if there is a letter in that position
                 if (maskedCrossword[currentRow, currentColumn] == '?') 
                 {
+                    //replace it with the users guess as it will be the corrct letter
                     maskedCrossword[currentRow, currentColumn] = word[i];
-                
                 }
-            
-            
             }
-
             return true;
-        
         }
 
+        //method that gets the word the user guesses whilst solving the crossword and checks if it is correct/incorrect
         public void PlayerEnterWord(Crossword crossword, char[,] maskedCrossword, int startRow, int startColumn) 
         {
             //gets word at the users slected position
             Word w = GetWord(crossword, startRow, startColumn);
 
+            //if there is no word that starts at that position in the crossword
             if (w == null) 
             {
+                //inform the user
                 Console.WriteLine("No word starts here! Press any key to continue.");
                 Console.ReadKey(true);
                 return;
             }
 
+            //if there is a word there. write the clue and the direction that th word goes on screen
             Console.WriteLine();
             Console.WriteLine("Clue: " + w.Clue);
             Console.WriteLine("Direction: " + w.Direction);
             Console.WriteLine();
-
-
             Console.SetCursorPosition(0, 16);
+
             //gets user input
             Console.WriteLine("Enter the word you guess:");
             string guess = Console.ReadLine();
@@ -525,19 +493,10 @@ namespace CrosswordApp
             //get word in correct formato to then validate
             guess = guess.ToUpper().Trim();
 
-            //Console.WriteLine("Enter the direction you guess:");
-            //string direction = Console.ReadLine();
-
-            //if (direction != "across" && direction != "down") 
-            //{
-            //    Console.WriteLine("invalid direction, press any key");
-            //    Console.ReadKey(true);
-            //    return;
-            //}
-
+            //checks if the word the user enters is correct
             bool correct = CheckUserWord(crossword, maskedCrossword, guess, w.Direction, startRow, startColumn);
 
-
+            //if their guess is correct
             if (correct)
             {
                 Console.WriteLine("Correct!!!");
@@ -545,6 +504,7 @@ namespace CrosswordApp
                 //checks if the crossword is fully solved or not
                 if (IsCrosswordFullySolved(maskedCrossword))
                 {
+                    //if it is fully solved, inform the user and prompt them to return to the main menu
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Congratulations! You have solved the entire crossword! Well done :)");
@@ -555,6 +515,7 @@ namespace CrosswordApp
                     return;
                 }
             }
+            //if their guess is incorrect
             else 
             { 
                 Console.WriteLine("Incorrect :("); 
@@ -611,11 +572,8 @@ namespace CrosswordApp
             //replace crosswords with filledcrosswords to ensure there are no empty ones in the final list
             crosswords = filledCrosswords;
 
-            
             //returns the list of crosswords
             return crosswords;
-
-
         }
 
         //method to create a solvable crossword
@@ -649,13 +607,9 @@ namespace CrosswordApp
                         solvableCrossword[i, j] = '?';
                     }
                 }
-            
             }
-
             //returns the char[,]
             return solvableCrossword;
-        
-        
         }
 
         //method to display the crossword for the user to solve
@@ -666,7 +620,6 @@ namespace CrosswordApp
 
             //create a solvable crossword from the user selection
             char[,] solvableCrossword = crosswordManager.CreateSolvableCrossword(crossword);
-
 
             //loops through the rows and columns of the crossword grid
             for (int i = 0; i < crossword.Rows; i++)
@@ -679,9 +632,6 @@ namespace CrosswordApp
                 //moves to the next row in the crossword
                 Console.WriteLine();
             }
-
-
-
         }
 
         public Crossword GetCrosswordBeingSolved() 
@@ -701,28 +651,29 @@ namespace CrosswordApp
                 }
             
             }
+            //if no word starts at that position, return null
             return null;
         }
 
         //method to check if the user has completed the whole crossword or not
         public bool IsCrosswordFullySolved(char[,] maskedCrossword)
         {
+            //loops through all of the grid positions
             for (int i = 0; i < maskedCrossword.GetLength(0); i++) 
             {
                 for (int j = 0; j < maskedCrossword.GetLength(1); j++) 
                 {
+                    //if any still contain a '?' (there is still words left to guess)
                     if (maskedCrossword[i, j] == '?') 
                     {
+                        //return false
                         return false;
                     }
                 
                 }
-            
-            
-            
             }
+            //otherwise return true
             return true;
-        
         }
     }
 }
