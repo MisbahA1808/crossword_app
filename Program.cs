@@ -261,7 +261,8 @@ namespace CrosswordApp
             Console.SetCursorPosition(0, 2);
 
             //gets input of their username and password
-            Console.WriteLine("Enter your username:");
+            Console.Write("Enter your username:");
+            Console.Write("\t (Default Login: Username = 'admin' and Password = 'password')");
             Console.SetCursorPosition(0, 5);
             Console.WriteLine("Enter your password:");
 
