@@ -76,7 +76,17 @@ namespace CrosswordApp
             else { crosswords = new List<Crossword>(); }
 
             //add the current crossword to the list
-            crosswords.Add(_currentCrossword);
+            //crosswords.Add(_currentCrossword);
+
+            //if it finds thsat the current crossword already exists (based on the name), it will update it rather than make a duplicate
+            for (int i = 0; i < crosswords.Count; i++) 
+            {
+                if (crosswords[i].CrosswordTitle == _currentCrossword.CrosswordTitle) 
+                {
+                    crosswords[i] = _currentCrossword;
+                }
+            }
+
 
             //serialise the list of crossword objects
             string json1 = JsonConvert.SerializeObject(crosswords, Formatting.Indented);
