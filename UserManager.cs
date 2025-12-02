@@ -10,11 +10,13 @@ using Newtonsoft.Json;
 
 namespace CrosswordApp
 {
+    //class to manage all user rleated functions
     internal class UserManager
     {
         //list of all users
         private List<User> _users;
         private int _userId;
+        //by default, a users login state is -1 as they will open the program having not logged in yet
         private int _loginState = -1;
         private User _loggedInUser;
 
