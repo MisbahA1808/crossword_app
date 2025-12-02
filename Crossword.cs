@@ -20,6 +20,7 @@ namespace CrosswordApp
         [JsonProperty] private string _crosswordTitle;
         [JsonProperty] private string _clue;
         [JsonProperty] private List<Word> _words;
+        private char[,] _crosswordToSave;
         //getters and setters for the attirbutes above
         public int Rows { get => _rows; set => _rows = value; }
         public int Columns { get => _columns; set => _columns = value; }
@@ -27,6 +28,7 @@ namespace CrosswordApp
         public string Clue { get => _clue; set => _clue = value; }
         internal List<Word> Words { get => _words; set => _words = value; }
         public char[,] Grid { get => _grid; set => _grid = value; }
+        public char[,] CrosswordToSave { get => _crosswordToSave; set => _crosswordToSave = value; }
 
 
         //constructor for crossword class
