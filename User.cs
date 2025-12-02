@@ -17,7 +17,6 @@ namespace CrosswordApp
         [JsonProperty] private string _password;
         [JsonProperty] private string _email;
         [JsonProperty] private int _userId;
-        //[JsonProperty] private int _state;
 
         //constructor
         public User(int userId, string name, string username, string password, string email, string accountType)
@@ -36,8 +35,6 @@ namespace CrosswordApp
         public string Username { get => _username; set => _username = value; }
         public string Password { get => _password; set => _password = value; }
         public string AccountType { get => _accountType; set => _accountType = value; }
-
-        //public int State { get => _state; set => _state = value; }
 
         //method to set the account type of the user
         public string SetAccountType(string accountType) 

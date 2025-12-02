@@ -225,7 +225,6 @@ namespace CrosswordApp
             Console.WriteLine();
             Console.ResetColor();
 
-
             //getting the username, password, email and name of the user
             Console.WriteLine("Enter your full name:");
             string name = Console.ReadLine();
@@ -249,8 +248,6 @@ namespace CrosswordApp
 
             Console.ReadKey(true);
             DisplayLogin();
-           
-
         }
 
         //method to verify a user that has already created an account
@@ -266,6 +263,7 @@ namespace CrosswordApp
             Console.SetCursorPosition(0, 5);
             Console.WriteLine("Enter your password:");
 
+            //stores the user input in appropriate variables
             Console.SetCursorPosition(0, 3);
             string username = Console.ReadLine();
 
@@ -366,6 +364,7 @@ namespace CrosswordApp
             Console.SetCursorPosition(0, 10);
             Console.WriteLine("Number of Columns: ");
 
+            //stores the user input in the follwoing variables
             Console.SetCursorPosition(0, 5);
             string title = Console.ReadLine();
 
@@ -375,7 +374,6 @@ namespace CrosswordApp
             Console.SetCursorPosition(0, 11);
             int columns = Convert.ToInt32(Console.ReadLine());
 
-
             //creates a new crossword object with the user input as parameters
             Crossword crossword = new Crossword(rows, columns, title);
 
@@ -383,8 +381,6 @@ namespace CrosswordApp
             crossword.DisplayCrossword();
 
             return crossword;
-                
-        
         }
 
         //method to display the account creation page
@@ -427,7 +423,6 @@ namespace CrosswordApp
             //fill the list with the crosswords stored in the json
             savedCrosswords = crosswordManager.GetStoredCrosswords();
 
-
             //get user input
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Available Crosswords:");
@@ -443,14 +438,10 @@ namespace CrosswordApp
             //gets user input
             Console.WriteLine();
             Console.WriteLine("Enter the number of the crossword you choose:");
+
             //stores their choice
-
-
             int choice = Convert.ToInt32(Console.ReadLine());
 
-            
-
-            
             return savedCrosswords[choice];
 
         }
