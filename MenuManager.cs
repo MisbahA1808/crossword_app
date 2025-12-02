@@ -14,6 +14,7 @@ namespace CrosswordApp
         private int _activeMenuPointer;
         private Menu _activeMenu;
 
+        //constructor
         public MenuManager(List<Menu> menus)
         {
             _menus = menus;
@@ -170,57 +171,9 @@ namespace CrosswordApp
                         { return "(R) Change Role"; }
                     }
                     break;
-                    //switch (keyPressed)
-                    //{
-                    //    //for each vlid letter pressed, returns the name of that menu item
-                    //    case ConsoleKey.L:
-                    //        //checks if there is more than one menu on the console
-                    //        //if there isn't it will just show the whole menu and no drop down system will be in place
-                    //        //same logic for all of the cases except the default
-                    //        if (_menus.Count > 1)
-                    //        {
-                    //            _activeMenu.IsExpanded = true;
-                    //        }
-                    //        return "(L) Login";
-                    //    case ConsoleKey.C:
-                    //        if (_menus.Count > 1)
-                    //        {
-                    //            _activeMenu.IsExpanded = true;
-                    //        }
-                    //        return "(C) Create Crossword";
-                    //    case ConsoleKey.S:
-                    //        if (_menus.Count > 1)
-                    //        {
-                    //            _activeMenu.IsExpanded = true;
-                    //        }
-                    //        return "(S) Solve Crossword";
-                    //    case ConsoleKey.A:
-                    //        if (_menus.Count > 1)
-                    //        {
-                    //            _activeMenu.IsExpanded = true;
-                    //        }
-                    //        return "(A) Create Account";
-                    //    case ConsoleKey.Q:
-                    //        if (_menus.Count > 1)
-                    //        {
-                    //            _activeMenu.IsExpanded = true;
-                    //        }
-                    //        return "(Q) Logout";
-                    //    case ConsoleKey.R:
-                    //        if (_menus.Count > 1)
-                    //        {
-                    //            _activeMenu.IsExpanded = true;
-                    //        }
-                    //        return "(R) Change Role";
-                    //    default:
-                    //        break;
-                    //}
-                    break;
             }
             //return the selected menu item
             return _activeMenu.GetActiveChoice();
-        
-        
         }
 
         //method to display the menu on the console
@@ -256,9 +209,6 @@ namespace CrosswordApp
                 else 
                 {
                     Console.Write(menu.Name);
-                   
-                    //Console.WriteLine();
-
                 }
                 //calls the display menumethod from the menu class
                 menu.DisplayMenu(startCol, startRow);
@@ -268,18 +218,10 @@ namespace CrosswordApp
 
         }
 
-       
-
-       
         //runs the main menu loop and also returns the menu choice chosen by the user
         public string RunMenu()
         {
             ConsoleKey keyPressed;
-
-            //_activeMenu.DeactivateAllItems();
-            //_activeMenuPointer = 0;
-            //_activeMenu = _menus[0];
-            //_activeMenu.ActivateCurrentMenuItem();
 
             //initially display the menu
             DisplayMenu();
@@ -310,7 +252,6 @@ namespace CrosswordApp
                 
                 //redisplay the menu after updating it
                 DisplayMenu();
-
                 
                 //if the user selects enter or one of the valid key choices
                 if (keyPressed == ConsoleKey.Enter ||
@@ -324,17 +265,8 @@ namespace CrosswordApp
                     return choice;
                 }
                 
-            
-            
             }
         
-        
-        
-        
         }
-
-        
-
-
     }
 }

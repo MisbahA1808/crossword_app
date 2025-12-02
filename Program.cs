@@ -14,6 +14,7 @@ namespace CrosswordApp
         //creating a global user manager object
         //global because if i keep creating instances, the account state of the user logged in would not be consistsent across the program
         public static UserManager UserManager = new UserManager();
+
         static void Main(string[] args)
         {
             //creates a default admin account using username 'admin' and password 'password' so that a default admin can always login
@@ -47,6 +48,8 @@ namespace CrosswordApp
             Console.ResetColor();
             Console.SetCursorPosition(0, 2);
 
+            //defines the state of the user logged so that access levels can be implemented throughout the program
+            //especially in the menu system, controlling what a user can and can't access
             int state = Program.UserManager.LoginState;
 
             //creating the menu objects and adding sub menus/ menu items to them
@@ -198,7 +201,8 @@ namespace CrosswordApp
                     DisplayWelcomeMessage();
                     Console.SetCursorPosition(20, 27);
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Use arrow keys to navigate OR keyboard shortcuts!");
+                    //extrra information for the user
+                    Console.WriteLine("Use arrow keys to navigate OR keyboard shortcuts, which are in brackets!");
                     Console.ResetColor();
                     Console.SetCursorPosition(0, 2);
 
@@ -206,7 +210,6 @@ namespace CrosswordApp
                     break;
             }
 
-            
 
         }
 

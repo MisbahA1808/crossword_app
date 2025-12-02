@@ -37,15 +37,6 @@ namespace CrosswordApp
         
         }
 
-        //method for adding words to the current crossword 
-        public void AddWord(string word, string direction, int startRow, int startColumn, string clue) 
-        {
-            //calls displayword from the crossword class
-            _currentCrossword.DisplayWord(word, direction, startRow, startColumn, clue);
-        
-        
-        }
-
         //method to store current crossword data in crossword.json
         public void StoreCurrentCrossword() 
         {
@@ -383,6 +374,11 @@ namespace CrosswordApp
                 }
                 //if the key pressed is the escape key, the loop breaks
             } while (keyPressed != ConsoleKey.Escape);
+
+            //saves the players progress when they press escape, so they can come back to it later
+            _currentCrossword = crossword;
+            StoreCurrentCrossword();
+
             //returns back to the menu
             Program.DisplayMenu();
 
@@ -612,34 +608,6 @@ namespace CrosswordApp
             return solvableCrossword;
         }
 
-        //method to display the crossword for the user to solve
-        public void DisplaySolvableCrossword(Crossword crossword)
-        {
-            //create a crossword manager object
-            CrosswordManager crosswordManager = new CrosswordManager();
-
-            //create a solvable crossword from the user selection
-            char[,] solvableCrossword = crosswordManager.CreateSolvableCrossword(crossword);
-
-            //loops through the rows and columns of the crossword grid
-            for (int i = 0; i < crossword.Rows; i++)
-            {
-                for (int j = 0; j < crossword.Columns; j++)
-                {
-                    //for each grid position, it displays it on screen, adds space so that it is formatted nicely
-                    Console.Write(solvableCrossword[i, j] + " ");
-                }
-                //moves to the next row in the crossword
-                Console.WriteLine();
-            }
-        }
-
-        public Crossword GetCrosswordBeingSolved() 
-        {
-            Crossword crosswordBeingSolved = Program.DisplayCrosswordSolver();
-            return crosswordBeingSolved;
-        }
-
         //method to get the word at the users selected start position
         public Word GetWord(Crossword crossword, int row, int column) 
         {
@@ -649,7 +617,6 @@ namespace CrosswordApp
                 {
                     return w;
                 }
-            
             }
             //if no word starts at that position, return null
             return null;

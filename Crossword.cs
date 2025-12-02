@@ -124,30 +124,21 @@ namespace CrosswordApp
             else 
             {
                 Console.WriteLine("Invalid Entry!");
-            
             }
             //adds the input word to the list of words
             _words.Add(word);
-
-        
         }
 
         //gets the current grid position/cell
         public char GetGridPosition(int row, int column) 
         {
             return _grid[row, column];
-        
         }
 
         //sets the current grids position
         public void SetGridPosition(int row, int column, char value) 
         {
             _grid[row, column] = value;
-        
-        
         }
-
-        
-
     }
 }
