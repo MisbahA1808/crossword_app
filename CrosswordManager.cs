@@ -279,103 +279,119 @@ namespace CrosswordApp
 
             //gets and stores the masked crossword forrhe chosen crossword
             //masked crossword is a 2d array version of the crossword, only used for displaying purposes so that the original crossword object is not altered when solving
-            char[,] maskedCrossword = CreateSolvableCrossword(crossword);
+            char[,] maskedCrossword;
 
-            //loop to display the crossword and its updated changes each time until the admin pressed the escape key
-            do
+            //if the player has saved trhe crosssword previosly as a draft
+            if (crossword.CrosswordToSave != null)
             {
-                //clears the console
-                Console.Clear();
-                //display the welcome message
-                Program.DisplayWelcomeMessage();
+                //load that crossword
+                maskedCrossword = crossword.CrosswordToSave;
+            }
+            else
+            {
+                //otherwise get and store the masked crossword for the chosen crossword
+                maskedCrossword = CreateSolvableCrossword(crossword);
+            }
 
-                //information for the user
-                Console.SetCursorPosition(25, 27);
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Use arrows keys to move, enter to select a position to guess from.");
-                Console.ResetColor();
-
-                Console.SetCursorPosition(0, 2);
-
-                //printig the masked crossword on the console
-                for (int i = 0; i < crossword.Rows; i++)
+                //loop to display the crossword and its updated changes each time until the admin pressed the escape key
+                do
                 {
-                    for (int j = 0; j < crossword.Columns; j++) 
+                    //clears the console
+                    Console.Clear();
+                    //display the welcome message
+                    Program.DisplayWelcomeMessage();
+
+                    //information for the user
+                    Console.SetCursorPosition(25, 27);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Use arrows keys to move, enter to select a position to guess from.");
+                    Console.ResetColor();
+
+                    Console.SetCursorPosition(0, 2);
+
+                    //printig the masked crossword on the console
+                    for (int i = 0; i < crossword.Rows; i++)
                     {
-                        //if it is the grid position that the user has selected with the arrow keys, starts at 0,0
-                        if (i == selectedRow && j == selectedColumn)
+                        for (int j = 0; j < crossword.Columns; j++)
                         {
-                            //change its colour to red
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write(maskedCrossword[i, j] + " ");
-                            Console.ResetColor();
+                            //if it is the grid position that the user has selected with the arrow keys, starts at 0,0
+                            if (i == selectedRow && j == selectedColumn)
+                            {
+                                //change its colour to red
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write(maskedCrossword[i, j] + " ");
+                                Console.ResetColor();
+                            }
+                            else
+                            {
+                                //otherwise print in normally
+                                Console.Write(maskedCrossword[i, j] + " ");
+                            }
                         }
-                        else
-                        {
-                            //otherwise print in normally
-                            Console.Write(maskedCrossword[i,j] + " ");
-                        }
+                        Console.WriteLine();
                     }
-                    Console.WriteLine();
-                }
-                //stores key pressed by user
-                keyPressed = Console.ReadKey(true).Key;
+                    //stores key pressed by user
+                    keyPressed = Console.ReadKey(true).Key;
 
-                //switch case block based on the key pressed
-                switch (keyPressed)
-                {
-                    //if the key pressed is the up arrow
-                    case ConsoleKey.UpArrow:
-                        //if the row they have selected is > 0
-                        if (selectedRow > 0)
-                        {
-                            //decrement selectedRow
-                            selectedRow--;
-                        }
-                        break;
+                    //switch case block based on the key pressed
+                    switch (keyPressed)
+                    {
+                        //if the key pressed is the up arrow
+                        case ConsoleKey.UpArrow:
+                            //if the row they have selected is > 0
+                            if (selectedRow > 0)
+                            {
+                                //decrement selectedRow
+                                selectedRow--;
+                            }
+                            break;
 
-                    //if the key pressed is the down arroow
-                    case ConsoleKey.DownArrow:
-                        //if the row selected is less than the amount of rowws in the crossword
-                        if (selectedRow < crossword.Rows - 1)
-                        {
-                            //increment selectedRow
-                            selectedRow++;
-                        }
-                        break;
+                        //if the key pressed is the down arroow
+                        case ConsoleKey.DownArrow:
+                            //if the row selected is less than the amount of rowws in the crossword
+                            if (selectedRow < crossword.Rows - 1)
+                            {
+                                //increment selectedRow
+                                selectedRow++;
+                            }
+                            break;
 
-                    //if the key pressed is the left arrow
-                    case ConsoleKey.LeftArrow:
-                        //if the selected column > 0
-                        if (selectedColumn > 0)
-                        {
-                            //decrement selected column
-                            selectedColumn--;
-                        }
-                        break;
+                        //if the key pressed is the left arrow
+                        case ConsoleKey.LeftArrow:
+                            //if the selected column > 0
+                            if (selectedColumn > 0)
+                            {
+                                //decrement selected column
+                                selectedColumn--;
+                            }
+                            break;
 
-                    //if the key pressed is the right arrow
-                    case ConsoleKey.RightArrow:
-                        //if the selected column is less than the amount of columns in the crossword
-                        if (selectedColumn < crossword.Columns)
-                        {
-                            //increment selected column
-                            selectedColumn++;
-                        }
-                        break;
+                        //if the key pressed is the right arrow
+                        case ConsoleKey.RightArrow:
+                            //if the selected column is less than the amount of columns in the crossword
+                            if (selectedColumn < crossword.Columns)
+                            {
+                                //increment selected column
+                                selectedColumn++;
+                            }
+                            break;
 
-                    case ConsoleKey.Enter:
-                        PlayerEnterWord(crossword, maskedCrossword, selectedRow, selectedColumn);
-                        break;
-                        
-                    default:
-                        //CheckUserLetter(crossword, maskedCrossword, selectedRow, selectedColumn, keyPressed);
-                        break;
-                }
-                //if the key pressed is the escape key, the loop breaks
-            } while (keyPressed != ConsoleKey.Escape);
+                        case ConsoleKey.Enter:
+                            PlayerEnterWord(crossword, maskedCrossword, selectedRow, selectedColumn);
+                            break;
+
+                        default:
+                            //CheckUserLetter(crossword, maskedCrossword, selectedRow, selectedColumn, keyPressed);
+                            break;
+                    }
+                    //if the key pressed is the escape key, the loop breaks
+                } while (keyPressed != ConsoleKey.Escape);
 
             //saves the players progress when they press escape, so they can come back to it later
+            //_currentCrossword = crossword;
+            //StoreCurrentCrossword();
+
+            crossword.CrosswordToSave = maskedCrossword;
             _currentCrossword = crossword;
             StoreCurrentCrossword();
 
