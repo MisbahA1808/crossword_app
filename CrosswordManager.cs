@@ -79,9 +79,15 @@ namespace CrosswordApp
             for (int i = 0; i < crosswords.Count; i++) 
             {
                 //if the titles of the 2 crosswords match
-                if (crosswords[i].CrosswordTitle == _currentCrossword.CrosswordTitle) 
+                if (crosswords[i].CrosswordTitle == _currentCrossword.CrosswordTitle)
                 {
                     crosswords[i] = _currentCrossword;
+                    break;
+                }
+                else 
+                {
+                    crosswords.Add(_currentCrossword);
+                    break;
                 }
             }
 
