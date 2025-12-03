@@ -72,7 +72,7 @@ namespace CrosswordApp
                 }
             }
             //if the file doesn't exist, create a new list of crosswords
-            else { crosswords = new List<Crossword>(); }
+            else { crosswords = new List<Crossword>();}
 
             //add the current crossword to the list
             //if it finds thsat the current crossword already exists (based on the name), it will update it rather than make a duplicate

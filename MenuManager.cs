@@ -259,6 +259,7 @@ namespace CrosswordApp
                     keyPressed == ConsoleKey.C ||
                     keyPressed == ConsoleKey.S ||
                     keyPressed == ConsoleKey.A ||
+                    keyPressed == ConsoleKey.R||
                     keyPressed == ConsoleKey.Q)
                 {
                     //returns the user's selection
